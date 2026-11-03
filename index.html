@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>大滿貫跑道誌</title>
+<meta name="description" content="世界馬拉松大滿貫各站的歷史、城市簡介、路線圖、高度剖面、沿途景點與賽道紀錄。手機優先，支援折疊螢幕。">
+<meta property="og:title" content="大滿貫跑道誌">
+<meta property="og:description" content="世界馬拉松大滿貫各站的歷史、路線、高度與賽道紀錄。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F1F3F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1214" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=JetBrains+Mono:wght@500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap">
+<style>
+/* Layout: 號碼布為每場的封面；路線（地圖＋高度）是主角。
+   窄螢幕單欄；展開的折疊機或寬螢幕改成「左路線、右內容」兩欄，
+   有實體轉軸時兩欄各佔一個螢幕段，不跨越摺痕。 */
+:root {
+  --bg: #F1F3F1;
+  --surface: #FFFFFF;
+  --map: #E6EAE8;
+  --ink: #13181C;
+  --muted: #5A646B;
+  --rule: #D3D8D5;
+  --course: #1C55D4;           /* 馬拉松路面上的藍色最短路線 */
+  --course-soft: rgba(28, 85, 212, .14);
+  --star: #B4800F;             /* 六星獎牌的金 */
+  --f-display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --f-head: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --f-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --hdr: 104px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1214; --surface: #161B1E; --map: #1B2226; --ink: #E6EAE7; --muted: #98A2A8;
+    --rule: #2A3236; --course: #74A0FF; --course-soft: rgba(116, 160, 255, .18); --star: #E0B24C;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1214; --surface: #161B1E; --map: #1B2226; --ink: #E6EAE7; --muted: #98A2A8;
+  --rule: #2A3236; --course: #74A0FF; --course-soft: rgba(116, 160, 255, .18); --star: #E0B24C;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 16px; line-height: 1.7;
+  overflow-x: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--bg);
+}
+.gutter {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--f-head); text-wrap: balance; line-height: 1.3; margin: 0; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--course); outline-offset: 2px; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* ---------- 站頭與分頁 ---------- */
+.site-hdr {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1px solid var(--rule);
+}
+.brand {
+  display: flex; align-items: baseline; gap: 10px; padding-block: 10px 4px;
+}
+.brand b { font-family: var(--f-head); font-size: 17px; font-weight: 900; letter-spacing: .04em; }
+.brand span { font-size: 12px; color: var(--muted); letter-spacing: .06em; }
+.tabs {
+  display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;
+  padding-block: 6px 10px; scroll-snap-type: x proximity;
+  scroll-padding-inline: 16px;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: none; scroll-snap-align: start;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 56px; padding: 4px 10px 5px; border-radius: 4px;
+  border: 1px solid var(--rule); background: var(--surface); cursor: pointer;
+  text-decoration: none; color: var(--ink);
+}
+.tab .c { font-family: var(--f-display); font-weight: 900; font-size: 18px; line-height: 1.05; letter-spacing: .02em; }
+.tab .n { font-size: 11px; color: var(--muted); line-height: 1.2; }
+.tab[aria-current="page"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.tab[aria-current="page"] .n { color: var(--bg); opacity: .75; }
+.tab.soon .c::after { content: "*"; color: var(--star); }
+
+main { padding-block: 20px 48px; }
+
+/* ---------- 總覽 ---------- */
+.home { display: grid; gap: 32px; max-width: 1100px; margin-inline: auto; }
+.home-hero { display: grid; gap: 12px; max-width: 40em; }
+.eyebrow { font-size: 12px; letter-spacing: .14em; color: var(--muted); font-weight: 700; }
+.home-hero h1 { font-size: clamp(28px, 7.5vw, 46px); font-weight: 900; }
+.home-hero h1 .stars { color: var(--star); font-family: var(--f-display); letter-spacing: .05em; }
+.home-hero p { color: var(--muted); max-width: 34em; }
+
+.series { display: grid; gap: 0; border-left: 2px solid var(--rule); margin-left: 6px; }
+.series li { list-style: none; position: relative; padding: 0 0 18px 20px; }
+.series li::before {
+  content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--star); border: 2px solid var(--bg);
+}
+.series li.pending::before { background: var(--bg); border: 2px dashed var(--muted); }
+.series .y { font-family: var(--f-display); font-weight: 900; font-size: 22px; line-height: 1; }
+.series h3 { font-size: 16px; display: inline; margin-left: 8px; }
+.series p { font-size: 14px; color: var(--muted); margin-top: 2px; }
+.series ol { padding: 0; margin: 0; }
+
+.cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+.card {
+  display: grid; grid-template-columns: 1fr 96px; gap: 8px; align-items: center;
+  padding: 14px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+  text-decoration: none; color: var(--ink); min-width: 0;
+}
+.card:hover { border-color: var(--course); }
+.card .c { font-family: var(--f-display); font-weight: 900; font-size: 40px; line-height: .9; }
+.card h3 { font-size: 16px; margin-top: 6px; }
+.card .meta { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.card svg { width: 96px; height: 80px; }
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  padding: 1px 6px; border-radius: 3px; border: 1px solid var(--star); color: var(--star);
+  vertical-align: middle;
+}
+
+/* ---------- 賽事頁 ---------- */
+.race { display: grid; gap: 20px; max-width: 1200px; margin-inline: auto; }
+
+/* 號碼布：四角別針孔 */
+.bib {
+  position: relative; background: var(--surface); border: 2px solid var(--ink);
+  border-radius: 6px; padding: 18px 20px 16px; overflow: hidden;
+  display: grid; gap: 4px;
+}
+.bib .pin { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--muted); }
+.bib .pin:nth-child(1) { top: 8px; left: 8px; } .bib .pin:nth-child(2) { top: 8px; right: 8px; }
+.bib .pin:nth-child(3) { bottom: 8px; left: 8px; } .bib .pin:nth-child(4) { bottom: 8px; right: 8px; }
+.bib-top { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-size: 12px; letter-spacing: .1em; color: var(--muted); font-weight: 700; padding-inline: 8px; }
+.bib-top .stars { color: var(--star); letter-spacing: .15em; }
+.bib-code {
+  font-family: var(--f-display); font-weight: 900; line-height: .85;
+  font-size: clamp(64px, 26vw, 150px); letter-spacing: .01em; text-align: center;
+  padding-block: 6px 2px;
+}
+.bib h1 { font-size: clamp(22px, 6vw, 32px); font-weight: 900; text-align: center; }
+.bib .en { text-align: center; font-size: 13px; color: var(--muted); letter-spacing: .05em; }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; margin: 0; }
+.facts div { background: var(--surface); padding: 10px 12px; min-width: 0; }
+.facts dt { font-size: 11px; color: var(--muted); letter-spacing: .08em; font-weight: 700; }
+.facts dd { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.45; }
+
+.jump { display: flex; gap: 6px; flex-wrap: wrap; }
+.jump button {
+  border: 1px solid var(--rule); background: transparent; border-radius: 999px;
+  padding: 3px 12px; font-size: 13px; cursor: pointer;
+}
+.jump button:hover { border-color: var(--course); color: var(--course); }
+
+.race-grid { display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); }
+.block { display: grid; gap: 12px; min-width: 0; scroll-margin-top: calc(var(--hdr) + 12px); }
+.block > h2 { font-size: 21px; font-weight: 900; display: flex; align-items: baseline; gap: 10px; }
+.block > h2 small { font-family: var(--f-body); font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: .08em; }
+.prose { display: grid; gap: 10px; max-width: 38em; }
+
+.milestones { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 6px; }
+.milestones li { display: grid; grid-template-columns: 52px 1fr; gap: 10px; font-size: 14px; }
+.milestones .y { font-family: var(--f-display); font-weight: 900; font-size: 19px; line-height: 1.35; color: var(--course); }
+
+/* 路線面板 */
+.route-pane { display: grid; gap: 12px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.route-col { min-width: 0; display: grid; gap: 12px; }
+figure { margin: 0; }
+.map-fig { background: var(--map); border-radius: 6px; overflow: hidden; }
+.map-fig svg { display: block; width: 100%; height: auto; }
+.prof-fig { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 4px 2px; }
+.prof-fig svg { display: block; width: 100%; height: auto; touch-action: pan-y; cursor: crosshair; }
+figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
+.readout {
+  display: grid; grid-template-columns: auto auto 1fr; gap: 4px 14px; align-items: baseline;
+  font-size: 13px;
+}
+.readout .big { font-family: var(--f-display); font-weight: 900; font-size: 30px; line-height: 1; }
+.readout .big small { font-family: var(--f-body); font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 2px; }
+.readout .near { color: var(--muted); min-width: 0; }
+.readout .near b { color: var(--ink); font-weight: 500; }
+.slider { width: 100%; accent-color: var(--course); margin: 0; }
+.note { font-size: 13px; color: var(--muted); }
+.src { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; font-size: 12px; color: var(--muted); line-height: 1.5; }
+.src-tag { font-weight: 700; letter-spacing: .04em; padding: 1px 6px; border-radius: 3px; border: 1px solid currentColor; }
+.src-tag.k-official { color: var(--course); }
+.src-tag.k-osm, .src-tag.k-trace { color: var(--ink); }
+.src-tag.k-sketch { color: var(--star); border-style: dashed; }
+.stat-row { display: flex; gap: 6px 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.stat-row b { color: var(--ink); font-family: var(--f-mono); font-weight: 500; }
+
+/* 景點 */
+.marks { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.marks li { border-bottom: 1px solid var(--rule); }
+.marks button {
+  width: 100%; text-align: left; background: none; border: 0; cursor: pointer;
+  display: grid; grid-template-columns: 26px 56px 1fr; gap: 10px; align-items: start;
+  padding: 10px 4px;
+}
+.marks .num {
+  width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--bg);
+  font-size: 12px; font-weight: 700; display: grid; place-items: center; margin-top: 2px;
+  font-family: var(--f-mono);
+}
+.marks .km { font-size: 13px; color: var(--muted); padding-top: 2px; }
+.marks .t { min-width: 0; }
+.marks .t b { display: block; font-weight: 700; line-height: 1.45; }
+.marks .t span { display: block; font-size: 14px; color: var(--muted); line-height: 1.55; }
+.marks li.on .num { background: var(--course); }
+.marks li.on .t b { color: var(--course); }
+
+/* 事件與紀錄（日後補上） */
+.empty {
+  border: 1.5px dashed var(--rule); border-radius: 6px; padding: 18px;
+  display: grid; gap: 6px; color: var(--muted); font-size: 14px;
+}
+.empty b { color: var(--ink); font-size: 15px; }
+.records { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.rec { display: grid; gap: 2px; padding: 12px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; min-width: 0; }
+.rec-l { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--muted); }
+.rec-t { font-family: var(--f-display); font-weight: 900; font-size: clamp(28px, 8vw, 38px); line-height: 1.05; font-variant-numeric: tabular-nums; }
+.rec-n { font-size: 13px; color: var(--muted); line-height: 1.45; }
+.rec-note { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
+.events { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 0; border-left: 2px solid var(--rule); margin-left: 6px; }
+.events li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 10px; padding: 0 0 16px 14px; position: relative; }
+.events li::before { content: ""; position: absolute; left: -7px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--muted); }
+.events li.ev-record::before { background: var(--star); border-color: var(--star); }
+.events .y { font-family: var(--f-display); font-weight: 900; font-size: 21px; line-height: 1.3; }
+.events b { display: block; line-height: 1.45; }
+.events p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 2px; }
+.events .kind { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 0 5px; border-radius: 3px; border: 1px solid var(--rule); color: var(--muted); margin-bottom: 2px; }
+.events li.ev-record .kind { border-color: var(--star); color: var(--star); }
+@media (max-width: 359px) { .records { grid-template-columns: minmax(0, 1fr); } .events li { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+
+.foot a, .linkbtn { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+.foot { font-size: 12px; color: var(--muted); max-width: 1200px; margin: 40px auto 0; border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 4px; }
+
+/* ---------- 封面螢幕（極窄，例如折疊機外螢幕 ~280–344px） ---------- */
+@media (max-width: 359px) {
+  body { font-size: 15px; }
+  .brand span { display: none; }
+  .bib { padding: 14px 12px 12px; }
+  .marks button { grid-template-columns: 24px 1fr; }
+  .marks .km { grid-column: 2; padding: 0; }
+  .marks .t { grid-column: 2; }
+  .readout { grid-template-columns: auto 1fr; }
+  .readout .near { grid-column: 1 / -1; }
+}
+
+/* ---------- 展開的折疊機內螢幕、平板、桌機：兩欄 ---------- */
+@media (min-width: 720px) {
+  .race-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 20px; align-items: stretch; }
+  .race-head .facts { align-content: stretch; }
+  .race-grid { grid-template-columns: minmax(0, 11fr) minmax(0, 9fr); column-gap: 32px; align-items: start; }
+  .race-grid > .b-route { grid-column: 1; grid-row: 1 / span 5; position: sticky; top: calc(var(--hdr) + 12px); }
+  .race-grid > .block:not(.b-route) { grid-column: 2; }
+}
+@media (min-width: 720px) and (max-height: 640px) {
+  /* 橫向手機或矮視窗：路線面板不 sticky，避免超出畫面 */
+  .race-grid > .b-route { position: static; }
+}
+
+/* ---------- 實體轉軸：左右兩個螢幕段（書本式展開） ---------- */
+@media (horizontal-viewport-segments: 2) {
+  .race-grid {
+    grid-template-columns:
+      calc(env(viewport-segment-width 0 0, 50vw) - max(16px, env(safe-area-inset-left, 0px)))
+      calc(env(viewport-segment-left 1 0, 50vw) - env(viewport-segment-right 0 0, 50vw))
+      minmax(0, 1fr);
+    column-gap: 0;
+  }
+  .race-grid > .b-route { grid-column: 1; padding-right: 16px; }
+  .race-grid > .block:not(.b-route) { grid-column: 3; padding-left: 16px; }
+  .home .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- 實體轉軸：上下兩個螢幕段（筆電式半折） ---------- */
+@media (vertical-viewport-segments: 2) {
+  .race-grid { grid-template-columns: minmax(0, 1fr); }
+  .race-grid > .b-route {
+    position: sticky; top: calc(var(--hdr)); grid-column: 1; grid-row: auto;
+    max-height: calc(env(viewport-segment-height 0 0, 50vh) - var(--hdr));
+    overflow-y: auto; background: var(--bg); z-index: 2;
+  }
+  .race-grid > .block:not(.b-route) { grid-column: 1; }
+  .route-pane { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+}
+
+.consent {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  background: var(--surface); border-top: 1px solid var(--rule); box-shadow: 0 -4px 16px rgba(0,0,0,.08);
+  padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; font-size: 14px;
+}
+.consent p { flex: 1 1 240px; margin: 0; color: var(--muted); }
+.consent .btns { display: flex; gap: 8px; }
+.consent button { font: inherit; font-size: 14px; padding: 6px 14px; border-radius: 4px; cursor: pointer; border: 1px solid var(--ink); background: transparent; color: var(--ink); }
+.consent button.yes { background: var(--ink); color: var(--bg); }
+@media (prefers-reduced-motion: no-preference) {
+  .view { animation: rise .35s ease-out both; }
+  @keyframes rise { from { transform: translateY(6px); } to { transform: none; } }
+}
+</style>
+</head>
+<body>
+
+<header class="site-hdr" id="hdr">
+  <div class="gutter brand"><b>大滿貫跑道誌</b><span>WORLD MARATHON MAJORS</span></div>
+  <nav class="gutter tabs" id="tabs" aria-label="賽事"></nav>
+</header>
+<main class="gutter" id="main"></main>
+
+<script src="config.js"></script>
+<script src="analytics.js"></script>
+<script src="marathons.js"></script>
+<script src="courses.js"></script>
+<script>
+(function () {
+  "use strict";
+  var RACES = window.MAJORS || [];
+  var TIMELINE = window.MAJORS_TIMELINE || [];
+  var COURSES = window.COURSES || {};
+  var SRC_LABEL = { official: "官方路線資料", osm: "OpenStreetMap 賽道", trace: "依官方路線圖重建", sketch: "示意" };
+
+  // 有實際路線資料的賽事：以 courses.js 覆蓋路線、高度與景點公里數
+  RACES.forEach(function (r) {
+    var c = COURSES[r.id];
+    if (!c) {
+      r.source = r.source || { kind: "sketch", route: "依 2026 官方景點路線圖繪製的示意（2027 新路線尚未公布）", elevation: "示意" };
+      return;
+    }
+    r.route = c.route;
+    r.elevation = c.elevation;
+    r.source = c.source;
+    r.landmarks.forEach(function (lm, i) { if (c.landmarkKm[i] != null) lm.km = c.landmarkKm[i]; });
+  });
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var FULL = 42.195;
+  var VSPAN = 160; // 所有高度圖共用的垂直比例（公尺）
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function fmtKm(k) { return k >= FULL - 0.01 ? "42.2" : (Math.round(k * 10) / 10).toFixed(1); }
+  function starCount(r) {
+    // 依加入順序算第幾星
+    var order = RACES.slice().sort(function (a, b) { return a.joined - b.joined; });
+    var founders = order.filter(function (x) { return x.joined === 2006; }).length;
+    if (r.joined === 2006) return founders;
+    return founders + order.filter(function (x) { return x.joined > 2006 && x.joined <= r.joined; }).length;
+  }
+
+  /* ---------- 幾何 ---------- */
+  function project(route, W, H, pad) {
+    var lat0 = route.reduce(function (s, p) { return s + p[0]; }, 0) / route.length;
+    var k = Math.cos(lat0 * Math.PI / 180);
+    var xs = route.map(function (p) { return p[1] * k; });
+    var ys = route.map(function (p) { return -p[0]; });
+    var minx = Math.min.apply(null, xs), maxx = Math.max.apply(null, xs);
+    var miny = Math.min.apply(null, ys), maxy = Math.max.apply(null, ys);
+    var s = Math.min((W - 2 * pad) / (maxx - minx || 1), (H - 2 * pad) / (maxy - miny || 1));
+    var ox = (W - (maxx - minx) * s) / 2, oy = (H - (maxy - miny) * s) / 2;
+    return {
+      pxPerKm: s / 111.32,
+      xy: function (lat, lon) { return [ox + (lon * k - minx) * s, oy + (-lat - miny) * s]; }
+    };
+  }
+  function lerpAt(arr, km, idxKm) {
+    for (var i = 0; i < arr.length - 1; i++) {
+      var a = arr[i], b = arr[i + 1];
+      if (km <= b[idxKm]) {
+        var t = (km - a[idxKm]) / ((b[idxKm] - a[idxKm]) || 1);
+        t = Math.max(0, Math.min(1, t));
+        return a.map(function (v, j) { return v + (b[j] - v) * t; });
+      }
+    }
+    return arr[arr.length - 1].slice();
+  }
+  function routeAt(r, km) { return lerpAt(r.route, km, 2); }
+  function elevAt(r, km) { return lerpAt(r.elevation, km, 0)[1]; }
+  function stats(r) {
+    var e = r.elevation, gain = 0, loss = 0, hi = -1e9, lo = 1e9;
+    for (var i = 0; i < e.length; i++) {
+      hi = Math.max(hi, e[i][1]); lo = Math.min(lo, e[i][1]);
+      if (i) { var d = e[i][1] - e[i - 1][1]; if (d > 0) gain += d; else loss -= d; }
+    }
+    return { gain: Math.round(gain), loss: Math.round(loss), hi: hi, lo: lo, start: e[0][1], end: e[e.length - 1][1] };
+  }
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(SVGNS, tag);
+    for (var a in attrs) n.setAttribute(a, attrs[a]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function pathFrom(pts) { return pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(""); }
+
+  /* ---------- 小地圖（總覽卡片） ---------- */
+  function miniMap(r) {
+    var W = 96, H = 80, P = project(r.route, W, H, 8);
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, "aria-hidden": "true" });
+    var pts = r.route.map(function (p) { return P.xy(p[0], p[1]); });
+    el("path", { d: pathFrom(pts), fill: "none", stroke: "var(--course)", "stroke-width": 2.2, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
+    var s = pts[0], f = pts[pts.length - 1];
+    el("circle", { cx: s[0], cy: s[1], r: 3, fill: "var(--ink)" }, svg);
+    el("rect", { x: f[0] - 3, y: f[1] - 3, width: 6, height: 6, fill: "var(--surface)", stroke: "var(--ink)", "stroke-width": 1.5 }, svg);
+    return svg;
+  }
+
+  /* ---------- 路線圖 ---------- */
+  function drawMap(r) {
+    var W = 400, H = 320, P = project(r.route, W, H, 30);
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": r.name + "示意路線圖，起點" + r.start + "，終點" + r.finish });
+    var pts = r.route.map(function (p) { return P.xy(p[0], p[1]); });
+    var d = pathFrom(pts);
+    el("path", { d: d, fill: "none", stroke: "var(--map)", "stroke-width": 9, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
+    el("path", { d: d, fill: "none", stroke: "var(--course)", "stroke-width": 3.5, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
+
+    // 每 10 公里標記
+    for (var k = 10; k < FULL; k += 10) {
+      var q = routeAt(r, k), xy = P.xy(q[0], q[1]);
+      el("circle", { cx: xy[0], cy: xy[1], r: 3.2, fill: "var(--surface)", stroke: "var(--course)", "stroke-width": 1.6 }, svg);
+      var t = el("text", { x: xy[0] + 6, y: xy[1] - 5, "font-size": 10, "font-family": "var(--f-mono)", fill: "var(--muted)", stroke: "var(--map)", "stroke-width": 3, "paint-order": "stroke" }, svg);
+      t.textContent = k + "K";
+    }
+
+    // 景點編號（依路線順序）
+    var g = el("g", {}, svg);
+    r.landmarks.forEach(function (lm, i) {
+      var q = routeAt(r, lm.km), xy = P.xy(q[0], q[1]);
+      var c = el("g", { "data-i": i, class: "lm" }, g);
+      el("circle", { cx: xy[0], cy: xy[1], r: 8.5, fill: "var(--ink)", stroke: "var(--map)", "stroke-width": 1.5 }, c);
+      var tx = el("text", { x: xy[0], y: xy[1] + 3.6, "text-anchor": "middle", "font-size": 10, "font-weight": 700, "font-family": "var(--f-mono)", fill: "var(--bg)" }, c);
+      tx.textContent = i + 1;
+    });
+
+    // 目前位置
+    var cur = el("g", { id: "map-cur" }, svg);
+    el("circle", { r: 11, fill: "var(--course-soft)", stroke: "var(--course)", "stroke-width": 1.5 }, cur);
+    el("circle", { r: 4.5, fill: "var(--course)", stroke: "var(--surface)", "stroke-width": 1.5 }, cur);
+
+    // 北向與比例尺
+    var na = el("g", { transform: "translate(" + (W - 22) + ",22)" }, svg);
+    el("path", { d: "M0 -12 L6 6 L0 2 L-6 6 Z", fill: "var(--ink)" }, na);
+    var nt = el("text", { y: 18, "text-anchor": "middle", "font-size": 10, "font-weight": 700, fill: "var(--ink)", "font-family": "var(--f-mono)" }, na);
+    nt.textContent = "N";
+    var steps = [0.5, 1, 2, 5, 10], bar = steps[0];
+    for (var s = 0; s < steps.length; s++) if (steps[s] * P.pxPerKm <= 110) bar = steps[s];
+    var bw = bar * P.pxPerKm, by = H - 14;
+    el("path", { d: "M14 " + (by - 4) + "V" + by + "H" + (14 + bw) + "V" + (by - 4), fill: "none", stroke: "var(--ink)", "stroke-width": 1.5 }, svg);
+    var bt = el("text", { x: 14 + bw + 6, y: by + 1, "font-size": 10, fill: "var(--ink)", "font-family": "var(--f-mono)" }, svg);
+    bt.textContent = bar + " km";
+
+    svg._P = P;
+    return svg;
+  }
+
+  /* ---------- 高度剖面 ---------- */
+  function drawProfile(r) {
+    var W = 440, H = 200, ml = 36, mr = 14, mt = 14, mb = 30;
+    var st = stats(r);
+    var y0 = Math.floor((st.lo - 5) / 20) * 20; if (y0 < 0 && st.lo > -10) y0 = 0;
+    var y1 = y0 + Math.max(VSPAN, Math.ceil((st.hi - y0 + 10) / 20) * 20);
+    var X = function (km) { return ml + km / FULL * (W - ml - mr); };
+    var Y = function (m) { return mt + (1 - (m - y0) / (y1 - y0)) * (H - mt - mb); };
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": r.name + "高度剖面，最高約 " + st.hi + " 公尺，最低約 " + st.lo + " 公尺" });
+
+    for (var m = y0; m <= y1; m += 40) {
+      el("line", { x1: ml, x2: W - mr, y1: Y(m), y2: Y(m), stroke: "var(--rule)", "stroke-width": 1 }, svg);
+      var lt = el("text", { x: ml - 6, y: Y(m) + 3.5, "text-anchor": "end", "font-size": 12, fill: "var(--muted)", "font-family": "var(--f-mono)" }, svg);
+      lt.textContent = m;
+    }
+    var unit = el("text", { x: ml - 6, y: mt - 3, "text-anchor": "end", "font-size": 11, fill: "var(--muted)" }, svg);
+    unit.textContent = "m";
+    [0, 5, 10, 15, 20, 25, 30, 35, 40, FULL].forEach(function (k) {
+      var xt = el("text", { x: X(k), y: H - mb + 15, "text-anchor": k === FULL ? "end" : "middle", "font-size": 12, fill: "var(--muted)", "font-family": "var(--f-mono)" }, svg);
+      xt.textContent = k === FULL ? "42.2" : k;
+      el("line", { x1: X(k), x2: X(k), y1: H - mb, y2: H - mb + 4, stroke: "var(--muted)" }, svg);
+    });
+    var kmLbl = el("text", { x: W - mr, y: H - 2, "text-anchor": "end", "font-size": 11, fill: "var(--muted)" }, svg);
+    kmLbl.textContent = "km";
+    // 半程線
+    el("line", { x1: X(21.0975), x2: X(21.0975), y1: mt, y2: H - mb, stroke: "var(--muted)", "stroke-dasharray": "2 3", "stroke-width": 1 }, svg);
+
+    var pts = r.elevation.map(function (p) { return [X(p[0]), Y(p[1])]; });
+    var area = pathFrom(pts) + "L" + X(FULL) + " " + (H - mb) + "L" + X(0) + " " + (H - mb) + "Z";
+    el("path", { d: area, fill: "var(--course-soft)" }, svg);
+    el("path", { d: pathFrom(pts), fill: "none", stroke: "var(--course)", "stroke-width": 2.2, "stroke-linejoin": "round" }, svg);
+    el("line", { x1: ml, x2: W - mr, y1: H - mb, y2: H - mb, stroke: "var(--muted)", "stroke-width": 1 }, svg);
+
+    // 景點刻度
+    r.landmarks.forEach(function (lm, i) {
+      el("circle", { cx: X(lm.km), cy: H - mb, r: 2.6, fill: "var(--ink)", "data-i": i }, svg);
+    });
+
+    var cur = el("g", { id: "prof-cur" }, svg);
+    el("line", { y1: mt, y2: H - mb, stroke: "var(--ink)", "stroke-width": 1 }, cur);
+    el("circle", { r: 5, fill: "var(--course)", stroke: "var(--surface)", "stroke-width": 2 }, cur);
+
+    svg._X = X; svg._Y = Y; svg._ml = ml; svg._mr = mr; svg._W = W;
+    return svg;
+  }
+
+  /* ---------- 頁面 ---------- */
+  var tabsEl = document.getElementById("tabs");
+  var main = document.getElementById("main");
+  var hdr = document.getElementById("hdr");
+
+  function buildTabs() {
+    var html = '<a class="tab" href="#home" data-id="home"><span class="c">ALL</span><span class="n">總覽</span></a>';
+    RACES.forEach(function (r) {
+      html += '<a class="tab' + (r.status !== "member" ? " soon" : "") + '" href="#' + r.id + '" data-id="' + r.id + '"><span class="c">' + r.code + '</span><span class="n">' + esc(r.city) + "</span></a>";
+    });
+    tabsEl.innerHTML = html;
+  }
+
+  function renderHome() {
+    var members = RACES.filter(function (r) { return r.status === "member"; }).length;
+    var html = '<div class="home view">' +
+      '<section class="home-hero"><div class="eyebrow">ABBOTT WORLD MARATHON MAJORS</div>' +
+      '<h1>從六星到八星 <span class="stars">★★★★★★★☆</span></h1>' +
+      "<p>世界馬拉松大滿貫從 2006 年的五場比賽開始，東京加入後成為大家熟悉的「六大」。2025 年雪梨成為第七場，開普敦已確認於 2027 年成為第八場。目前正式成員 " + members + " 場，依賽季順序排列如下。</p></section>" +
+      '<section class="block"><h2>系列沿革 <small>TIMELINE</small></h2><ol class="series">' +
+      TIMELINE.map(function (t) {
+        return '<li class="' + (t.pending ? "pending" : "") + '"><span class="y">' + t.year + "</span><h3>" + esc(t.title) + "</h3><p>" + esc(t.text) + "</p></li>";
+      }).join("") + "</ol></section>" +
+      '<section class="block"><h2>依賽季瀏覽 <small>BY SEASON</small></h2><div class="cards" id="cards"></div></section>' +
+      "</div>";
+    main.innerHTML = html + foot();
+    var cards = document.getElementById("cards");
+    RACES.forEach(function (r) {
+      var a = document.createElement("a");
+      a.className = "card"; a.href = "#" + r.id;
+      a.innerHTML = '<div><div class="c">' + r.code + "</div><h3>" + esc(r.name) + "</h3>" +
+        '<div class="meta">' + esc(r.month) + "<br>" +
+        (r.status === "member" ? "第 " + starCount(r) + " 星・" + r.joined + " 加入" : '<span class="badge">' + r.joined + " 加入</span>") +
+        "</div></div>";
+      a.appendChild(miniMap(r));
+      cards.appendChild(a);
+    });
+  }
+
+  function foot() {
+    return '<footer class="foot">' +
+      "<p>本站為非官方的粉絲整理網站，與各馬拉松主辦單位及 Abbott World Marathon Majors 無關。實際路線、日期與規則請以各賽事官網為準。</p>" +
+      "<p>路線：依各賽事公布的官方路線圖，沿 OpenStreetMap 道路資料重建（公里數已換算為 42.195）；開普敦 2027 路線尚未公布，仍為示意。" +
+      '地圖資料 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>，以 ODbL 授權。</p>' +
+      "<p>高度：美國三場取自 USGS 3DEP；倫敦、柏林取自 Copernicus EU-DEM；東京取自日本國土地理院（出典：国土地理院）；雪梨取自 NASA SRTM；經 OpenTopoData 取得並平滑處理。跨橋路段無法呈現橋面高度。" +
+      "所有高度圖使用相同垂直比例（" + VSPAN + " 公尺），可直接比較各場的起伏。</p>" +
+      '<p>賽道紀錄與事件更新至 2026 年 11 月。<a href="privacy.html">隱私權說明</a>' +
+      (window.SITE_ANALYTICS ? '・<button type="button" class="linkbtn" id="consent-reset">分析 Cookie 設定</button>' : "") + "</p></footer>";
+  }
+
+  function renderRace(r) {
+    var st = stats(r);
+    var n = starCount(r);
+    var stars = "";
+    for (var i = 0; i < 8; i++) stars += i < n ? "★" : "☆";
+    var joinTxt = r.status === "member" ? r.joined + "（第 " + n + " 星）" : r.joined + "（已確認）";
+
+    var html = '<article class="race view">' +
+      '<div class="race-head">' +
+      '<header class="bib"><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>' +
+      '<div class="bib-top"><span>' + esc(r.country) + " · " + esc(r.city) + '</span><span class="stars" aria-label="大滿貫第 ' + n + ' 站">' + stars + "</span></div>" +
+      '<div class="bib-code" aria-hidden="true">' + r.code + "</div>" +
+      "<h1>" + esc(r.name) + '</h1><div class="en">' + esc(r.en) + "</div></header>" +
+      '<dl class="facts">' +
+      fact("首屆", r.first) + fact("加入大滿貫", joinTxt) + fact("賽期", r.month) +
+      fact("路線型態", r.shape) + fact("起點", r.start) + fact("終點", r.finish) +
+      "</dl></div>" +
+      '<div class="jump" role="navigation" aria-label="本頁段落">' +
+      jump("b-history", "歷史") + jump("b-city", "城市") + jump("b-route", "路線") + jump("b-marks", "沿途景點") + jump("b-events", "事件與紀錄") +
+      "</div>" +
+      '<div class="race-grid">' +
+
+      '<section class="block b-history" id="b-history"><h2>賽事歷史 <small>HISTORY</small></h2><div class="prose">' +
+      r.history.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") +
+      '</div><ol class="milestones">' +
+      r.milestones.map(function (m) { return '<li><span class="y">' + m[0] + "</span><span>" + esc(m[1]) + "</span></li>"; }).join("") +
+      "</ol></section>" +
+
+      '<section class="block b-city" id="b-city"><h2>' + esc(r.city) + " <small>CITY</small></h2><div class=\"prose\">" +
+      r.cityIntro.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</div></section>" +
+
+      '<section class="block b-route" id="b-route"><h2>路線與高度 <small>COURSE</small></h2>' +
+      '<div class="route-pane">' +
+      '<div class="route-col"><figure class="map-fig" id="map-fig"></figure></div>' +
+      '<div class="route-col">' +
+      '<figure class="prof-fig" id="prof-fig"><figcaption>在高度圖上拖曳，或用下方滑桿移動位置。虛線為半程。</figcaption></figure>' +
+      '<label class="readout" for="km-slider"><span class="big" id="ro-km">21.1<small>km</small></span><span class="big" id="ro-m">0<small>m</small></span><span class="near" id="ro-near"></span></label>' +
+      '<input class="slider" id="km-slider" type="range" min="0" max="' + FULL + '" step="0.1" value="21.1" aria-label="公里數">' +
+      '<div class="stat-row"><span>起點 <b>' + st.start + ' m</b></span><span>最高 <b>' + st.hi + ' m</b></span><span>最低 <b>' + st.lo + ' m</b></span><span>累計爬升 <b>≈' + st.gain + ' m</b></span><span>累計下降 <b>≈' + st.loss + " m</b></span></div>" +
+      '<p class="note">' + esc(r.profileNote) + "</p>" +
+      '<p class="src"><span class="src-tag k-' + r.source.kind + '">' + SRC_LABEL[r.source.kind] + "</span>" +
+      "<span>路線：" + esc(r.source.route) + "</span><span>高度：" + esc(r.source.elevation) + "</span></p>" +
+      "</div></div></section>" +
+
+      '<section class="block b-marks" id="b-marks"><h2>沿途景點 <small>LANDMARKS</small></h2><ol class="marks" id="marks">' +
+      r.landmarks.map(function (lm, i) {
+        return '<li data-i="' + i + '"><button type="button" data-km="' + lm.km + '"><span class="num">' + (i + 1) + '</span><span class="km mono">' + fmtKm(lm.km) + ' K</span><span class="t"><b>' + esc(lm.name) + "</b><span>" + esc(lm.note) + "</span></span></button></li>";
+      }).join("") + "</ol></section>" +
+
+      '<section class="block b-events" id="b-events"><h2>知名事件與紀錄 <small>MOMENTS</small></h2>' +
+      (r.records
+        ? '<div class="records">' + recTile("男子賽道紀錄", r.records.men) + recTile("女子賽道紀錄", r.records.women) +
+          '<p class="rec-note">更新至 2026 年 11 月</p></div>'
+        : '<p class="note">' + esc(r.city) + "尚未以大滿貫身分舉行，賽道紀錄待 2027 年起整理。</p>") +
+      (r.events && r.events.length
+        ? '<ol class="events">' + r.events.slice().sort(function (a, b) { return a.year - b.year; }).map(function (e) {
+            return '<li class="ev-' + e.kind + '"><span class="y">' + e.year + '</span><div><span class="kind">' + (e.kind === "record" ? "紀錄" : "事件") +
+              "</span><b>" + esc(e.title) + "</b><p>" + esc(e.text) + "</p></div></li>";
+          }).join("") + "</ol>"
+        : '<div class="empty"><b>這一區即將補上</b><span>' + esc(r.name) + "史上的經典時刻、世界紀錄與賽道紀錄會整理在這裡。</span></div>") +
+      "</section>" +
+
+      "</div></article>";
+    main.innerHTML = html + foot();
+
+    var map = drawMap(r), prof = drawProfile(r);
+    document.getElementById("map-fig").appendChild(map);
+    var cap = document.createElement("figcaption");
+    cap.textContent = (r.source.kind === "sketch" ? "示意路線" : SRC_LABEL[r.source.kind]) + "・數字對應沿途景點・藍點為目前位置";
+    document.getElementById("map-fig").appendChild(cap);
+    var pf = document.getElementById("prof-fig");
+    pf.insertBefore(prof, pf.firstChild);
+
+    var slider = document.getElementById("km-slider");
+    var roKm = document.getElementById("ro-km"), roM = document.getElementById("ro-m"), roNear = document.getElementById("ro-near");
+    var marks = document.getElementById("marks");
+
+    function setKm(km) {
+      km = Math.max(0, Math.min(FULL, km));
+      var q = routeAt(r, km), xy = map._P.xy(q[0], q[1]);
+      document.getElementById("map-cur").setAttribute("transform", "translate(" + xy[0].toFixed(1) + "," + xy[1].toFixed(1) + ")");
+      var m = elevAt(r, km);
+      var pc = document.getElementById("prof-cur");
+      pc.firstChild.setAttribute("x1", prof._X(km)); pc.firstChild.setAttribute("x2", prof._X(km));
+      pc.lastChild.setAttribute("cx", prof._X(km)); pc.lastChild.setAttribute("cy", prof._Y(m));
+      roKm.innerHTML = fmtKm(km) + "<small>km</small>";
+      roM.innerHTML = Math.round(m) + "<small>m</small>";
+      var best = 0, bd = 1e9;
+      r.landmarks.forEach(function (lm, i) { var dd = Math.abs(lm.km - km); if (dd < bd) { bd = dd; best = i; } });
+      var lm = r.landmarks[best];
+      roNear.innerHTML = (bd < 0.6 ? "此處：" : "最近：") + "<b>" + (best + 1) + ". " + esc(lm.name) + "</b>";
+      Array.prototype.forEach.call(marks.children, function (li, i) { li.classList.toggle("on", i === best && bd < 0.6); });
+      if (Math.abs(parseFloat(slider.value) - km) > 0.05) slider.value = km;
+    }
+
+    slider.addEventListener("input", function () { setKm(parseFloat(slider.value)); });
+
+    function kmFromEvent(e) {
+      var rect = prof.getBoundingClientRect();
+      var vx = (e.clientX - rect.left) / rect.width * prof._W;
+      return (vx - prof._ml) / (prof._W - prof._ml - prof._mr) * FULL;
+    }
+    var dragging = false;
+    prof.addEventListener("pointerdown", function (e) { dragging = true; try { prof.setPointerCapture(e.pointerId); } catch (_) {} setKm(kmFromEvent(e)); });
+    prof.addEventListener("pointermove", function (e) { if (dragging || e.pointerType === "mouse") setKm(kmFromEvent(e)); });
+    prof.addEventListener("pointerup", function () { dragging = false; });
+    prof.addEventListener("pointercancel", function () { dragging = false; });
+
+    marks.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-km]");
+      if (!b) return;
+      setKm(parseFloat(b.getAttribute("data-km")));
+      var mf = document.getElementById("map-fig").getBoundingClientRect();
+      var top = hdr.getBoundingClientRect().bottom;
+      if (mf.bottom < top + 40 || mf.top > window.innerHeight - 40) {
+        document.getElementById("b-route").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      }
+    });
+
+    document.querySelector(".jump").addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-to]");
+      if (b) document.getElementById(b.getAttribute("data-to")).scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    setKm(21.1);
+  }
+  function recTile(label, x) {
+    return '<div class="rec"><span class="rec-l">' + label + '</span><span class="rec-t">' + esc(x.time) + '</span><span class="rec-n">' + esc(x.name) + "・" + x.year + "</span></div>";
+  }
+  function fact(k, v) { return "<div><dt>" + esc(k) + "</dt><dd>" + esc(v) + "</dd></div>"; }
+  function jump(id, label) { return '<button type="button" data-to="' + id + '">' + esc(label) + "</button>"; }
+
+  function route() {
+    var id = (location.hash || "").replace(/^#/, "") || "home";
+    var r = RACES.find(function (x) { return x.id === id; });
+    if (!r) id = "home";
+    Array.prototype.forEach.call(tabsEl.children, function (a) {
+      if (a.getAttribute("data-id") === id) {
+        a.setAttribute("aria-current", "page");
+        var tr = tabsEl.getBoundingClientRect(), ar = a.getBoundingClientRect();
+        if (ar.left < tr.left || ar.right > tr.right) tabsEl.scrollLeft += ar.left - tr.left - 16;
+      } else a.removeAttribute("aria-current");
+    });
+    if (r) renderRace(r); else renderHome();
+    document.title = r ? r.name + "・大滿貫跑道誌" : "大滿貫跑道誌";
+    if (window.SITE_ANALYTICS) window.SITE_ANALYTICS.pageView(id);
+    window.scrollTo(0, 0);
+  }
+
+  function measure() { document.documentElement.style.setProperty("--hdr", hdr.offsetHeight + "px"); }
+
+  buildTabs();
+  route();
+  measure();
+  window.addEventListener("hashchange", route);
+  window.addEventListener("resize", measure);
+})();
+</script>
+</body>
+</html>
