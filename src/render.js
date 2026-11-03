@@ -10,6 +10,15 @@ function tag(name, a, inner) { return inner == null ? `<${name}${attrs(a)}/>` : 
 function n1(v) { return Math.round(v * 10) / 10; }
 function pathFrom(pts) { return pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(""); }
 
+const ORD_EN = { 6: "6th", 7: "7th", 8: "8th", 9: "9th" };
+const WORD = { en: ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"], es: ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"] };
+// 「創始成員」或「第 n 個大滿貫」
+function majorLabel(lang, races, r, kind) {
+  const n = starCount(races, r);
+  if (r.joined === 2006) return t(lang, kind === "card" ? "cardFounder" : "joinedFounder", { y: r.joined });
+  const key = r.status === "member" ? (kind === "card" ? "cardNth" : "joinedNth") : (kind === "card" ? "cardJoins" : "joinedConfirmed");
+  return t(lang, key, { n, nth: ORD_EN[n] || n + "th", y: r.joined });
+}
 function starCount(races, r) {
   const founders = races.filter((x) => x.joined === 2006).length;
   if (r.joined === 2006) return founders;
@@ -129,13 +138,13 @@ function homeMain(ctx, timeline) {
   let cards = "";
   races.forEach((r) => {
     cards += `<a class="card" href="${r.id}/"><div><div class="c">${r.code}</div><h3>${esc(r.name)}</h3><div class="meta">${esc(r.month)}<br>` +
-      (r.status === "member" ? esc(t(lang, "cardMember", { n: starCount(races, r), y: r.joined })) : `<span class="badge">${esc(t(lang, "cardJoins", { y: r.joined }))}</span>`) +
+      (r.status === "member" ? esc(majorLabel(lang, races, r, "card")) : `<span class="badge">${esc(majorLabel(lang, races, r, "card"))}</span>`) +
       `</div></div>${miniMap(r.mini)}</a>`;
   });
   return `<div class="home">` +
     `<section class="home-hero"><div class="eyebrow">ABBOTT WORLD MARATHON MAJORS</div>` +
     `<h1>${esc(t(lang, "homeTitle"))} <span class="stars" aria-hidden="true">★★★★★★★☆</span></h1>` +
-    `<p>${esc(t(lang, "homeIntro", { n: members }))}</p></section>` +
+    `<p>${esc(t(lang, "homeIntro", { n: members, nWord: (WORD[lang] || [])[members] || members }))}</p></section>` +
     `<section class="block"><h2>${head2(lang, "timelineH", "timelineSub")}</h2><ol class="series">` +
     timeline.map((it) => `<li class="${it.pending ? "pending" : ""}"><span class="y">${it.year}</span><h3>${esc(it.title)}</h3><p>${esc(it.text)}</p></li>`).join("") +
     `</ol></section>` +
@@ -156,7 +165,7 @@ function raceMain(ctx, r) {
   const n = starCount(races, r);
   let stars = "";
   for (let i = 0; i < 8; i++) stars += i < n ? "★" : "☆";
-  const joinTxt = r.status === "member" ? t(lang, "joinedMember", { y: r.joined, n }) : t(lang, "joinedConfirmed", { y: r.joined });
+  const joinTxt = majorLabel(lang, races, r, "fact");
   const P = Geo.mapProjection(r), S = Geo.profileScale(r);
   const st0 = Geo.stateAt(r, 21.1, P, S);
   const kindLabel = t(lang, "kind_" + r.source.kind);
@@ -167,7 +176,7 @@ function raceMain(ctx, r) {
   return `<article class="race">` +
     `<div class="race-head">` +
     `<header class="bib"><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>` +
-    `<div class="bib-top"><span>${esc(r.country)} · ${esc(r.city)}</span><span class="stars" aria-label="${esc(t(lang, "starsAria", { n }))}">${stars}</span></div>` +
+    `<div class="bib-top"><span>${esc(r.country)} · ${esc(r.city)}</span><span class="stars" aria-label="${esc(t(lang, "starsAria", { label: joinTxt }))}">${stars}</span></div>` +
     `<div class="bib-code" aria-hidden="true">${r.code}</div>` +
     `<h1>${esc(r.name)}</h1>` + (r.en !== r.name ? `<div class="en">${esc(r.en)}</div>` : "") + `</header>` +
     `<dl class="facts">` +

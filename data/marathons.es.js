@@ -7,7 +7,7 @@ window.MAJORS_I18N = window.MAJORS_I18N || {};
 window.MAJORS_I18N.es = {
   timeline: [
     ["Cinco carreras fundadoras", "Boston, Londres, Berlín, Chicago y Nueva York forman los World Marathon Majors."],
-    ["Llega Tokio", "La sexta carrera y la primera fuera de Europa y Norteamérica. Quien termina las seis recibe la medalla Six Star."],
+    ["Llega Tokio", "El sexto Major y el primero fuera de Europa y Norteamérica. Quien completa los seis obtiene la condición de Six Star Finisher; la medalla Six Star llegó en 2016."],
     ["Llega Sídney", "La séptima carrera y el primer Major del hemisferio sur."],
     ["Llega Ciudad del Cabo", "Confirmada en junio de 2026 como la octava carrera y el primer Major de África."],
     ["Shanghái, en evaluación", "Su carrera del 6 de diciembre de 2026 es la segunda evaluación. Si la supera, podría convertirse en el noveno Major."]
@@ -18,7 +18,7 @@ window.MAJORS_I18N.es = {
       shape: "Lineal (Shinjuku → estación de Tokio), con varios tramos de ida y vuelta",
       start: "Edificio del Gobierno Metropolitano de Tokio", finish: "Estación de Tokio, lado Marunouchi",
       history: [
-        "El Maratón de Tokio nació del Maratón Internacional de Tokio (carrera masculina de élite) y del Maratón Internacional Femenino de Tokio, que se alternaban desde 1981. En 2007 se fusionaron en un gran maratón popular, y unas 30.000 personas tomaron la salida en la primera edición.",
+        "El Maratón de Tokio nació de dos carreras de élite: el Maratón Internacional de Tokio masculino, creado en 1981, y el Maratón Internacional Femenino de Tokio, creado en 1979. En 2007 se fusionaron en un gran maratón popular, y unas 30.000 personas tomaron la salida en la primera edición.",
         "En 2013 Tokio se convirtió en el sexto Major y el primero de Asia. El nuevo recorrido de 2017 llevó la meta de Odaiba a la avenida Gyoko-dori, frente a la estación de Tokio, y la carrera se volvió más llana y rápida. En 2020 la pandemia la limitó a la élite, y la edición de 2021 se aplazó a marzo de 2022."
       ],
       milestones: ["Nace el Maratón Internacional de Tokio (élite)", "Primer Maratón de Tokio popular", "Entra en los World Marathon Majors", "Nuevo recorrido; la meta pasa a la estación de Tokio"],
@@ -34,7 +34,7 @@ window.MAJORS_I18N.es = {
         ["Nihonbashi", "El punto de partida de las rutas de la época Edo, custodiado por estatuas de kirin."],
         ["Kaminarimon, Asakusa", "El gran farol rojo y la calle Nakamise, con la Tokyo Skytree a la vista. Aquí se da la vuelta."],
         ["Ryogoku", "Hogar del estadio de sumo Kokugikan. La media maratón cae en Kiyosumi-dori."],
-        ["Monzen-nakacho y Tomioka Hachimangu", "Un breve tramo de ida y vuelta por Eitai-dori, el más castizo del recorrido."],
+        ["Monzen-nakacho y Tomioka Hachimangu", "Un breve tramo de ida y vuelta por Eitai-dori, el que mejor conserva el sabor del viejo Tokio."],
         ["Ginza 4-chome", "El reloj de los almacenes Wako, con mucho público en la calle comercial."],
         ["Giro de Tamachi", "El punto más al sur, en Daiichi Keihin, antes de volver al norte por Hibiya-dori."],
         ["Zojoji y Torre de Tokio", "La torre roja y blanca junto al templo antiguo."],
@@ -43,7 +43,7 @@ window.MAJORS_I18N.es = {
       ],
       events: [
         ["Primer maratón popular", "Se fusionan el Maratón Internacional de Tokio y el maratón femenino, y unas 30.000 personas toman la salida en la primera edición."],
-        ["Sexto Major", "Con Tokio, quien completa las seis carreras recibe la medalla Six Star. Es el primer Major fuera de Europa y Norteamérica."],
+        ["Sexto Major", "Con Tokio, quien completa las seis carreras obtiene la condición de Six Star Finisher, y la medalla Six Star llegó en 2016. Es el primer Major fuera de Europa y Norteamérica."],
         ["Solo élite durante la pandemia", "Con la COVID-19 en expansión, se cancela la carrera popular y solo compiten los atletas de élite."],
         ["Kipchoge bate el récord", "Eliud Kipchoge gana en 2:02:40, el maratón más rápido corrido en Japón hasta entonces."],
         ["Récord masculino de 2:02:16", "Benson Kipruto gana en 2:02:16, y Sutume Kebede establece el récord femenino de entonces con 2:15:55."],
@@ -58,7 +58,7 @@ window.MAJORS_I18N.es = {
       start: "Hopkinton", finish: "Copley Square, Boylston St",
       history: [
         "Inspirada en el maratón de los Juegos Olímpicos de Atenas de 1896, la Boston Athletic Association (B.A.A.) organizó la primera carrera en 1897 con solo 15 participantes. Es el maratón anual más antiguo del mundo.",
-        "Se celebra siempre en el Patriots’ Day de Massachusetts, el tercer lunes de abril. Las mujeres pueden inscribirse oficialmente desde 1972. Boston es famoso por su marca mínima (la BQ): la mayoría de los corredores deben lograr antes un tiempo determinado en otro maratón."
+        "Se celebra tradicionalmente en el Patriots’ Day de Massachusetts, el tercer lunes de abril. Las mujeres pueden inscribirse oficialmente desde 1972. Boston es famoso por sus marcas mínimas de clasificación (la famosa «BQ»): la mayoría de los corredores deben lograr antes un tiempo determinado en otro maratón."
       ],
       milestones: ["Primera carrera, 15 participantes", "La salida se traslada a Hopkinton", "Se admite oficialmente a las mujeres", "Miembro fundador de los Majors"],
       cityIntro: [
@@ -84,7 +84,7 @@ window.MAJORS_I18N.es = {
         ["La primera mujer en terminar", "Tras rechazar su inscripción, Bobbi Gibb se esconde entre arbustos cerca de la salida, se une a la carrera y termina en unas 3 horas y 21 minutos."],
         ["El dorsal de Switzer", "Kathrine Switzer se inscribe como «K. V. Switzer» y obtiene un dorsal. Un organizador intenta arrancárselo en plena carrera y las fotos se convierten en un símbolo del atletismo femenino. La categoría femenina se oficializa en 1972."],
         ["Nace la categoría en silla de ruedas", "Bob Hall termina en silla de ruedas, y Boston se convierte en uno de los primeros maratones en acoger a estos atletas."],
-        ["La trampa de Rosie Ruiz", "La primera mujer en cruzar la meta, Rosie Ruiz, resulta haber ido en metro. Se le retira el título, que pasa a Jacqueline Gareau."],
+        ["La trampa de Rosie Ruiz", "La primera mujer en cruzar la meta, Rosie Ruiz, resulta haberse colado en la carrera a menos de una milla de la meta. Se le retira el título, que pasa a Jacqueline Gareau."],
         ["Atentado en la meta", "El 15 de abril dos bombas estallan cerca de la meta: 3 muertos y cientos de heridos. «Boston Strong» se convierte en el lema de la ciudad."],
         ["Meb gana para EE. UU.", "Un año después del atentado, Meb Keflezighi gana la carrera masculina, el primer estadounidense en hacerlo desde 1983."],
         ["Des Linden bajo la lluvia fría", "Con lluvia helada y fuerte viento, Des Linden se convierte en la primera estadounidense en ganar desde 1985."],
@@ -100,7 +100,7 @@ window.MAJORS_I18N.es = {
       start: "Greenwich y Blackheath", finish: "The Mall",
       history: [
         "Tras correr el Maratón de Nueva York en 1979, el excampeón olímpico de obstáculos Chris Brasher y John Disley decidieron llevar un maratón urbano a Londres. La primera edición se celebró en marzo de 1981 con unas 7.000 personas.",
-        "Londres es famoso por la recaudación benéfica y es uno de los eventos de un solo día que más dinero reúne cada año, con corredores disfrazados de todas las formas posibles. La carrera masculina de élite produce récords mundiales con frecuencia."
+        "Londres es famoso por la recaudación benéfica y es el evento benéfico de un solo día que más recauda cada año en el mundo, con corredores disfrazados de todas las formas posibles. También ha visto varios récords mundiales, del 2:15:25 de Paula Radcliffe en 2003 a la primera carrera por debajo de dos horas de Sabastian Sawe en 2026."
       ],
       milestones: ["Primer Maratón de Londres", "Miembro fundador de los Majors", "Carrera de élite en circuito durante la pandemia"],
       cityIntro: [
@@ -144,7 +144,7 @@ window.MAJORS_I18N.es = {
         "Ciudad del Cabo está en el extremo suroeste de Sudáfrica, al pie de la Montaña de la Mesa y frente al Atlántico y la bahía de la Mesa. Es la capital legislativa del país y una de las ciudades más visitadas de África.",
         "La ciudad mezcla culturas neerlandesa, británica, malaya y africana, y el colorido barrio de Bo-Kaap resume esa historia. En mayo es otoño en el hemisferio sur, más fresco que la antigua fecha de octubre."
       ],
-      profileNote: "Desde 2027 la carrera pasa a mayo y el nuevo recorrido aún no se ha publicado. El recorrido y la altimetría que se muestran son un esquema basado en el mapa oficial de puntos de interés de 2026, del que también salen las distancias.",
+      profileNote: "Desde 2027 la carrera pasa a mayo y el nuevo recorrido aún no se ha publicado. El recorrido y la altimetría que se muestran son una aproximación basada en el mapa oficial de puntos de interés de 2026, del que también salen las distancias.",
       landmarks: [
         ["Estadio de Ciudad del Cabo", "Construido para el Mundial de 2010 entre la ciudad y el Atlántico; el primer hito del recorrido."],
         ["Mirador de la Montaña de la Mesa", "Un tramo del centro con la Montaña de la Mesa justo delante."],
@@ -170,8 +170,8 @@ window.MAJORS_I18N.es = {
       shape: "Lineal (North Sydney → Ópera)",
       start: "Miller St, North Sydney", finish: "Ópera de Sídney",
       history: [
-        "El Maratón de Sídney es un legado de los Juegos Olímpicos de 2000 y se celebra cada año desde 2001. Las primeras ediciones mantuvieron el espíritu del recorrido olímpico: salida en la orilla norte y cruce del Harbour Bridge.",
-        "Sídney entró en el proceso de candidatura de los Majors en 2022 y corrió su primera edición como séptimo Major el 31 de agosto de 2025, el primero del hemisferio sur."
+        "El Maratón de Sídney es un legado de los Juegos Olímpicos de 2000 y se celebró por primera vez en 2001. Las primeras ediciones mantuvieron el espíritu del recorrido olímpico: salida en la orilla norte y cruce del Harbour Bridge.",
+        "Tras superar la evaluación de los Majors como carrera candidata, Sídney corrió su primera edición como séptimo Major el 31 de agosto de 2025, el primero del hemisferio sur."
       ],
       milestones: ["Maratón olímpico de Sídney", "Primer Maratón de Sídney", "Se convierte en el séptimo Major"],
       cityIntro: [
@@ -181,7 +181,7 @@ window.MAJORS_I18N.es = {
       profileNote: "Según los datos de terreno SRTM, la salida en North Sydney está a unos 90 m. Tras el puente, el recorrido baja hasta el puerto, sube y baja entre 30 y 50 m por Kensington y Centennial Park en la parte central y termina cuesta abajo hacia la Ópera. Su desnivel acumulado está entre los mayores de los Majors.",
       landmarks: [
         ["North Sydney", "La salida, en lo alto de Miller St con el Harbour Bridge delante."],
-        ["Harbour Bridge de Sídney", "El único día del año en que se puede correr por la calzada principal del puente."],
+        ["Harbour Bridge de Sídney", "Una ocasión poco habitual de correr por el tablero principal del puente."],
         ["Barangaroo", "El nuevo frente portuario junto a The Rocks."],
         ["Darling Harbour y Pyrmont", "Por el puente de Pyrmont, con público a lo largo del paseo."],
         ["Hyde Park", "El parque del centro, junto a la catedral de St Mary."],
@@ -230,7 +230,7 @@ window.MAJORS_I18N.es = {
       events: [
         ["La primera carrera, en el bosque", "Se celebra en el bosque de Grunewald con poco más de doscientos corredores."],
         ["A través de la Puerta de Brandeburgo", "Tres días antes de la reunificación, los corredores cruzan por primera vez la Puerta de Brandeburgo."],
-        ["El primer récord mundial de Berlín", "El brasileño Ronaldo da Costa corre en 2:06:05 y abre la era de Berlín como circuito de récords."],
+        ["El primer récord mundial masculino de Berlín", "El brasileño Ronaldo da Costa corre en 2:06:05 y abre la era de Berlín como circuito de récords."],
         ["Primera mujer por debajo de 2:20", "La japonesa Naoko Takahashi corre en 2:19:46, la primera mujer en bajar de 2 horas y 20 minutos."],
         ["Primer hombre por debajo de 2:05", "Paul Tergat bate el récord mundial con 2:04:55."],
         ["Gebrselassie 2:03:59", "Haile Gebrselassie bate el récord mundial en Berlín por segundo año seguido y se convierte en el primero por debajo de 2:04."],
@@ -290,7 +290,7 @@ window.MAJORS_I18N.es = {
       start: "Staten Island", finish: "Central Park",
       history: [
         "En 1970 Fred Lebow y Vince Chiappetta organizaron la primera carrera dando vueltas a Central Park: 127 participantes, 55 llegados a meta y un dólar de inscripción.",
-        "En 1976, para celebrar el bicentenario de Estados Unidos, el recorrido se amplió a los cinco distritos, el formato que mantiene hoy. Nueva York es ahora el maratón con más corredores en meta del mundo."
+        "En 1976, para celebrar el bicentenario de Estados Unidos, el recorrido se amplió a los cinco distritos, el formato que mantiene hoy. Nueva York es hoy uno de los maratones más grandes del mundo, con más de 55.000 corredores en meta."
       ],
       milestones: ["Primera carrera, con vueltas a Central Park", "Primer recorrido por los cinco distritos", "Miembro fundador de los Majors", "Cancelado por el huracán Sandy"],
       cityIntro: [

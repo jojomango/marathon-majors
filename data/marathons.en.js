@@ -7,7 +7,7 @@ window.MAJORS_I18N = window.MAJORS_I18N || {};
 window.MAJORS_I18N.en = {
   timeline: [
     ["Five founding races", "Boston, London, Berlin, Chicago and New York form the World Marathon Majors."],
-    ["Tokyo joins", "The sixth race and the first outside Europe and North America. Runners who finish all six earn the Six Star Medal."],
+    ["Tokyo joins", "The sixth Major and the first outside Europe and North America. Runners who complete all six can now earn Six Star Finisher status; the Six Star Medal followed in 2016."],
     ["Sydney joins", "The seventh race and the first Major in the Southern Hemisphere."],
     ["Cape Town joins", "Confirmed in June 2026 as the eighth race and Africa’s first Major."],
     ["Shanghai under review", "Its 6 December 2026 race is the second assessment. If it passes, it could become the ninth Major."]
@@ -15,10 +15,10 @@ window.MAJORS_I18N.en = {
   races: {
     tokyo: {
       name: "Tokyo Marathon", city: "Tokyo", country: "Japan", month: "Early March",
-      shape: "Point to point (Shinjuku → Tokyo Station), with several out-and-backs",
+      shape: "Point-to-point (Shinjuku → Tokyo Station), with several out-and-backs",
       start: "Tokyo Metropolitan Government Building", finish: "Tokyo Station, Marunouchi side",
       history: [
-        "The Tokyo Marathon grew out of the Tokyo International Marathon (an elite men’s race) and the Tokyo International Women’s Marathon, held in alternate years from 1981. In 2007 they were merged into a mass-participation city marathon, and about 30,000 runners started the first edition.",
+        "The Tokyo Marathon grew out of two elite races: the Tokyo International Marathon for men, first held in 1981, and the Tokyo International Women’s Marathon, first held in 1979. In 2007 they were merged into a mass-participation city marathon, and about 30,000 runners started the first edition.",
         "In 2013 Tokyo became the sixth Major and the first in Asia. A new course in 2017 moved the finish from Odaiba to Gyoko-dori in front of Tokyo Station, making the race flatter and faster. In 2020 the pandemic limited the race to elites, and the 2021 edition was postponed to March 2022."
       ],
       milestones: ["Tokyo International Marathon launched (elite race)", "First mass-participation Tokyo Marathon", "Joins the World Marathon Majors", "New course; finish moves to Tokyo Station"],
@@ -43,7 +43,7 @@ window.MAJORS_I18N.en = {
       ],
       events: [
         ["First mass-participation race", "The Tokyo International Marathon and the women’s marathon merge, and about 30,000 runners start the first edition."],
-        ["Becomes the sixth Major", "With Tokyo on board, runners who complete all six races earn the Six Star Medal. It is the first Major outside Europe and North America."],
+        ["Becomes the sixth Major", "With Tokyo on board, runners who complete all six can earn Six Star Finisher status, and the Six Star Medal followed in 2016. It is the first Major outside Europe and North America."],
         ["Elite-only race in the pandemic", "With COVID-19 spreading, the mass race is cancelled and only elite athletes compete."],
         ["Kipchoge breaks the course record", "Eliud Kipchoge wins in 2:02:40, the fastest marathon ever run in Japan at the time."],
         ["Men’s course record 2:02:16", "Benson Kipruto wins in 2:02:16, and Sutume Kebede sets the women’s course record of the time with 2:15:55."],
@@ -54,11 +54,11 @@ window.MAJORS_I18N.en = {
     },
     boston: {
       name: "Boston Marathon", city: "Boston", country: "United States", month: "April (Patriots’ Day)",
-      shape: "Point to point (Hopkinton → Boston)",
+      shape: "Point-to-point (Hopkinton → Boston)",
       start: "Hopkinton", finish: "Copley Square, Boylston St",
       history: [
         "Inspired by the marathon at the 1896 Athens Olympics, the Boston Athletic Association (B.A.A.) held the first race in 1897 with just 15 starters. It is the world’s oldest annual marathon.",
-        "The race is always held on Patriots’ Day in Massachusetts, the third Monday in April. Women were officially allowed to enter from 1972. Boston is known for its qualifying standard (the BQ): most runners must first run a set time at another marathon to get in."
+        "The race is traditionally held on Patriots’ Day in Massachusetts, the third Monday in April. Women were officially allowed to enter from 1972. Boston is known for its qualifying times (runners call it a “BQ”): most runners must first run a set time at another marathon to get in."
       ],
       milestones: ["First race, 15 starters", "Start moves to Hopkinton", "Women officially admitted", "Founding member of the Majors"],
       cityIntro: [
@@ -72,7 +72,7 @@ window.MAJORS_I18N.en = {
         ["Wellesley College “Scream Tunnel”", "Students line the road and cheer so loudly you can hear them hundreds of metres away."],
         ["Newton Lower Falls", "The crossing of the Charles River, where the hills begin."],
         ["Right turn at the Newton firehouse", "Onto Commonwealth Avenue and a run of climbs."],
-        ["Heartbreak Hill", "The last hill, about 800 m long, named after the 1936 race."],
+        ["Heartbreak Hill", "The last hill, about 800 m long, which earned its name in the 1936 race."],
         ["Boston College", "Student crowds just past the top of the hill."],
         ["Coolidge Corner", "A busy intersection in Brookline."],
         ["Kenmore Square & the Citgo sign", "Next to Fenway Park. Seeing the sign means about one mile to go."],
@@ -84,7 +84,7 @@ window.MAJORS_I18N.en = {
         ["The first woman to finish", "Refused an entry, Bobbi Gibb hides in bushes near the start, joins the field and finishes in about 3 hours 21 minutes."],
         ["Switzer’s race bib", "Kathrine Switzer enters as “K. V. Switzer” and gets a bib. An official tries to rip it off during the race, and the photos become a symbol for women’s distance running. The women’s race becomes official in 1972."],
         ["The wheelchair division begins", "Bob Hall finishes in a wheelchair, making Boston one of the first marathons to welcome wheelchair athletes."],
-        ["Rosie Ruiz cheats", "The first woman across the line, Rosie Ruiz, turns out to have taken the subway. Her title is stripped and given to Jacqueline Gareau."],
+        ["Rosie Ruiz cheats", "The first woman across the line, Rosie Ruiz, turns out to have jumped into the race less than a mile from the finish. Her title is stripped and given to Jacqueline Gareau."],
         ["Finish-line bombing", "On 15 April two bombs explode near the finish, killing 3 people and injuring hundreds. “Boston Strong” becomes the city’s rallying cry."],
         ["Meb wins for the US", "A year after the bombing, Meb Keflezighi wins the men’s race, the first American man to win Boston since 1983."],
         ["Des Linden in the cold rain", "In freezing rain and strong winds, Des Linden becomes the first American woman to win since 1985."],
@@ -96,11 +96,11 @@ window.MAJORS_I18N.en = {
     },
     london: {
       name: "London Marathon", city: "London", country: "United Kingdom", month: "Late April",
-      shape: "Point to point (Greenwich → The Mall)",
+      shape: "Point-to-point (Greenwich → The Mall)",
       start: "Greenwich & Blackheath", finish: "The Mall",
       history: [
         "After running the New York City Marathon in 1979, former Olympic steeplechase champion Chris Brasher and John Disley set out to bring a city marathon to London. The first race was held in March 1981 with about 7,000 runners.",
-        "London is famous for charity fundraising and is one of the world’s biggest annual one-day fundraising events, with runners in every kind of costume. The elite men’s race regularly produces world records."
+        "London is famous for charity fundraising and is the world’s largest annual one-day fundraising event, with runners in every kind of costume. It has also produced several world records, from Paula Radcliffe’s 2:15:25 in 2003 to Sabastian Sawe’s first sub-two-hour run in 2026."
       ],
       milestones: ["First London Marathon", "Founding member of the Majors", "Elite-only loop race during the pandemic"],
       cityIntro: [
@@ -144,7 +144,7 @@ window.MAJORS_I18N.en = {
         "Cape Town sits at the south-western tip of South Africa, backed by Table Mountain and facing the Atlantic and Table Bay. It is South Africa’s legislative capital and one of Africa’s most visited cities.",
         "The city blends Dutch, British, Malay and African cultures, and the brightly painted Bo-Kaap neighbourhood is a snapshot of that history. In May it is autumn in the Southern Hemisphere, cooler than the old October date."
       ],
-      profileNote: "From 2027 the race moves to May and the new course has not been published. The route and elevation shown here are a sketch based on the official 2026 landmark map, with landmark distances taken from that map.",
+      profileNote: "From 2027 the race moves to May and the new course has not been published. The route and elevation shown here are an approximation based on the official 2026 landmark map, with landmark distances taken from that map.",
       landmarks: [
         ["Cape Town Stadium", "Built for the 2010 World Cup between the city and the Atlantic, and the first landmark on the course."],
         ["Table Mountain viewpoint", "A city-centre stretch with Table Mountain straight ahead."],
@@ -167,11 +167,11 @@ window.MAJORS_I18N.en = {
     },
     sydney: {
       name: "Sydney Marathon", city: "Sydney", country: "Australia", month: "Late August / early September",
-      shape: "Point to point (North Sydney → Opera House)",
+      shape: "Point-to-point (North Sydney → Opera House)",
       start: "Miller St, North Sydney", finish: "Sydney Opera House",
       history: [
-        "The Sydney Marathon is a legacy of the 2000 Sydney Olympics and has been held every year since 2001. Early editions kept the spirit of the Olympic course, starting on the north shore and crossing the Harbour Bridge.",
-        "Sydney entered the Majors candidacy process in 2022 and ran its first race as the seventh Major on 31 August 2025, becoming the first Major in the Southern Hemisphere."
+        "The Sydney Marathon is a legacy of the 2000 Sydney Olympics and was first held in 2001. Early editions kept the spirit of the Olympic course, starting on the north shore and crossing the Harbour Bridge.",
+        "After passing the Majors’ assessment as a candidate race, Sydney ran its first race as the seventh Major on 31 August 2025, becoming the first Major in the Southern Hemisphere."
       ],
       milestones: ["Sydney Olympic marathon", "First Sydney Marathon", "Becomes the seventh Major"],
       cityIntro: [
@@ -181,7 +181,7 @@ window.MAJORS_I18N.en = {
       profileNote: "Based on SRTM terrain data: the start in North Sydney is at about 90 m. After the bridge the course drops to the harbour, rolls between 30 and 50 m through Kensington and Centennial Park in the middle section, and runs downhill to the Opera House at the end. Its total climb is among the largest of the Majors.",
       landmarks: [
         ["North Sydney", "The start, high on Miller St with the Harbour Bridge ahead."],
-        ["Sydney Harbour Bridge", "The one day a year you can run on the bridge’s main roadway."],
+        ["Sydney Harbour Bridge", "A rare chance to run across the bridge’s main deck."],
         ["Barangaroo", "The newly developed harbour foreshore next to The Rocks."],
         ["Darling Harbour & Pyrmont", "Across Pyrmont Bridge, with crowds along the waterfront."],
         ["Hyde Park", "The city-centre park next to St Mary’s Cathedral."],
@@ -230,7 +230,7 @@ window.MAJORS_I18N.en = {
       events: [
         ["The first race, in the forest", "Held in the Grunewald forest with a little over two hundred runners."],
         ["Through the Brandenburg Gate", "Three days before reunification, runners pass through the Brandenburg Gate for the first time."],
-        ["Berlin’s first world record", "Brazil’s Ronaldo da Costa runs 2:06:05, starting Berlin’s era as the world-record course."],
+        ["Berlin’s first men’s world record", "Brazil’s Ronaldo da Costa runs 2:06:05, starting Berlin’s era as the world-record course."],
         ["First woman under 2:20", "Japan’s Naoko Takahashi runs 2:19:46, the first woman to break 2 hours 20 minutes."],
         ["First man under 2:05", "Paul Tergat breaks the world record with 2:04:55."],
         ["Gebrselassie 2:03:59", "Haile Gebrselassie breaks the world record in Berlin for the second year in a row, becoming the first man under 2:04."],
@@ -286,11 +286,11 @@ window.MAJORS_I18N.en = {
     },
     nyc: {
       name: "New York City Marathon", city: "New York", country: "United States", month: "First Sunday in November",
-      shape: "Point to point (Staten Island → Central Park)",
+      shape: "Point-to-point (Staten Island → Central Park)",
       start: "Staten Island", finish: "Central Park",
       history: [
         "In 1970 Fred Lebow and Vince Chiappetta held the first race as laps of Central Park: 127 starters, 55 finishers and a one-dollar entry fee.",
-        "In 1976, to mark the US Bicentennial, the course was expanded to run through all five boroughs, which is the format it keeps today. New York now has more finishers than any other marathon in the world."
+        "In 1976, to mark the US Bicentennial, the course was expanded to run through all five boroughs, which is the format it keeps today. New York is now one of the largest marathons in the world, with more than 55,000 finishers."
       ],
       milestones: ["First race, on laps of Central Park", "First course through all five boroughs", "Founding member of the Majors", "Cancelled because of Hurricane Sandy"],
       cityIntro: [
