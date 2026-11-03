@@ -23,53 +23,127 @@ main {
   padding-block: 32px 64px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  display: grid; gap: 14px;
 }
+article { display: grid; gap: 14px; }
 h1 { font-family: "Noto Serif TC", serif; font-weight: 900; font-size: 28px; line-height: 1.3; margin: 0; }
 h2 { font-family: "Noto Serif TC", serif; font-weight: 900; font-size: 19px; margin: 18px 0 0; }
 p, ul { margin: 0; }
 ul { padding-left: 1.2em; }
 a { color: var(--course); }
-.back { font-size: 14px; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; font-size: 14px; }
+.langs { display: flex; gap: 4px; }
+.langs a { font-size: 12px; font-weight: 700; padding: 2px 7px; border-radius: 3px; text-decoration: none; color: var(--muted); border: 1px solid transparent; }
+.langs a[aria-current] { color: var(--ink); border-color: var(--rule); background: var(--surface); }
 .muted { color: var(--muted); font-size: 14px; }
 button { font: inherit; padding: 6px 14px; border-radius: 4px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; justify-self: start; }
 </style>
+<script src="i18n.js"></script>
 </head>
 <body>
 <main>
-  <a class="back" href="./">← 回到大滿貫跑道誌</a>
-  <h1>隱私權說明</h1>
-  <p class="muted">最後更新：2026 年 11 月</p>
+  <div class="top">
+    <a class="back" id="back" href="./">← 大滿貫跑道誌</a>
+    <nav class="langs" aria-label="Language">
+      <a href="?lang=zh" data-lang="zh" lang="zh-Hant">中文</a><a href="?lang=en" data-lang="en" lang="en">EN</a><a href="?lang=es" data-lang="es" lang="es">ES</a>
+    </nav>
+  </div>
 
-  <h2>本站收集哪些資料</h2>
-  <p>本站是靜態網站，沒有會員、留言或表單，不會要求你提供姓名、電子郵件等個人資料。</p>
+  <article data-lang="zh" lang="zh-Hant" hidden>
+    <h1>隱私權說明</h1>
+    <p class="muted">最後更新：2026 年 11 月</p>
+    <h2>本站收集哪些資料</h2>
+    <p>本站是靜態網站，沒有會員、留言或表單，不會要求你提供姓名、電子郵件等個人資料。</p>
+    <h2>Google Analytics</h2>
+    <p>本站使用 Google Analytics 4。第一次造訪時會詢問你是否同意，只有在你按下「同意」後，才會載入 Google Analytics 並設定分析用 Cookie，用來統計：</p>
+    <ul>
+      <li>瀏覽了哪些賽事頁面、停留多久，以及使用的介面語言</li>
+      <li>大致的地區、使用的裝置與瀏覽器類型</li>
+      <li>從哪個網站連結過來</li>
+    </ul>
+    <p>這些資料只用於了解哪些內容受歡迎，以改善網站。IP 位址會經過匿名化處理。資料由 Google 依其<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">隱私權政策</a>處理與保存。</p>
+    <p>如果你按下「不同意」，本站不會載入任何追蹤程式。</p>
+    <h2>語言設定</h2>
+    <p>你在語言切換器選擇的語言會存在你自己的瀏覽器裡（localStorage），只用來下次以相同語言顯示。</p>
+    <h2>更改你的選擇</h2>
+    <p>你的分析 Cookie 選擇也只存在你的瀏覽器裡。按下面的按鈕可以清除，下次回到首頁時會再詢問一次；也可以直接清除瀏覽器的網站資料。</p>
+    <button type="button" class="reset">清除我的分析 Cookie 選擇</button>
+    <p class="muted reset-msg" hidden>已清除。回到首頁時會再詢問一次。</p>
+    <h2>第三方資源</h2>
+    <p>網頁字型由 Google Fonts 提供。載入字型時，你的瀏覽器會連線到 Google 的伺服器。網站本身由 GitHub Pages 代管，GitHub 可能依其政策記錄存取紀錄。</p>
+    <h2>聯絡</h2>
+    <p>對本說明有疑問，請在本站的 <a href="https://github.com/jojomango/marathon-majors/issues" target="_blank" rel="noopener">GitHub repository</a> 開 issue。</p>
+  </article>
 
-  <h2>Google Analytics</h2>
-  <p>如果網站啟用了 Google Analytics 4，第一次造訪時會詢問你是否同意。只有在你按下「同意」後，才會載入 Google Analytics 並設定分析用 Cookie，用來統計：</p>
-  <ul>
-    <li>瀏覽了哪些賽事頁面、停留多久</li>
-    <li>大致的地區、使用的裝置與瀏覽器類型</li>
-    <li>從哪個網站連結過來</li>
-  </ul>
-  <p>這些資料只用於了解哪些內容受歡迎，以改善網站。IP 位址會經過匿名化處理。資料由 Google 依其<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">隱私權政策</a>處理與保存。</p>
-  <p>如果你按下「不同意」，本站不會載入任何追蹤程式。</p>
+  <article data-lang="en" lang="en" hidden>
+    <h1>Privacy</h1>
+    <p class="muted">Last updated: November 2026</p>
+    <h2>What this site collects</h2>
+    <p>This is a static website with no accounts, comments or forms. It never asks for your name, email address or other personal details.</p>
+    <h2>Google Analytics</h2>
+    <p>This site uses Google Analytics 4. On your first visit you are asked for consent, and Google Analytics is only loaded, with its analytics cookies, after you choose “Accept”. It is used to count:</p>
+    <ul>
+      <li>which race pages you view, for how long, and in which interface language</li>
+      <li>your approximate region and the type of device and browser you use</li>
+      <li>which website linked you here</li>
+    </ul>
+    <p>The data is only used to understand which content is popular and to improve the site. IP addresses are anonymised. Google processes and stores the data under its <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
+    <p>If you choose “Decline”, no tracking code is loaded.</p>
+    <h2>Language setting</h2>
+    <p>The language you pick in the language switcher is stored in your own browser (localStorage) and is only used to show the same language next time.</p>
+    <h2>Changing your choice</h2>
+    <p>Your analytics cookie choice is also stored only in your browser. Use the button below to clear it, and you will be asked again on the home page. You can also clear the site data in your browser.</p>
+    <button type="button" class="reset">Clear my analytics cookie choice</button>
+    <p class="muted reset-msg" hidden>Cleared. You will be asked again on the home page.</p>
+    <h2>Third-party resources</h2>
+    <p>Web fonts are provided by Google Fonts, so your browser connects to Google’s servers to load them. The site is hosted on GitHub Pages, and GitHub may keep access logs under its own policies.</p>
+    <h2>Contact</h2>
+    <p>For questions about this notice, please open an issue on the site’s <a href="https://github.com/jojomango/marathon-majors/issues" target="_blank" rel="noopener">GitHub repository</a>.</p>
+  </article>
 
-  <h2>更改你的選擇</h2>
-  <p>你的選擇只存在你自己的瀏覽器裡（localStorage）。按下面的按鈕可以清除選擇，下次回到首頁時會再詢問一次；也可以直接清除瀏覽器的網站資料。</p>
-  <button type="button" id="reset">清除我的分析 Cookie 選擇</button>
-  <p class="muted" id="reset-msg" hidden>已清除。回到首頁時會再詢問一次。</p>
-
-  <h2>第三方資源</h2>
-  <p>網頁字型由 Google Fonts 提供。載入字型時，你的瀏覽器會連線到 Google 的伺服器。網站本身由 GitHub Pages 代管，GitHub 可能依其政策記錄存取紀錄。</p>
-
-  <h2>聯絡</h2>
-  <p>對本說明有疑問，請在本站的 GitHub repository 開 issue。</p>
+  <article data-lang="es" lang="es" hidden>
+    <h1>Privacidad</h1>
+    <p class="muted">Última actualización: noviembre de 2026</p>
+    <h2>Qué datos recoge este sitio</h2>
+    <p>Este es un sitio web estático, sin cuentas, comentarios ni formularios. Nunca pide tu nombre, tu correo electrónico ni otros datos personales.</p>
+    <h2>Google Analytics</h2>
+    <p>Este sitio usa Google Analytics 4. En tu primera visita se te pide el consentimiento, y Google Analytics solo se carga, con sus cookies de análisis, después de que elijas «Aceptar». Sirve para contar:</p>
+    <ul>
+      <li>qué páginas de carreras ves, durante cuánto tiempo y en qué idioma de la interfaz</li>
+      <li>tu región aproximada y el tipo de dispositivo y navegador</li>
+      <li>desde qué sitio web llegaste</li>
+    </ul>
+    <p>Los datos solo se usan para saber qué contenidos interesan más y mejorar el sitio. Las direcciones IP se anonimizan. Google trata y conserva los datos según su <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad</a>.</p>
+    <p>Si eliges «Rechazar», no se carga ningún código de seguimiento.</p>
+    <h2>Idioma</h2>
+    <p>El idioma que eliges en el selector se guarda en tu propio navegador (localStorage) y solo sirve para mostrar el mismo idioma la próxima vez.</p>
+    <h2>Cambiar tu elección</h2>
+    <p>Tu elección sobre las cookies de análisis también se guarda solo en tu navegador. Con el botón de abajo puedes borrarla y se te volverá a preguntar en la página de inicio. También puedes borrar los datos del sitio en tu navegador.</p>
+    <button type="button" class="reset">Borrar mi elección sobre cookies de análisis</button>
+    <p class="muted reset-msg" hidden>Borrada. Se te volverá a preguntar en la página de inicio.</p>
+    <h2>Recursos de terceros</h2>
+    <p>Las fuentes tipográficas las proporciona Google Fonts, así que tu navegador se conecta a los servidores de Google para cargarlas. El sitio está alojado en GitHub Pages, y GitHub puede guardar registros de acceso según sus propias políticas.</p>
+    <h2>Contacto</h2>
+    <p>Si tienes preguntas sobre este aviso, abre una issue en el <a href="https://github.com/jojomango/marathon-majors/issues" target="_blank" rel="noopener">repositorio de GitHub</a> del sitio.</p>
+  </article>
 </main>
 <script>
-document.getElementById("reset").addEventListener("click", function () {
-  try { localStorage.removeItem("analytics-consent"); } catch (e) {}
-  document.getElementById("reset-msg").hidden = false;
-});
+(function () {
+  var lang = window.SITE_LANG || "zh";
+  var art = document.querySelector('article[data-lang="' + lang + '"]') || document.querySelector('article[data-lang="en"]');
+  art.hidden = false;
+  document.title = art.querySelector("h1").textContent + window.t("titleSep") + window.t("brand");
+  var back = document.getElementById("back");
+  back.textContent = "← " + window.t("brand");
+  if (lang !== "zh") back.href = "./?lang=" + lang;
+  document.querySelectorAll(".langs a").forEach(function (a) {
+    if (a.getAttribute("data-lang") === lang) a.setAttribute("aria-current", "true");
+    a.addEventListener("click", function (e) { e.preventDefault(); window.setSiteLang(a.getAttribute("data-lang")); });
+  });
+  art.querySelector(".reset").addEventListener("click", function () {
+    try { localStorage.removeItem("analytics-consent"); } catch (e) {}
+    art.querySelector(".reset-msg").hidden = false;
+  });
+})();
 </script>
 </body>
 </html>

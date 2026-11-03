@@ -76,10 +76,20 @@ button { font: inherit; color: inherit; }
   background: var(--bg); border-bottom: 1px solid var(--rule);
 }
 .brand {
-  display: flex; align-items: baseline; gap: 10px; padding-block: 10px 4px;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding-block: 10px 4px;
 }
+.brand b { white-space: nowrap; }
+.langs button { white-space: nowrap; }
+@media (max-width: 479px) { .brand span { display: none; } }
 .brand b { font-family: var(--f-head); font-size: 17px; font-weight: 900; letter-spacing: .04em; }
 .brand span { font-size: 12px; color: var(--muted); letter-spacing: .06em; }
+.langs { margin-left: auto; display: flex; gap: 2px; align-self: center; }
+.langs button {
+  font-size: 12px; font-weight: 700; letter-spacing: .04em; padding: 3px 7px; border-radius: 3px;
+  border: 1px solid transparent; background: none; color: var(--muted); cursor: pointer; line-height: 1.3;
+}
+.langs button:hover { color: var(--ink); }
+.langs button[aria-current="true"] { color: var(--ink); border-color: var(--rule); background: var(--surface); }
 .tabs {
   display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;
   padding-block: 6px 10px; scroll-snap-type: x proximity;
@@ -326,35 +336,50 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
 <body>
 
 <header class="site-hdr" id="hdr">
-  <div class="gutter brand"><b>大滿貫跑道誌</b><span>WORLD MARATHON MAJORS</span></div>
+  <div class="gutter brand"><b id="brand-name">大滿貫跑道誌</b><span>WORLD MARATHON MAJORS</span><nav class="langs" id="langs" aria-label="語言"></nav></div>
   <nav class="gutter tabs" id="tabs" aria-label="賽事"></nav>
 </header>
 <main class="gutter" id="main"></main>
 
+<script src="i18n.js"></script>
 <script src="config.js"></script>
 <script src="analytics.js"></script>
 <script src="marathons.js"></script>
 <script src="courses.js"></script>
+<script src="marathons.en.js"></script>
+<script src="marathons.es.js"></script>
 <script>
 (function () {
   "use strict";
   var RACES = window.MAJORS || [];
   var TIMELINE = window.MAJORS_TIMELINE || [];
   var COURSES = window.COURSES || {};
-  var SRC_LABEL = { official: "官方路線資料", osm: "OpenStreetMap 賽道", trace: "依官方路線圖重建", sketch: "示意" };
+  var LANG = window.SITE_LANG || "zh";
+  var t = window.t;
+  var TR = (window.MAJORS_I18N || {})[LANG];
 
   // 有實際路線資料的賽事：以 courses.js 覆蓋路線、高度與景點公里數
   RACES.forEach(function (r) {
     var c = COURSES[r.id];
     if (!c) {
-      r.source = r.source || { kind: "sketch", route: "依 2026 官方景點路線圖繪製的示意（2027 新路線尚未公布）", elevation: "示意" };
-      return;
+      r.source = r.source || { kind: "sketch", route: t("sketchRoute"), elevation: t("sketchElev") };
+    } else {
+      r.route = c.route;
+      r.elevation = c.elevation;
+      r.source = { kind: c.source.kind, route: c.source.route, elevation: c.source.elevation };
+      r.landmarks.forEach(function (lm, i) { if (c.landmarkKm[i] != null) lm.km = c.landmarkKm[i]; });
     }
-    r.route = c.route;
-    r.elevation = c.elevation;
-    r.source = c.source;
-    r.landmarks.forEach(function (lm, i) { if (c.landmarkKm[i] != null) lm.km = c.landmarkKm[i]; });
+    // 英文、西文：以翻譯覆蓋文字欄位（陣列依原本順序對應）
+    var x = TR && TR.races && TR.races[r.id];
+    if (!x) return;
+    ["name", "city", "country", "month", "shape", "start", "finish", "profileNote", "history", "cityIntro"].forEach(function (k) { if (x[k] != null) r[k] = x[k]; });
+    if (x.milestones) r.milestones.forEach(function (m, i) { if (x.milestones[i] != null) m[1] = x.milestones[i]; });
+    if (x.landmarks) r.landmarks.forEach(function (lm, i) { var y = x.landmarks[i]; if (y) { lm.name = y[0]; lm.note = y[1]; } });
+    if (x.events) r.events.forEach(function (e, i) { var y = x.events[i]; if (y) { e.title = y[0]; e.text = y[1]; } });
+    if (x.records && r.records) { r.records.men.name = x.records[0]; r.records.women.name = x.records[1]; }
+    if (x.source && c) { r.source.route = x.source[0]; r.source.elevation = x.source[1]; }
   });
+  if (TR && TR.timeline) TIMELINE.forEach(function (it, i) { var y = TR.timeline[i]; if (y) { it.title = y[0]; it.text = y[1]; } });
   var SVGNS = "http://www.w3.org/2000/svg";
   var FULL = 42.195;
   var VSPAN = 160; // 所有高度圖共用的垂直比例（公尺）
@@ -428,7 +453,7 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
   /* ---------- 路線圖 ---------- */
   function drawMap(r) {
     var W = 400, H = 320, P = project(r.route, W, H, 30);
-    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": r.name + "示意路線圖，起點" + r.start + "，終點" + r.finish });
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": t("mapAria", { name: r.name, start: r.start, finish: r.finish }) });
     var pts = r.route.map(function (p) { return P.xy(p[0], p[1]); });
     var d = pathFrom(pts);
     el("path", { d: d, fill: "none", stroke: "var(--map)", "stroke-width": 9, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
@@ -438,8 +463,8 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
     for (var k = 10; k < FULL; k += 10) {
       var q = routeAt(r, k), xy = P.xy(q[0], q[1]);
       el("circle", { cx: xy[0], cy: xy[1], r: 3.2, fill: "var(--surface)", stroke: "var(--course)", "stroke-width": 1.6 }, svg);
-      var t = el("text", { x: xy[0] + 6, y: xy[1] - 5, "font-size": 10, "font-family": "var(--f-mono)", fill: "var(--muted)", stroke: "var(--map)", "stroke-width": 3, "paint-order": "stroke" }, svg);
-      t.textContent = k + "K";
+      var kmTxt = el("text", { x: xy[0] + 6, y: xy[1] - 5, "font-size": 10, "font-family": "var(--f-mono)", fill: "var(--muted)", stroke: "var(--map)", "stroke-width": 3, "paint-order": "stroke" }, svg);
+      kmTxt.textContent = k + "K";
     }
 
     // 景點編號（依路線順序）
@@ -481,7 +506,7 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
     var y1 = y0 + Math.max(VSPAN, Math.ceil((st.hi - y0 + 10) / 20) * 20);
     var X = function (km) { return ml + km / FULL * (W - ml - mr); };
     var Y = function (m) { return mt + (1 - (m - y0) / (y1 - y0)) * (H - mt - mb); };
-    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": r.name + "高度剖面，最高約 " + st.hi + " 公尺，最低約 " + st.lo + " 公尺" });
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": t("profAria", { name: r.name, hi: st.hi, lo: st.lo }) });
 
     for (var m = y0; m <= y1; m += 40) {
       el("line", { x1: ml, x2: W - mr, y1: Y(m), y2: Y(m), stroke: "var(--rule)", "stroke-width": 1 }, svg);
@@ -525,7 +550,7 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
   var hdr = document.getElementById("hdr");
 
   function buildTabs() {
-    var html = '<a class="tab" href="#home" data-id="home"><span class="c">ALL</span><span class="n">總覽</span></a>';
+    var html = '<a class="tab" href="#home" data-id="home"><span class="c">ALL</span><span class="n">' + esc(t("overview")) + "</span></a>";
     RACES.forEach(function (r) {
       html += '<a class="tab' + (r.status !== "member" ? " soon" : "") + '" href="#' + r.id + '" data-id="' + r.id + '"><span class="c">' + r.code + '</span><span class="n">' + esc(r.city) + "</span></a>";
     });
@@ -536,13 +561,13 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
     var members = RACES.filter(function (r) { return r.status === "member"; }).length;
     var html = '<div class="home view">' +
       '<section class="home-hero"><div class="eyebrow">ABBOTT WORLD MARATHON MAJORS</div>' +
-      '<h1>從六星到八星 <span class="stars">★★★★★★★☆</span></h1>' +
-      "<p>世界馬拉松大滿貫從 2006 年的五場比賽開始，東京加入後成為大家熟悉的「六大」。2025 年雪梨成為第七場，開普敦已確認於 2027 年成為第八場。目前正式成員 " + members + " 場，依賽季順序排列如下。</p></section>" +
-      '<section class="block"><h2>系列沿革 <small>TIMELINE</small></h2><ol class="series">' +
+      "<h1>" + esc(t("homeTitle")) + ' <span class="stars">★★★★★★★☆</span></h1>' +
+      "<p>" + esc(t("homeIntro", { n: members })) + "</p></section>" +
+      '<section class="block"><h2>' + head("timelineH", "timelineSub") + '</h2><ol class="series">' +
       TIMELINE.map(function (t) {
         return '<li class="' + (t.pending ? "pending" : "") + '"><span class="y">' + t.year + "</span><h3>" + esc(t.title) + "</h3><p>" + esc(t.text) + "</p></li>";
       }).join("") + "</ol></section>" +
-      '<section class="block"><h2>依賽季瀏覽 <small>BY SEASON</small></h2><div class="cards" id="cards"></div></section>' +
+      '<section class="block"><h2>' + head("seasonH", "seasonSub") + '</h2><div class="cards" id="cards"></div></section>' +
       "</div>";
     main.innerHTML = html + foot();
     var cards = document.getElementById("cards");
@@ -551,7 +576,7 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
       a.className = "card"; a.href = "#" + r.id;
       a.innerHTML = '<div><div class="c">' + r.code + "</div><h3>" + esc(r.name) + "</h3>" +
         '<div class="meta">' + esc(r.month) + "<br>" +
-        (r.status === "member" ? "第 " + starCount(r) + " 星・" + r.joined + " 加入" : '<span class="badge">' + r.joined + " 加入</span>") +
+        (r.status === "member" ? esc(t("cardMember", { n: starCount(r), y: r.joined })) : '<span class="badge">' + esc(t("cardJoins", { y: r.joined })) + "</span>") +
         "</div></div>";
       a.appendChild(miniMap(r));
       cards.appendChild(a);
@@ -559,14 +584,17 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
   }
 
   function foot() {
+    var osm = '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>';
     return '<footer class="foot">' +
-      "<p>本站為非官方的粉絲整理網站，與各馬拉松主辦單位及 Abbott World Marathon Majors 無關。實際路線、日期與規則請以各賽事官網為準。</p>" +
-      "<p>路線：依各賽事公布的官方路線圖，沿 OpenStreetMap 道路資料重建（公里數已換算為 42.195）；開普敦 2027 路線尚未公布，仍為示意。" +
-      '地圖資料 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>，以 ODbL 授權。</p>' +
-      "<p>高度：美國三場取自 USGS 3DEP；倫敦、柏林取自 Copernicus EU-DEM；東京取自日本國土地理院（出典：国土地理院）；雪梨取自 NASA SRTM；經 OpenTopoData 取得並平滑處理。跨橋路段無法呈現橋面高度。" +
-      "所有高度圖使用相同垂直比例（" + VSPAN + " 公尺），可直接比較各場的起伏。</p>" +
-      '<p>賽道紀錄與事件更新至 2026 年 11 月。<a href="privacy.html">隱私權說明</a>' +
-      (window.SITE_ANALYTICS ? '・<button type="button" class="linkbtn" id="consent-reset">分析 Cookie 設定</button>' : "") + "</p></footer>";
+      "<p>" + esc(t("foot1")) + "</p>" +
+      "<p>" + esc(t("foot2", { osm: "\u0000" })).replace("\u0000", osm) + "</p>" +
+      "<p>" + esc(t("foot3", { v: VSPAN })) + "</p>" +
+      "<p>" + esc(t("foot4")) + ' <a href="privacy.html' + (LANG !== "zh" ? "?lang=" + LANG : "") + '">' + esc(t("privacy")) + "</a>" +
+      (window.SITE_ANALYTICS ? ' · <button type="button" class="linkbtn" id="consent-reset">' + esc(t("cookieSettings")) + "</button>" : "") + "</p></footer>";
+  }
+  function head(h, sub, raw) {
+    var small = t(sub);
+    return (raw != null ? esc(raw) : esc(t(h))) + (small ? " <small>" + esc(small) + "</small>" : "");
   }
 
   function renderRace(r) {
@@ -574,61 +602,61 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
     var n = starCount(r);
     var stars = "";
     for (var i = 0; i < 8; i++) stars += i < n ? "★" : "☆";
-    var joinTxt = r.status === "member" ? r.joined + "（第 " + n + " 星）" : r.joined + "（已確認）";
+    var joinTxt = r.status === "member" ? t("joinedMember", { y: r.joined, n: n }) : t("joinedConfirmed", { y: r.joined });
 
     var html = '<article class="race view">' +
       '<div class="race-head">' +
       '<header class="bib"><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>' +
-      '<div class="bib-top"><span>' + esc(r.country) + " · " + esc(r.city) + '</span><span class="stars" aria-label="大滿貫第 ' + n + ' 站">' + stars + "</span></div>" +
+      '<div class="bib-top"><span>' + esc(r.country) + " · " + esc(r.city) + '</span><span class="stars" aria-label="' + esc(t("starsAria", { n: n })) + '">' + stars + "</span></div>" +
       '<div class="bib-code" aria-hidden="true">' + r.code + "</div>" +
-      "<h1>" + esc(r.name) + '</h1><div class="en">' + esc(r.en) + "</div></header>" +
+      "<h1>" + esc(r.name) + "</h1>" + (r.en !== r.name ? '<div class="en">' + esc(r.en) + "</div>" : "") + "</header>" +
       '<dl class="facts">' +
-      fact("首屆", r.first) + fact("加入大滿貫", joinTxt) + fact("賽期", r.month) +
-      fact("路線型態", r.shape) + fact("起點", r.start) + fact("終點", r.finish) +
+      fact(t("fFirst"), r.first) + fact(t("fJoined"), joinTxt) + fact(t("fDate"), r.month) +
+      fact(t("fShape"), r.shape) + fact(t("fStart"), r.start) + fact(t("fFinish"), r.finish) +
       "</dl></div>" +
-      '<div class="jump" role="navigation" aria-label="本頁段落">' +
-      jump("b-history", "歷史") + jump("b-city", "城市") + jump("b-route", "路線") + jump("b-marks", "沿途景點") + jump("b-events", "事件與紀錄") +
+      '<div class="jump" role="navigation" aria-label="' + esc(t("jumpAria")) + '">' +
+      jump("b-history", t("jHistory")) + jump("b-city", t("jCity")) + jump("b-route", t("jCourse")) + jump("b-marks", t("jMarks")) + jump("b-events", t("jMoments")) +
       "</div>" +
       '<div class="race-grid">' +
 
-      '<section class="block b-history" id="b-history"><h2>賽事歷史 <small>HISTORY</small></h2><div class="prose">' +
+      '<section class="block b-history" id="b-history"><h2>' + head("hHistory", "sHistory") + '</h2><div class="prose">' +
       r.history.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") +
       '</div><ol class="milestones">' +
       r.milestones.map(function (m) { return '<li><span class="y">' + m[0] + "</span><span>" + esc(m[1]) + "</span></li>"; }).join("") +
       "</ol></section>" +
 
-      '<section class="block b-city" id="b-city"><h2>' + esc(r.city) + " <small>CITY</small></h2><div class=\"prose\">" +
+      '<section class="block b-city" id="b-city"><h2>' + head(null, "sCity", r.city) + '</h2><div class="prose">' +
       r.cityIntro.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</div></section>" +
 
-      '<section class="block b-route" id="b-route"><h2>路線與高度 <small>COURSE</small></h2>' +
+      '<section class="block b-route" id="b-route"><h2>' + head("hCourse", "sCourse") + '</h2>' +
       '<div class="route-pane">' +
       '<div class="route-col"><figure class="map-fig" id="map-fig"></figure></div>' +
       '<div class="route-col">' +
-      '<figure class="prof-fig" id="prof-fig"><figcaption>在高度圖上拖曳，或用下方滑桿移動位置。虛線為半程。</figcaption></figure>' +
+      '<figure class="prof-fig" id="prof-fig"><figcaption>' + esc(t("profCaption")) + '</figcaption></figure>' +
       '<label class="readout" for="km-slider"><span class="big" id="ro-km">21.1<small>km</small></span><span class="big" id="ro-m">0<small>m</small></span><span class="near" id="ro-near"></span></label>' +
-      '<input class="slider" id="km-slider" type="range" min="0" max="' + FULL + '" step="0.1" value="21.1" aria-label="公里數">' +
-      '<div class="stat-row"><span>起點 <b>' + st.start + ' m</b></span><span>最高 <b>' + st.hi + ' m</b></span><span>最低 <b>' + st.lo + ' m</b></span><span>累計爬升 <b>≈' + st.gain + ' m</b></span><span>累計下降 <b>≈' + st.loss + " m</b></span></div>" +
+      '<input class="slider" id="km-slider" type="range" min="0" max="' + FULL + '" step="0.1" value="21.1" aria-label="' + esc(t("sliderAria")) + '">' +
+      '<div class="stat-row"><span>' + t("stStart") + " <b>" + st.start + " m</b></span><span>" + t("stHigh") + " <b>" + st.hi + " m</b></span><span>" + t("stLow") + " <b>" + st.lo + " m</b></span><span>" + t("stGain") + " <b>≈" + st.gain + " m</b></span><span>" + t("stLoss") + " <b>≈" + st.loss + " m</b></span></div>" +
       '<p class="note">' + esc(r.profileNote) + "</p>" +
-      '<p class="src"><span class="src-tag k-' + r.source.kind + '">' + SRC_LABEL[r.source.kind] + "</span>" +
-      "<span>路線：" + esc(r.source.route) + "</span><span>高度：" + esc(r.source.elevation) + "</span></p>" +
+      '<p class="src"><span class="src-tag k-' + r.source.kind + '">' + esc(t("kind_" + r.source.kind)) + "</span>" +
+      "<span>" + esc(t("srcRoute") + r.source.route) + "</span><span>" + esc(t("srcElev") + r.source.elevation) + "</span></p>" +
       "</div></div></section>" +
 
-      '<section class="block b-marks" id="b-marks"><h2>沿途景點 <small>LANDMARKS</small></h2><ol class="marks" id="marks">' +
+      '<section class="block b-marks" id="b-marks"><h2>' + head("hMarks", "sMarks") + '</h2><ol class="marks" id="marks">' +
       r.landmarks.map(function (lm, i) {
         return '<li data-i="' + i + '"><button type="button" data-km="' + lm.km + '"><span class="num">' + (i + 1) + '</span><span class="km mono">' + fmtKm(lm.km) + ' K</span><span class="t"><b>' + esc(lm.name) + "</b><span>" + esc(lm.note) + "</span></span></button></li>";
       }).join("") + "</ol></section>" +
 
-      '<section class="block b-events" id="b-events"><h2>知名事件與紀錄 <small>MOMENTS</small></h2>' +
+      '<section class="block b-events" id="b-events"><h2>' + head("hMoments", "sMoments") + '</h2>' +
       (r.records
-        ? '<div class="records">' + recTile("男子賽道紀錄", r.records.men) + recTile("女子賽道紀錄", r.records.women) +
-          '<p class="rec-note">更新至 2026 年 11 月</p></div>'
-        : '<p class="note">' + esc(r.city) + "尚未以大滿貫身分舉行，賽道紀錄待 2027 年起整理。</p>") +
+        ? '<div class="records">' + recTile(t("recMen"), r.records.men) + recTile(t("recWomen"), r.records.women) +
+          '<p class="rec-note">' + esc(t("recNote")) + "</p></div>"
+        : '<p class="note">' + esc(t("noRecords", { city: r.city })) + "</p>") +
       (r.events && r.events.length
         ? '<ol class="events">' + r.events.slice().sort(function (a, b) { return a.year - b.year; }).map(function (e) {
-            return '<li class="ev-' + e.kind + '"><span class="y">' + e.year + '</span><div><span class="kind">' + (e.kind === "record" ? "紀錄" : "事件") +
+            return '<li class="ev-' + e.kind + '"><span class="y">' + e.year + '</span><div><span class="kind">' + esc(t(e.kind === "record" ? "kRecord" : "kMoment")) +
               "</span><b>" + esc(e.title) + "</b><p>" + esc(e.text) + "</p></div></li>";
           }).join("") + "</ol>"
-        : '<div class="empty"><b>這一區即將補上</b><span>' + esc(r.name) + "史上的經典時刻、世界紀錄與賽道紀錄會整理在這裡。</span></div>") +
+        : '<div class="empty"><b>' + esc(t("emptyTitle")) + "</b><span>" + esc(t("emptyText", { name: r.name })) + "</span></div>") +
       "</section>" +
 
       "</div></article>";
@@ -637,7 +665,7 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
     var map = drawMap(r), prof = drawProfile(r);
     document.getElementById("map-fig").appendChild(map);
     var cap = document.createElement("figcaption");
-    cap.textContent = (r.source.kind === "sketch" ? "示意路線" : SRC_LABEL[r.source.kind]) + "・數字對應沿途景點・藍點為目前位置";
+    cap.textContent = t("mapCaption", { kind: r.source.kind === "sketch" ? t("mapSketch") : t("kind_" + r.source.kind) });
     document.getElementById("map-fig").appendChild(cap);
     var pf = document.getElementById("prof-fig");
     pf.insertBefore(prof, pf.firstChild);
@@ -659,7 +687,7 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
       var best = 0, bd = 1e9;
       r.landmarks.forEach(function (lm, i) { var dd = Math.abs(lm.km - km); if (dd < bd) { bd = dd; best = i; } });
       var lm = r.landmarks[best];
-      roNear.innerHTML = (bd < 0.6 ? "此處：" : "最近：") + "<b>" + (best + 1) + ". " + esc(lm.name) + "</b>";
+      roNear.innerHTML = esc(t(bd < 0.6 ? "here" : "nearest")) + "<b>" + (best + 1) + ". " + esc(lm.name) + "</b>";
       Array.prototype.forEach.call(marks.children, function (li, i) { li.classList.toggle("on", i === best && bd < 0.6); });
       if (Math.abs(parseFloat(slider.value) - km) > 0.05) slider.value = km;
     }
@@ -696,7 +724,7 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
     setKm(21.1);
   }
   function recTile(label, x) {
-    return '<div class="rec"><span class="rec-l">' + label + '</span><span class="rec-t">' + esc(x.time) + '</span><span class="rec-n">' + esc(x.name) + "・" + x.year + "</span></div>";
+    return '<div class="rec"><span class="rec-l">' + label + '</span><span class="rec-t">' + esc(x.time) + '</span><span class="rec-n">' + esc(x.name) + " · " + x.year + "</span></div>";
   }
   function fact(k, v) { return "<div><dt>" + esc(k) + "</dt><dd>" + esc(v) + "</dd></div>"; }
   function jump(id, label) { return '<button type="button" data-to="' + id + '">' + esc(label) + "</button>"; }
@@ -713,13 +741,29 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
       } else a.removeAttribute("aria-current");
     });
     if (r) renderRace(r); else renderHome();
-    document.title = r ? r.name + "・大滿貫跑道誌" : "大滿貫跑道誌";
+    document.title = r ? r.name + t("titleSep") + t("brand") : t("brand");
     if (window.SITE_ANALYTICS) window.SITE_ANALYTICS.pageView(id);
     window.scrollTo(0, 0);
   }
 
   function measure() { document.documentElement.style.setProperty("--hdr", hdr.offsetHeight + "px"); }
 
+  function buildLangs() {
+    document.getElementById("brand-name").textContent = t("brand");
+    document.getElementById("tabs").setAttribute("aria-label", t("racesNav"));
+    var box = document.getElementById("langs");
+    box.setAttribute("aria-label", t("langNav"));
+    box.innerHTML = [["zh", "中文"], ["en", "EN"], ["es", "ES"]].map(function (l) {
+      return '<button type="button" lang="' + (l[0] === "zh" ? "zh-Hant" : l[0]) + '" data-lang="' + l[0] + '"' + (l[0] === LANG ? ' aria-current="true"' : "") +
+        ' title="' + esc(window.I18N_UI[l[0]].langName) + '">' + l[1] + "</button>";
+    }).join("");
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-lang]");
+      if (b && b.getAttribute("data-lang") !== LANG) window.setSiteLang(b.getAttribute("data-lang"));
+    });
+  }
+
+  buildLangs();
   buildTabs();
   route();
   measure();
