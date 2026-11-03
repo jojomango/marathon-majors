@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy</title>
+<meta name="description" content="History, course maps, elevation profiles, landmarks and course records for the eight World Marathon Majors: Tokyo, Boston, London, Cape Town, Sydney, Berlin, Chicago and New York.">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Majors Course Atlas">
+<meta property="og:title" content="Privacy">
+<meta property="og:description" content="History, course maps, elevation profiles, landmarks and course records for the eight World Marathon Majors: Tokyo, Boston, London, Cape Town, Sydney, Berlin, Chicago and New York.">
+<meta property="og:url" content="https://jojomango.github.io/marathon-majors/privacy.html">
+<meta property="og:image" content="https://jojomango.github.io/marathon-majors/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_TW">
+<meta property="og:locale:alternate" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F1F3F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1214" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=JetBrains+Mono:wght@500&family=Noto+Sans:wght@400;500;700&family=Noto+Serif:wght@700;900&display=swap">
+<link rel="stylesheet" href="assets/styles.css?v=a9e26d2d">
+<script>(function(){
+  var ids=["tokyo","boston","london","capetown","sydney","berlin","chicago","nyc"];
+  function norm(s){s=String(s||"").toLowerCase();if(s.indexOf("zh")===0)return"zh";if(s.indexOf("es")===0)return"es";if(s.indexOf("en")===0)return"en";return null;}
+  var l=null;try{l=norm(new URLSearchParams(location.search).get("lang"));}catch(e){}
+  if(!l){try{l=norm(localStorage.getItem("lang"));}catch(e){}}
+  if(!l){var a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language];for(var i=0;i<a.length&&!l;i++)l=norm(a[i]);}
+  if(!l)l="en";
+  var h=(location.hash||"").replace(/^#/,""),tail=ids.indexOf(h)>=0?h+"/":"";
+  location.replace(l+"/privacy/");
+})();</script>
+</head>
+<body>
+<main class="gutter chooser"><ul><li><a href="zh/privacy/">隱私權說明</a></li><li><a href="en/privacy/">Privacy</a></li><li><a href="es/privacy/">Privacidad</a></li></ul></main>
+</body>
+</html>

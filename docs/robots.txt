@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jojomango.github.io/marathon-majors/sitemap.xml

@@ -1,0 +1,11 @@
+{
+  "name": "marathon-majors",
+  "private": true,
+  "description": "大滿貫跑道誌：靜態網站產生器",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "2.6.2"
+  }
+}

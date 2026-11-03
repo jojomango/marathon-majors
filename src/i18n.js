@@ -1,34 +1,15 @@
-// 語言偵測與介面文字。
-// 優先順序：網址 ?lang= → 使用者在切換器選過的語言 → 瀏覽器語言清單（簡中、繁中都用中文）→ 英文。
-(function () {
-  "use strict";
-  var SUPPORTED = ["zh", "en", "es"];
-
-  function norm(tag) {
-    tag = String(tag || "").toLowerCase();
-    if (tag.indexOf("zh") === 0) return "zh";
-    if (tag.indexOf("es") === 0) return "es";
-    if (tag.indexOf("en") === 0) return "en";
-    return null;
-  }
-
-  var lang = null;
-  try {
-    lang = norm(new URLSearchParams(location.search).get("lang"));
-    if (lang) localStorage.setItem("lang", lang);
-  } catch (e) {}
-  if (!lang) { try { lang = norm(localStorage.getItem("lang")); } catch (e) {} }
-  if (!lang) {
-    var list = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language];
-    for (var i = 0; i < list.length && !lang; i++) lang = norm(list[i]);
-  }
-  if (SUPPORTED.indexOf(lang) < 0) lang = "en";
-
-  window.SITE_LANG = lang;
-  document.documentElement.lang = { zh: "zh-Hant", en: "en", es: "es" }[lang];
-
-  var UI = {
+// 介面文字（建置時使用）。語言偵測在 build.mjs 產生的首頁轉址程式裡。
+"use strict";
+const UI = {
     zh: {
+      seoHomeTitle: "大滿貫跑道誌：世界馬拉松大滿貫路線、高度與賽道紀錄",
+      seoHomeDesc: "東京、波士頓、倫敦、開普敦、雪梨、柏林、芝加哥、紐約八場世界馬拉松大滿貫的歷史、路線圖、高度剖面、沿途景點與賽道紀錄。",
+      seoRaceTitle: "{name}路線圖、高度與賽道紀錄｜大滿貫跑道誌",
+      seoRaceDesc: "{name}的賽事歷史、{city}城市簡介、路線圖與高度剖面、沿途景點，以及男女賽道紀錄（{men} / {women}）。",
+      seoRaceDescNoRec: "{name}的賽事歷史、{city}城市簡介、路線圖與高度剖面與沿途景點。",
+      prevRace: "上一場", nextRace: "下一場", homeLink: "回到總覽",
+      nfTitle: "找不到這個頁面", nfText: "網址可能打錯了，或頁面已經搬家。", nfBack: "回到大滿貫跑道誌",
+      crumbHome: "大滿貫跑道誌",
       langName: "中文",
       brand: "大滿貫跑道誌", brandSub: "WORLD MARATHON MAJORS",
       racesNav: "賽事", langNav: "語言", overview: "總覽",
@@ -70,6 +51,14 @@
       consentYes: "同意", consentNo: "不同意", consentAria: "分析 Cookie"
     },
     en: {
+      seoHomeTitle: "Majors Course Atlas: World Marathon Majors courses, elevation and records",
+      seoHomeDesc: "History, course maps, elevation profiles, landmarks and course records for the eight World Marathon Majors: Tokyo, Boston, London, Cape Town, Sydney, Berlin, Chicago and New York.",
+      seoRaceTitle: "{name}: course map, elevation & records | Majors Course Atlas",
+      seoRaceDesc: "{name} history, a guide to {city}, the course map and elevation profile, landmarks along the route, and the course records ({men} / {women}).",
+      seoRaceDescNoRec: "{name} history, a guide to {city}, the course map and elevation profile, and landmarks along the route.",
+      prevRace: "Previous race", nextRace: "Next race", homeLink: "Back to overview",
+      nfTitle: "Page not found", nfText: "The address may be mistyped, or the page has moved.", nfBack: "Back to Majors Course Atlas",
+      crumbHome: "Majors Course Atlas",
       langName: "English",
       brand: "Majors Course Atlas", brandSub: "WORLD MARATHON MAJORS",
       racesNav: "Races", langNav: "Language", overview: "Overview",
@@ -111,6 +100,14 @@
       consentYes: "Accept", consentNo: "Decline", consentAria: "Analytics cookies"
     },
     es: {
+      seoHomeTitle: "Atlas de los Majors: recorridos, altimetría y récords de los World Marathon Majors",
+      seoHomeDesc: "Historia, mapas de recorrido, perfiles de altimetría, puntos de interés y récords de los ocho World Marathon Majors: Tokio, Boston, Londres, Ciudad del Cabo, Sídney, Berlín, Chicago y Nueva York.",
+      seoRaceTitle: "{name}: recorrido, altimetría y récords | Atlas de los Majors",
+      seoRaceDesc: "Historia del {name}, guía de {city}, mapa del recorrido y perfil de altimetría, puntos de interés y récords de la prueba ({men} / {women}).",
+      seoRaceDescNoRec: "Historia del {name}, guía de {city}, mapa del recorrido y perfil de altimetría, y puntos de interés.",
+      prevRace: "Carrera anterior", nextRace: "Carrera siguiente", homeLink: "Volver al inicio",
+      nfTitle: "Página no encontrada", nfText: "Puede que la dirección esté mal escrita o que la página se haya movido.", nfBack: "Volver al Atlas de los Majors",
+      crumbHome: "Atlas de los Majors",
       langName: "Español",
       brand: "Atlas de los Majors", brandSub: "WORLD MARATHON MAJORS",
       racesNav: "Carreras", langNav: "Idioma", overview: "Inicio",
@@ -151,19 +148,16 @@
       consentText: "Este sitio quiere usar Google Analytics para contar las visitas, lo que instala cookies de análisis.",
       consentYes: "Aceptar", consentNo: "Rechazar", consentAria: "Cookies de análisis"
     }
-  };
+};
 
-  window.I18N_UI = UI;
-  window.t = function (key, vars) {
-    var s = (UI[lang] && UI[lang][key] != null) ? UI[lang][key] : UI.en[key];
-    if (s == null) return key;
-    return String(s).replace(/\{(\w+)\}/g, function (_, k) { return vars && vars[k] != null ? vars[k] : ""; });
-  };
-  window.setSiteLang = function (l) {
-    if (SUPPORTED.indexOf(l) < 0) return;
-    try { localStorage.setItem("lang", l); } catch (e) {}
-    var url = new URL(location.href);
-    url.searchParams.set("lang", l);
-    location.href = url.pathname + url.search + url.hash;
-  };
-})();
+
+const SUPPORTED = ["zh", "en", "es"];
+const HTML_LANG = { zh: "zh-Hant", en: "en", es: "es" };
+
+function t(lang, key, vars) {
+  let s = UI[lang] && UI[lang][key] != null ? UI[lang][key] : UI.en[key];
+  if (s == null) throw new Error("missing UI string: " + key);
+  return String(s).replace(/\{(\w+)\}/g, (_, k) => (vars && vars[k] != null ? vars[k] : ""));
+}
+
+module.exports = { UI, SUPPORTED, HTML_LANG, t };
