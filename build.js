@@ -15,7 +15,7 @@ const BASE = "/marathon-majors/";
 const OUT = path.join(__dirname, "docs");
 const OG_LOCALE = { zh: "zh_TW", en: "en_US", es: "es_ES" };
 // Google Search Console 的 HTML 標記驗證碼（content 值）。取得後填入即可。
-const SEARCH_CONSOLE_TOKEN = "";
+const SEARCH_CONSOLE_TOKEN = "ZjdCRT6Vp5BR8BkQVofkdttir7N0Os3NAY814zQgL4M";
 // 官方已公布的 2027 賽期，用於結構化資料 SportsEvent
 const NEXT_EDITION = {
   tokyo: { date: "2027-03-07", country: "JP" },
