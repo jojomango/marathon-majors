@@ -183,8 +183,8 @@ window.MAJORS_I18N.en = {
       landmarks: [
         ["North Sydney", "The start, high on Miller St with the Harbour Bridge ahead."],
         ["Sydney Harbour Bridge", "A rare chance to run across the bridge’s main deck."],
-        ["Barangaroo", "The newly developed harbour foreshore next to The Rocks."],
-        ["Darling Harbour & Pyrmont", "Across Pyrmont Bridge, with crowds along the waterfront."],
+        ["Pyrmont", "Off the bridge and along the Western Distributor viaduct into Pyrmont and Ultimo, looping the old wharf streets before heading back."],
+        ["Barangaroo", "Along Hickson Road past the newly developed harbour foreshore, then into The Rocks."],
         ["Hyde Park", "The city-centre park next to St Mary’s Cathedral."],
         ["Moore Park", "The sports precinct around the Sydney Cricket Ground."],
         ["Kensington & Kingsford turnaround", "The southernmost point, past the University of New South Wales."],

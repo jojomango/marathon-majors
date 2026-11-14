@@ -96,7 +96,10 @@
     flag: '<path d="M5 21V3M5 4h13l-3 4 3 4H5"/>',
     megaphone: '<path d="M3 10v4h3l9 5V5L6 10zM6 14l1.5 5h2.5l-1-4.5M18 9.5a3.5 3.5 0 0 1 0 5"/>',
     sign: '<path d="M4 4h16v10H4zM8 14v7M16 14v7M8 11l4-5 4 5z"/>',
-    ship: '<path d="M3 16h18l-2 4H5zM7 16V5M12 16V3M17 16V5M5 8h4M9.5 6h5M15 8h4M5 12h4M9.5 11h5M15 12h4"/>'
+    ship: '<path d="M3 16h18l-2 4H5zM7 16V5M12 16V3M17 16V5M5 8h4M9.5 6h5M15 8h4M5 12h4M9.5 11h5M15 12h4"/>',
+    church: '<path d="M12 2v4M10 4h4M8 21V11l4-5 4 5v10M3 21v-7l5-3M21 21v-7l-5-3M2 21h20M11 21v-4h2v4"/>',
+    stadium: '<ellipse cx="12" cy="9" rx="9" ry="4"/><path d="M3 9v6c0 2.2 4 4 9 4s9-1.8 9-4V9M7 12.5v4.5M12 13v6M17 12.5v4.5"/>',
+    view: '<circle cx="7" cy="15" r="4"/><circle cx="17" cy="15" r="4"/><path d="M11 15h2M5 11.5 7 5h3l1 6M19 11.5 17 5h-3l-1 6"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || ICONS.building) + "</svg>";
@@ -113,15 +116,41 @@
       var q = window.Geo.routeAt(r, Math.max(0, Math.min(FULL, km)));
       return [q[1], q[0]];
     }
+    // 往返共用同一條路的路段：拆成獨立線段，畫線時各自往行進方向的右側偏移，兩趟才不會疊在一起
+    function shared() {
+      var R = r.route, kx = 111320 * Math.cos(R[0][0] * Math.PI / 180), ky = 110540;
+      function near(p, a, b) {
+        var ax = (a[1] - p[1]) * kx, ay = (a[0] - p[0]) * ky, bx = (b[1] - p[1]) * kx, by = (b[0] - p[0]) * ky;
+        var dx = bx - ax, dy = by - ay, t = Math.max(0, Math.min(1, -(ax * dx + ay * dy) / (dx * dx + dy * dy || 1)));
+        return Math.hypot(ax + t * dx, ay + t * dy) < 25;
+      }
+      var on = R.map(function (p) {
+        for (var j = 0; j < R.length - 1; j++) {
+          if (Math.abs(R[j][2] - p[2]) > 0.5 && Math.abs(R[j + 1][2] - p[2]) > 0.5 && near(p, R[j], R[j + 1])) return true;
+        }
+        return false;
+      });
+      var feats = [], cur = null;
+      for (var i = 0; i < line.length - 1; i++) {
+        var o = on[i] && on[i + 1] ? 1 : 0;
+        if (!cur || cur.properties.o !== o) {
+          cur = { type: "Feature", properties: { o: o }, geometry: { type: "LineString", coordinates: [line[i]] } };
+          feats.push(cur);
+        }
+        cur.geometry.coordinates.push(line[i + 1]);
+      }
+      return { type: "FeatureCollection", features: feats };
+    }
     var bounds = line.reduce(function (b, p) { return b.extend(p); }, new ml.LngLatBounds(line[0], line[0]));
     r.landmarks.forEach(function (lm) { if (lm.lon != null) bounds.extend([lm.lon, lm.lat]); });
     var sw = bounds.getSouthWest(), ne = bounds.getNorthEast();
-    var padX = (ne.lng - sw.lng) * 1.2, padY = (ne.lat - sw.lat) * 1.6;
+    // 可拖曳範圍依路線的長邊留白，窄長的路線（如雪梨）才不會因為範圍太窄而被迫放大
+    var span = Math.max(ne.lng - sw.lng, ne.lat - sw.lat), padX = span * 1.5, padY = span * 1.5;
 
     var map = new ml.Map({
       container: opts.container,
       style: STYLE,
-      bounds: bounds, fitBoundsOptions: { padding: 36 },
+      bounds: bounds, fitBoundsOptions: { padding: 48 },
       maxBounds: [[sw.lng - padX, sw.lat - padY], [ne.lng + padX, ne.lat + padY]],
       dragRotate: false, pitchWithRotate: false, touchPitch: false,
       cooperativeGestures: true,
@@ -153,15 +182,16 @@
         if (/shield/i.test(l.id) || (tf && JSON.stringify(tf).indexOf('"ref"') >= 0)) map.setLayoutProperty(l.id, "visibility", "none");
       });
       var box = opts.container, course = css(box, "--course"), surface = css(box, "--surface"), muted = css(box, "--muted");
-      map.addSource("route", { type: "geojson", data: { type: "Feature", geometry: { type: "LineString", coordinates: line } } });
+      map.addSource("route", { type: "geojson", data: shared() });
+      var offset = ["interpolate", ["linear"], ["zoom"], 11, ["*", 2, ["get", "o"]], 15, ["*", 4.5, ["get", "o"]]];
       map.addSource("links", { type: "geojson", data: links });
       map.addSource("kms", { type: "geojson", data: kms });
       map.addSource("lm", { type: "geojson", data: points, cluster: true, clusterRadius: 44, clusterMaxZoom: 15 });
       map.addLayer({ id: "links", type: "line", source: "links", paint: { "line-color": muted, "line-width": 1.2, "line-dasharray": [2, 2] } });
       map.addLayer({ id: "route-casing", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" },
-        paint: { "line-color": surface, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 6, 15, 12] } });
+        paint: { "line-color": surface, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 6, 15, 12], "line-offset": offset } });
       map.addLayer({ id: "route", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" },
-        paint: { "line-color": course, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 3, 15, 6] } });
+        paint: { "line-color": course, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 3, 15, 6], "line-offset": offset } });
       map.addLayer({ id: "km-dots", type: "circle", source: "kms", paint: { "circle-radius": 4, "circle-color": surface, "circle-stroke-color": course, "circle-stroke-width": 2 } });
       map.addLayer({ id: "km-labels", type: "symbol", source: "kms",
         layout: { "text-field": ["get", "label"], "text-font": ["Noto Sans Bold"], "text-size": 11, "text-offset": [0, -1.1], "text-allow-overlap": true },
@@ -261,7 +291,7 @@
       refit: function () {
         map.resize();
         map.setMinZoom(0);
-        map.fitBounds(bounds, { padding: 36, animate: false });
+        map.fitBounds(bounds, { padding: 48, animate: false });
         map.setMinZoom(Math.max(0, map.getZoom() - 1));
       },
       onReady: function (fn) { if (map.loaded()) fn(); else map.once("load", fn); },

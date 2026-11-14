@@ -272,16 +272,16 @@ window.MAJORS = [
     ],
     profileNote: "依 SRTM 地形資料：北雪梨起點約 90 公尺，過橋後下到港邊，中段往肯辛頓與百年紀念公園一帶在 30–50 公尺間反覆起伏，最後下坡到歌劇院。累計爬升是大滿貫中最多的之一。",
     landmarks: [
-      { km: 0, name: "北雪梨", note: "Miller St 高處起跑，前方就是港灣大橋。" },
-      { km: 2, name: "雪梨港灣大橋", note: "難得可以跑過大橋主橋面的機會。" },
-      { km: 4, name: "巴蘭加魯", note: "新開發的港灣岸線與岩石區。" },
-      { km: 8, name: "達令港・皮蒙特", note: "跨過皮蒙特大橋，海濱步道兩側觀眾密集。" },
-      { km: 14, name: "海德公園", note: "市中心綠地與聖瑪麗大教堂。" },
-      { km: 17, name: "摩爾公園", note: "雪梨板球場與足球場所在的體育園區。" },
-      { km: 23, name: "肯辛頓・金斯福德折返點", note: "路線最南端，經過新南威爾斯大學一帶後折返。" },
-      { km: 31, name: "百年紀念公園", note: "雪梨東區最大的公園，林蔭大道上起伏不斷。" },
-      { km: 39, name: "麥覺理夫人座椅", note: "從這裡同時看見大橋與歌劇院。" },
-      { km: 42.195, name: "雪梨歌劇院", note: "在帆形屋頂前完賽。" }
+      { id: "northsydney", km: 0, name: "北雪梨", note: "Miller St 高處起跑，前方就是港灣大橋。" },
+      { id: "harbourbridge", km: 2, name: "雪梨港灣大橋", note: "難得可以跑過大橋主橋面的機會。" },
+      { id: "pyrmont", km: 6.5, name: "皮蒙特", note: "過橋後沿西區快速道路的高架橋進入皮蒙特與 Ultimo，在碼頭邊的老街區繞一圈再折返。" },
+      { id: "barangaroo", km: 10, name: "巴蘭加魯", note: "沿 Hickson Road 經過新開發的港灣岸線，接著進入岩石區。" },
+      { id: "hydepark", km: 14, name: "海德公園", note: "市中心綠地與聖瑪麗大教堂。" },
+      { id: "moorepark", km: 17, name: "摩爾公園", note: "雪梨板球場與足球場所在的體育園區。" },
+      { id: "kensington", km: 23, name: "肯辛頓・金斯福德折返點", note: "路線最南端，經過新南威爾斯大學一帶後折返。" },
+      { id: "centennial", km: 31, name: "百年紀念公園", note: "雪梨東區最大的公園，林蔭大道上起伏不斷。" },
+      { id: "mrsmacquarie", km: 39, name: "麥覺理夫人座椅", note: "從這裡同時看見大橋與歌劇院。" },
+      { id: "operahouse", km: 42.195, name: "雪梨歌劇院", note: "在帆形屋頂前完賽。" }
     ],
     records: {
       men: { time: "2:04:42", name: "Addisu Gobena（衣索比亞）", year: 2026 },
