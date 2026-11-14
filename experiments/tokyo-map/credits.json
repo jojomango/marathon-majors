@@ -14,11 +14,11 @@
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
  },
  "kaminarimon": {
-  "file": "File:Kaminarimon lantern and Nakamise by Koichi Suzuki.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Kaminarimon_lantern_and_Nakamise_by_Koichi_Suzuki.jpg",
-  "artist": "Koichi Suzuki",
-  "license": "CC BY 2.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  "file": "File:JP-tokio-sensoji-kaminarimon-gate.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:JP-tokio-sensoji-kaminarimon-gate.jpg",
+  "artist": "Bgabel",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
  },
  "ginza": {
   "file": "File:Ginza Wako 20241021.jpg",
@@ -28,11 +28,11 @@
   "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
  },
  "tokyotower": {
-  "file": "File:Tokyo Marathon 2010 Tokyo Tower and Zojoji.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Marathon_2010_Tokyo_Tower_and_Zojoji.jpg",
-  "artist": "Ajtnk",
-  "license": "Public domain",
-  "licenseUrl": ""
+  "file": "File:Tokyo Tower 2024.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower_2024.jpg",
+  "artist": "Qian2007",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
  },
  "tokyostation": {
   "file": "File:Tokyo Station (Marunouchi Building).jpg",
@@ -42,18 +42,18 @@
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
  },
  "kuramae": {
-  "file": "File:Kuramaebashi from above - april 9 2016.jpg",
-  "page": "https://commons.wikimedia.org/wiki/File:Kuramaebashi_from_above_-_april_9_2016.jpg",
-  "artist": "Nesnad",
-  "license": "CC BY 3.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
- },
- "hibiya": {
-  "file": "File:Imperial Palace Tokyo Nijubashi Bridge.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:Imperial_Palace_Tokyo_Nijubashi_Bridge.JPG",
-  "artist": "Chris 73",
+  "file": "File:Kuramaebashi Bridge And NTT - panoramio.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Kuramaebashi_Bridge_And_NTT_-_panoramio.jpg",
+  "artist": "Cho's",
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "hibiya": {
+  "file": "File:皇居の堀 Imperial Palace moat - panoramio.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:%E7%9A%87%E5%B1%85%E3%81%AE%E5%A0%80_Imperial_Palace_moat_-_panoramio.jpg",
+  "artist": "Bohao Zhao",
+  "license": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
  },
  "iidabashi": {
   "file": "File:Kagurazaka street 2.jpg",
