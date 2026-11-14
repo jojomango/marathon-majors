@@ -29,16 +29,17 @@ window.MAJORS_I18N.es = {
       profileNote: "Según los datos lidar de 1 m de la Autoridad de Información Geoespacial de Japón, la salida en Shinjuku está a unos 35 m y los primeros 5 km bajan hasta unos 10 m. Después, el recorrido queda casi siempre por debajo de 10 m en los barrios bajos tradicionales, con pequeñas subidas solo en los puentes.",
       landmarks: [
         ["Edificio del Gobierno Metropolitano", "La salida, frente a las torres gemelas, con los rascacielos de Shinjuku detrás."],
-        ["Iidabashi y Kagurazaka", "Por Sotobori-dori, donde termina la bajada inicial."],
+        ["Iidabashi y Kagurazaka", "Por Sotobori-dori, donde termina la bajada inicial, junto a las callejuelas empedradas de Kagurazaka."],
         ["Ueno-hirokoji", "El giro en el extremo norte de Chuo-dori, cerca del parque Ueno y del mercado Ameyoko."],
         ["Nihonbashi", "El punto de partida de las rutas de la época Edo, custodiado por estatuas de kirin."],
         ["Kaminarimon, Asakusa", "El gran farol rojo y la calle Nakamise, con la Tokyo Skytree a la vista. Aquí se da la vuelta."],
+        ["Puente Kuramae (río Sumida)", "Un puente de arcos amarillos sobre el Sumida, el único gran río del recorrido. Se cruza dos veces: hacia el km 19,9 a la ida y el 28,6 a la vuelta."],
         ["Ryogoku", "Hogar del estadio de sumo Kokugikan. La media maratón cae en Kiyosumi-dori."],
         ["Monzen-nakacho y Tomioka Hachimangu", "Un breve tramo de ida y vuelta por Eitai-dori, el que mejor conserva el sabor del viejo Tokio."],
         ["Ginza 4-chome", "El reloj de los almacenes Wako, con mucho público en la calle comercial."],
         ["Giro de Tamachi", "El punto más al sur, en Daiichi Keihin, antes de volver al norte por Hibiya-dori."],
         ["Zojoji y Torre de Tokio", "La torre roja y blanca junto al templo antiguo."],
-        ["Hibiya y jardines del Palacio Imperial", "Junto al foso, rumbo al tramo final."],
+        ["Hibiya y jardines del Palacio Imperial", "Junto al foso del palacio, rumbo al tramo final; desde los jardines exteriores se ve el puente Nijubashi."],
         ["Estación de Tokio", "La meta, en Gyoko-dori, frente al edificio de ladrillo rojo de Marunouchi."]
       ],
       events: [

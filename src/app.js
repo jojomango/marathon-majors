@@ -45,6 +45,7 @@
   var slider = document.getElementById("km-slider");
   var roKm = document.getElementById("ro-km"), roM = document.getElementById("ro-m"), roNear = document.getElementById("ro-near");
   var marks = document.getElementById("marks");
+  var live = null; // 真實地圖（有景點照片設定的賽事才有）
 
   function setKm(km) {
     var s = Geo.stateAt(r, km, P, S);
@@ -58,6 +59,7 @@
     roNear.lastChild.textContent = (s.near + 1) + ". " + r.landmarks[s.near].name;
     Array.prototype.forEach.call(marks.children, function (li, i) { li.classList.toggle("on", i === s.near && s.at); });
     if (Math.abs(parseFloat(slider.value) - s.km) > 0.05) slider.value = s.km;
+    if (live) live.setKm(s.km);
   }
 
   slider.addEventListener("input", function () { setKm(parseFloat(slider.value)); });
@@ -84,4 +86,22 @@
       document.getElementById("b-route").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
     }
   });
+
+  // 真實地圖：載入成功後取代 SVG 路線圖；失敗就保留 SVG
+  var liveBox = document.getElementById("live-map");
+  if (liveBox && window.CourseMap && r.map) {
+    try {
+      live = window.CourseMap.create({
+        container: liveBox, race: { route: r.route, landmarks: r.map }, imgBase: r.imgBase, text: SITE.map || {},
+        onPick: function (km) { setKm(km); }
+      });
+    } catch (err) { live = null; }
+    if (live) {
+      live.onReady(function () {
+        document.getElementById("map-fig").classList.add("has-live");
+        live.refit();
+        live.setKm(parseFloat(slider.value));
+      });
+    }
+  }
 })();

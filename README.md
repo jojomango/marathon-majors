@@ -39,10 +39,13 @@ npm run build
 | `data/marathons.js` | 各賽事的中文資料：歷史、城市、景點、事件、賽道紀錄（其他語言的基準） |
 | `data/marathons.en.js`、`data/marathons.es.js` | 英文、西文翻譯，依中文資料的陣列順序對應 |
 | `data/courses.js` | 路線與高度資料（由 `tools/` 的 Python 腳本產生） |
+| `data/photos.js` | 真實地圖的景點設定：實際位置、圖示、照片與授權（目前只有東京） |
+| `src/img/{賽事}/` | 景點照片（Wikimedia Commons，作者與授權記在 `data/photos.js`） |
 | `src/i18n.js` | 介面文字、頁面標題與描述 |
 | `src/render.js` | 產生頁面 HTML |
 | `src/geo.js` | 路線圖與高度圖的幾何計算（建置與瀏覽器共用） |
 | `src/app.js` | 瀏覽器端互動：高度圖拖曳、景點點選 |
+| `src/map.js` | 真實地圖（MapLibre + OpenFreeMap）：景點圖示、照片、聚合、深淺色模式 |
 | `src/analytics.js`、`src/config.js` | 訪客同意後才載入的 GA4、評估 ID |
 | `src/styles.css` | 樣式 |
 | `src/privacy-content.html` | 三種語言的隱私權說明內容 |

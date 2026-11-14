@@ -27,7 +27,7 @@ const NEXT_EDITION = {
 function loadData() {
   const ctx = { window: {} };
   vm.createContext(ctx);
-  for (const f of ["marathons.js", "courses.js", "marathons.en.js", "marathons.es.js"]) {
+  for (const f of ["marathons.js", "courses.js", "marathons.en.js", "marathons.es.js", "photos.js"]) {
     vm.runInContext(fs.readFileSync(path.join(__dirname, "data", f), "utf8"), ctx, { filename: f });
   }
   return ctx.window;
@@ -55,6 +55,12 @@ function racesFor(lang) {
       if (x.events) r.events.forEach((e, i) => { const y = x.events[i]; if (y) { e.title = y[0]; e.text = y[1]; } });
       if (x.records && r.records) { r.records.men.name = x.records[0]; r.records.women.name = x.records[1]; }
       if (x.source && c) { r.source.route = x.source[0]; r.source.elevation = x.source[1]; }
+    }
+    // 真實地圖的景點（有照片設定的賽事）
+    const ML = (W.MAP_LANDMARKS || {})[r.id];
+    if (ML) {
+      r.map = r.landmarks.map((lm) => Object.assign({ km: lm.km, name: lm.name, note: lm.note, id: lm.id }, ML[lm.id] || {}));
+      r.imgBase = "../../assets/img/" + r.id + "/";
     }
     // 總覽卡片用的簡化路線（約 60 點）
     const step = Math.max(1, Math.floor(r.route.length / 60));
@@ -121,6 +127,7 @@ ${SEARCH_CONSOLE_TOKEN ? `<meta name="google-site-verification" content="${SEARC
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${font}">
 <link rel="stylesheet" href="${assetUrl("styles.css", p.up)}">
+${p.liveMap ? `<link rel="stylesheet" href="${MAPLIBRE.css}">\n<script defer src="${MAPLIBRE.js}"></script>` : ""}
 ${(p.jsonld || []).map((j) => `<script type="application/ld+json">${json(j)}</script>`).join("\n")}
 ${p.inline ? `<script>${p.inline}</script>` : ""}
 ${(p.scripts || ["config.js", "analytics.js", "app.js"]).map((s) => `<script defer src="${assetUrl(s, p.up)}"></script>`).join("\n")}
@@ -136,7 +143,8 @@ function siteInline(lang, up) {
   const U = UI[lang];
   return "window.SITE=" + json({
     lang, here: U.here, nearest: U.nearest, privacy: U.privacy, privacyUrl: up + lang + "/privacy/",
-    consentText: U.consentText, consentYes: U.consentYes, consentNo: U.consentNo, consentAria: U.consentAria
+    consentText: U.consentText, consentYes: U.consentYes, consentNo: U.consentNo, consentAria: U.consentAria,
+    map: { gestureWin: U.gestureWin, gestureMac: U.gestureMac, gestureMobile: U.gestureMobile, cluster: U.clusterAria }
   }) + ";";
 }
 
@@ -147,7 +155,12 @@ fs.mkdirSync(OUT, { recursive: true });
 asset("styles.css", fs.readFileSync("src/styles.css", "utf8"));
 asset("config.js", fs.readFileSync("src/config.js", "utf8"));
 asset("analytics.js", fs.readFileSync("src/analytics.js", "utf8"));
-asset("app.js", fs.readFileSync("src/geo.js", "utf8") + "\n" + fs.readFileSync("src/app.js", "utf8"));
+asset("app.js", fs.readFileSync("src/geo.js", "utf8") + "\n" + fs.readFileSync("src/map.js", "utf8") + "\n" + fs.readFileSync("src/app.js", "utf8"));
+// 景點照片
+for (const race of fs.existsSync("src/img") ? fs.readdirSync("src/img") : []) {
+  for (const f of fs.readdirSync(path.join("src/img", race))) write(`assets/img/${race}/${f}`, fs.readFileSync(path.join("src/img", race, f)));
+}
+const MAPLIBRE = { css: "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css", js: "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" };
 
 const ids = W.MAJORS.map((r) => r.id);
 const sitemap = [];
@@ -192,10 +205,11 @@ for (const lang of SUPPORTED) {
       description: desc, url, image: `${SITE_URL}/og/${r.id}.png`
     });
     const pageRace = { route: r.route, elevation: r.elevation, landmarks: r.landmarks.map((lm) => ({ km: lm.km, name: lm.name })) };
+    if (r.map) { pageRace.map = r.map.map(({ credit, ...m }) => m); pageRace.imgBase = r.imgBase; }
     write(`${lang}/${r.id}/index.html`, page({
       lang, path: `${lang}/${r.id}/`, up: "../../", title: t(lang, "seoRaceTitle", { name: r.name }), ogTitle: r.name, desc,
       alternates: { zh: `zh/${r.id}/`, en: `en/${r.id}/`, es: `es/${r.id}/`, "x-default": `en/${r.id}/` }, og: r.id, ogType: "article",
-      jsonld, inline: siteInline(lang, "../../") + "window.PAGE_RACE=" + json(pageRace) + ";", body
+      jsonld, inline: siteInline(lang, "../../") + "window.PAGE_RACE=" + json(pageRace) + ";", body, liveMap: !!r.map
     }));
     if (lang === "zh") addSitemap({ zh: `zh/${r.id}/`, en: `en/${r.id}/`, es: `es/${r.id}/` });
   });

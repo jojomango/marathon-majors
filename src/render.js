@@ -159,6 +159,12 @@ function recTile(label, x) {
   return `<div class="rec"><span class="rec-l">${esc(label)}</span><span class="rec-t">${esc(x.time)}</span><span class="rec-n">${esc(x.name)} · ${x.year}</span></div>`;
 }
 
+function photoCredits(lang, r) {
+  const items = r.map.map((m, i) => m.img ? `<li>${i + 1}. ${esc(m.name)}：<a href="${esc(m.credit.page)}" target="_blank" rel="noopener">${esc(m.credit.artist)}</a>，` +
+    (m.credit.licenseUrl ? `<a href="${esc(m.credit.licenseUrl)}" target="_blank" rel="noopener">${esc(m.credit.license)}</a>` : esc(m.credit.license)) + `</li>` : "").join("");
+  return `<details class="photo-credits"><summary>${esc(t(lang, "photoCredits"))}</summary><ul>${items}</ul></details>`;
+}
+
 function raceMain(ctx, r) {
   const { lang, races } = ctx;
   const st = Geo.stats(r);
@@ -197,7 +203,9 @@ function raceMain(ctx, r) {
 
     `<section class="block b-route" id="b-route"><h2>${head2(lang, "hCourse", "sCourse")}</h2>` +
     `<div class="route-pane"><div class="route-col"><figure class="map-fig" id="map-fig">${mapSvg(r, lang, P, st0)}` +
-    `<figcaption>${esc(t(lang, "mapCaption", { kind: r.source.kind === "sketch" ? t(lang, "mapSketch") : kindLabel }))}</figcaption></figure></div>` +
+    (r.map ? `<div class="live-map" id="live-map"></div>` : "") +
+    `<figcaption>${esc(r.map ? t(lang, "mapLiveCaption") : t(lang, "mapCaption", { kind: r.source.kind === "sketch" ? t(lang, "mapSketch") : kindLabel }))}</figcaption>` +
+    (r.map ? photoCredits(lang, r) : "") + `</figure></div>` +
     `<div class="route-col">` +
     `<figure class="prof-fig" id="prof-fig">${profileSvg(r, lang, S, st0)}<figcaption>${esc(t(lang, "profCaption"))}</figcaption></figure>` +
     `<label class="readout" for="km-slider"><span class="big" id="ro-km">${Geo.fmtKm(st0.km)}<small>km</small></span><span class="big" id="ro-m">${Math.round(st0.ele)}<small>m</small></span>` +

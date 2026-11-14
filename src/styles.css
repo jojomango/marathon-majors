@@ -350,3 +350,73 @@ html[lang="en"], html[lang="es"] {
 .privacy a { color: var(--course); }
 .privacy .muted { color: var(--muted); font-size: 14px; }
 .privacy button { font: inherit; padding: 6px 14px; border-radius: 4px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; justify-self: start; }
+
+/* ---------- 真實地圖（MapLibre）：載入完成後取代 SVG 路線圖 ---------- */
+.map-fig { position: relative; }
+.live-map { position: absolute; inset: 0; visibility: hidden; }
+.map-fig.has-live > svg { display: none; }
+.map-fig.has-live .live-map { position: relative; visibility: visible; height: clamp(340px, 56vh, 540px); }
+.live-map .maplibregl-ctrl-attrib { font-size: 11px; }
+.photo-credits { font-size: 12px; color: var(--muted); padding: 0 10px 10px; }
+.photo-credits summary { cursor: pointer; }
+.photo-credits ul { margin: 6px 0 0; padding-left: 1.1em; }
+.photo-credits a { color: inherit; }
+
+/* 景點圖示：平常是小圓圖示，滑過或點選時放大成圓形照片 */
+.mlm, .mlm-dot { position: relative; width: 0; height: 0; }
+.mlm-btn {
+  position: absolute; left: 0; top: 0; transform: translate(var(--tx, -50%), var(--ty, -50%));
+  width: 38px; height: 38px; border-radius: 50%; padding: 0; cursor: pointer;
+  border: 2.5px solid var(--course); background: var(--surface); color: var(--course);
+  box-shadow: 0 2px 8px rgba(0,0,0,.25); display: grid; place-items: center;
+  transition: width .22s ease, height .22s ease, border-width .22s ease, box-shadow .22s ease;
+}
+.mlm-btn svg { width: 20px; height: 20px; transition: opacity .15s ease; }
+.mlm-btn::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: var(--photo, none) var(--pos, center) / var(--size, cover) no-repeat; opacity: 0; transition: opacity .2s ease .05s;
+}
+.mlm-card {
+  position: absolute; left: 0; top: 76px; transform: translateX(-50%);
+  width: max-content; max-width: 220px; padding: 8px 10px; border-radius: 6px;
+  background: var(--surface); color: var(--ink); box-shadow: 0 4px 16px rgba(0,0,0,.22);
+  font: 13px/1.45 var(--f-body); text-align: left; pointer-events: none; opacity: 0; transition: opacity .15s ease;
+}
+.mlm-card b { display: block; font-size: 14px; }
+.mlm-card .km { font-family: var(--f-mono); color: var(--course); font-size: 12px; }
+.mlm-card .note { display: block; color: var(--muted); }
+.mlm.open, .mlm-dot.open { z-index: 5; }
+.mlm.open .mlm-btn { width: 132px; height: 132px; border-width: 4px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+.mlm.open .mlm-btn svg { opacity: 0; }
+.mlm.open .mlm-btn::after, .mlm.open .mlm-card, .mlm-dot.open .mlm-card { opacity: 1; }
+@media (hover: hover) {
+  .mlm:hover, .mlm-dot:hover { z-index: 5; }
+  .mlm:hover .mlm-btn { width: 132px; height: 132px; border-width: 4px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+  .mlm:hover .mlm-btn svg { opacity: 0; }
+  .mlm:hover .mlm-btn::after, .mlm:hover .mlm-card, .mlm-dot:hover .mlm-card { opacity: 1; }
+}
+/* 靠近邊緣時，照片圓往地圖內側展開 */
+.mlm.down .mlm-btn { --ty: -19px; }
+.mlm.left .mlm-btn { --tx: calc(-100% + 19px); }
+.mlm.right .mlm-btn { --tx: -19px; }
+.mlm.down .mlm-card { top: 124px; }
+.mlm.up .mlm-card { top: auto; bottom: 76px; }
+.mlm.left .mlm-card, .mlm-dot.left .mlm-card { left: auto; right: -19px; transform: none; }
+.mlm.right .mlm-card, .mlm-dot.right .mlm-card { left: -19px; transform: none; }
+.mlm-btn:focus-visible, .mlm-dot-btn:focus-visible, .mlm-cluster:focus-visible { outline: 3px solid var(--star); outline-offset: 2px; }
+.mlm-dot-btn {
+  position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+  width: 24px; height: 24px; border-radius: 50%; padding: 0; cursor: pointer;
+  border: 2px solid var(--surface); background: var(--ink); color: var(--bg);
+  box-shadow: 0 1px 5px rgba(0,0,0,.35); font: 700 11px/1 var(--f-mono); display: grid; place-items: center;
+}
+.mlm-dot .mlm-card { top: 18px; }
+.mlm-cluster {
+  width: 42px; height: 42px; border-radius: 50%; cursor: pointer; padding: 0;
+  display: grid; place-items: center; color: #fff; background: var(--course);
+  border: 3px solid var(--surface); box-shadow: 0 0 0 5px var(--course-soft), 0 2px 8px rgba(0,0,0,.3);
+  font: 900 18px/1 var(--f-display); transition: transform .15s ease;
+}
+.mlm-cluster:hover { transform: scale(1.08); }
+.mlm-runner { width: 18px; height: 18px; border-radius: 50%; background: var(--course); border: 3px solid #fff; box-shadow: 0 0 0 6px var(--course-soft); }
+@media (prefers-reduced-motion: reduce) { .mlm-btn, .mlm-btn::after, .mlm-card { transition: none; } }
