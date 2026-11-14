@@ -787,5 +787,143 @@ window.MAP_LANDMARKS = {
    "lat": 52.5158,
    "lon": 13.3708
   }
+ },
+ "chicago": {
+  "buckingham": {
+   "lat": 41.8758,
+   "lon": -87.6189,
+   "icon": "fountain",
+   "img": "buckingham.jpg",
+   "credit": {
+    "artist": "Alhill42",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Buckingham_Fountain_Grant_Park_Chicago.jpg"
+   }
+  },
+  "loop": {
+   "lat": 41.8794,
+   "lon": -87.6261,
+   "icon": "station",
+   "img": "loop.jpg",
+   "credit": {
+    "artist": "Raed Mansour",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:L_Tracks_Over_Wabash.jpg"
+   }
+  },
+  "lincolnpark": {
+   "lat": 41.9214,
+   "lon": -87.6339,
+   "icon": "park",
+   "img": "lincolnpark.jpg",
+   "credit": {
+    "artist": "rboed*",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Lincoln_Park,_Chicago.jpg"
+   }
+  },
+  "lakeview": {
+   "lat": 41.9526,
+   "lon": -87.645,
+   "icon": "building",
+   "img": "lakeview.jpg",
+   "credit": {
+    "artist": "Ken Lund",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Boystown,_Lakeview,_Chicago,_Illinois_(28522738467).jpg"
+   }
+  },
+  "oldtown": {
+   "lat": 41.911,
+   "lon": -87.6346,
+   "icon": "building",
+   "img": "oldtown.jpg",
+   "credit": {
+    "artist": "Victor Grigas",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:North_and_Wells.jpg"
+   }
+  },
+  "greektown": {
+   "lat": 41.8794,
+   "lon": -87.6474,
+   "icon": "market",
+   "img": "greektown.jpg",
+   "credit": {
+    "artist": "Thomas Sly",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Popular_Greektown.jpg"
+   }
+  },
+  "unitedcenter": {
+   "lat": 41.8807,
+   "lon": -87.6742,
+   "icon": "stadium",
+   "img": "unitedcenter.jpg",
+   "credit": {
+    "artist": "JeremyA",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:United_Center_060716.jpg"
+   }
+  },
+  "pilsen": {
+   "lat": 41.8576,
+   "lon": -87.656,
+   "icon": "art",
+   "img": "pilsen.jpg",
+   "credit": {
+    "artist": "Señor Codo",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Pilsen_Mural_along_17th_street_(223567475).jpg"
+   }
+  },
+  "chinatown": {
+   "lat": 41.8527,
+   "lon": -87.632,
+   "icon": "gate",
+   "img": "chinatown.jpg",
+   "credit": {
+    "artist": "Han Zheng",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chinatown_Chicago_Gate.jpg"
+   }
+  },
+  "bronzeville": {
+   "lat": 41.831,
+   "lon": -87.6168,
+   "icon": "monument",
+   "img": "bronzeville.jpg",
+   "credit": {
+    "artist": "Joe Ravi",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Victory_Monument_Chicago.jpg"
+   }
+  },
+  "roosevelt": {
+   "lat": 41.8674,
+   "lon": -87.6203,
+   "icon": "slope",
+   "img": "roosevelt.jpg",
+   "credit": {
+    "artist": "Marlin Keesler",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chicago_skyline_from_Roosevelt_road_(9954939646).jpg"
+   }
+  },
+  "finish": {
+   "lat": 41.8704,
+   "lon": -87.6205
+  }
  }
 };

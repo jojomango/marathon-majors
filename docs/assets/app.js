@@ -99,7 +99,9 @@
     ship: '<path d="M3 16h18l-2 4H5zM7 16V5M12 16V3M17 16V5M5 8h4M9.5 6h5M15 8h4M5 12h4M9.5 11h5M15 12h4"/>',
     church: '<path d="M12 2v4M10 4h4M8 21V11l4-5 4 5v10M3 21v-7l5-3M21 21v-7l-5-3M2 21h20M11 21v-4h2v4"/>',
     stadium: '<ellipse cx="12" cy="9" rx="9" ry="4"/><path d="M3 9v6c0 2.2 4 4 9 4s9-1.8 9-4V9M7 12.5v4.5M12 13v6M17 12.5v4.5"/>',
-    view: '<circle cx="7" cy="15" r="4"/><circle cx="17" cy="15" r="4"/><path d="M11 15h2M5 11.5 7 5h3l1 6M19 11.5 17 5h-3l-1 6"/>'
+    view: '<circle cx="7" cy="15" r="4"/><circle cx="17" cy="15" r="4"/><path d="M11 15h2M5 11.5 7 5h3l1 6M19 11.5 17 5h-3l-1 6"/>',
+    fountain: '<path d="M3 17h18M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2M9 17v-3h6v3M12 14V7M12 7c-2-3-5-3-6 0M12 7c2-3 5-3 6 0M12 4v3"/>',
+    art: '<path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-1.5-1-2.5S14 15 15.5 15H18a3 3 0 0 0 3-3c0-5-4-9-9-9z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || ICONS.building) + "</svg>";
