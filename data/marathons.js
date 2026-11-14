@@ -274,8 +274,8 @@ window.MAJORS = [
     landmarks: [
       { id: "northsydney", km: 0, name: "北雪梨", note: "Miller St 高處起跑，前方就是港灣大橋。" },
       { id: "harbourbridge", km: 2, name: "雪梨港灣大橋", note: "難得可以跑過大橋主橋面的機會。" },
-      { id: "barangaroo", km: 4, name: "巴蘭加魯", note: "新開發的港灣岸線與岩石區。" },
-      { id: "pyrmont", km: 8, name: "達令港・皮蒙特", note: "跨過皮蒙特大橋，海濱步道兩側觀眾密集。" },
+      { id: "pyrmont", km: 6.5, name: "皮蒙特", note: "過橋後沿西區快速道路的高架橋進入皮蒙特與 Ultimo，在碼頭邊的老街區繞一圈再折返。" },
+      { id: "barangaroo", km: 10, name: "巴蘭加魯", note: "沿 Hickson Road 經過新開發的港灣岸線，接著進入岩石區。" },
       { id: "hydepark", km: 14, name: "海德公園", note: "市中心綠地與聖瑪麗大教堂。" },
       { id: "moorepark", km: 17, name: "摩爾公園", note: "雪梨板球場與足球場所在的體育園區。" },
       { id: "kensington", km: 23, name: "肯辛頓・金斯福德折返點", note: "路線最南端，經過新南威爾斯大學一帶後折返。" },

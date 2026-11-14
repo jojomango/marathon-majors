@@ -183,8 +183,8 @@ window.MAJORS_I18N.es = {
       landmarks: [
         ["North Sydney", "La salida, en lo alto de Miller St con el Harbour Bridge delante."],
         ["Harbour Bridge de Sídney", "Una ocasión poco habitual de correr por el tablero principal del puente."],
-        ["Barangaroo", "El nuevo frente portuario junto a The Rocks."],
-        ["Darling Harbour y Pyrmont", "Por el puente de Pyrmont, con público a lo largo del paseo."],
+        ["Pyrmont", "Tras el puente, por el viaducto del Western Distributor hacia Pyrmont y Ultimo, con una vuelta por las calles junto a los muelles antes de regresar."],
+        ["Barangaroo", "Por Hickson Road junto al nuevo frente portuario, y luego hacia The Rocks."],
         ["Hyde Park", "El parque del centro, junto a la catedral de St Mary."],
         ["Moore Park", "El recinto deportivo alrededor del Sydney Cricket Ground."],
         ["Giro de Kensington y Kingsford", "El punto más al sur, tras pasar por la Universidad de Nueva Gales del Sur."],

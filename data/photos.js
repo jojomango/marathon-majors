@@ -573,8 +573,20 @@ window.MAP_LANDMARKS = {
     "page": "https://commons.wikimedia.org/wiki/File:Sydney_Harbour_Bridge_01.jpg"
    }
   },
+  "pyrmont": {
+   "lat": -33.8645,
+   "lon": 151.194,
+   "icon": "river",
+   "img": "pyrmont.jpg",
+   "credit": {
+    "artist": "Maksym Kozlenko",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2018-04-26_Jones_Bay_Wharf,_Pyrmont,_NSW.jpg"
+   }
+  },
   "barangaroo": {
-   "lat": -33.858,
+   "lat": -33.8605,
    "lon": 151.2025,
    "icon": "park",
    "img": "barangaroo.jpg",
@@ -583,18 +595,6 @@ window.MAP_LANDMARKS = {
     "license": "CC BY 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
     "page": "https://commons.wikimedia.org/wiki/File:Sydney_Skyline_from_Barangaroo_Reserve.jpg"
-   }
-  },
-  "pyrmont": {
-   "lat": -33.8706,
-   "lon": 151.199,
-   "icon": "bridge",
-   "img": "pyrmont.jpg",
-   "credit": {
-    "artist": "Dietmar Rabich",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Sydney_(AU),_Darling_Harbour,_Pyrmont_Bridge_--_2019_--_2088.jpg"
    }
   },
   "hydepark": {
