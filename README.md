@@ -45,7 +45,7 @@ npm run build
 | `src/render.js` | 產生頁面 HTML |
 | `src/geo.js` | 路線圖與高度圖的幾何計算（建置與瀏覽器共用） |
 | `src/app.js` | 瀏覽器端互動：高度圖拖曳、景點點選 |
-| `src/map.js` | 真實地圖（MapLibre + OpenFreeMap）：景點圖示、照片、聚合、深淺色模式 |
+| `src/map.js` | 真實地圖（MapLibre + OpenFreeMap）：景點圖示、照片、聚合（深色模式下也固定用淺色底圖） |
 | `src/analytics.js`、`src/config.js` | 訪客同意後才載入的 GA4、評估 ID |
 | `src/styles.css` | 樣式 |
 | `src/privacy-content.html` | 三種語言的隱私權說明內容 |
