@@ -2,3 +2,4 @@ __pycache__/
 *.osm.json
 .DS_Store
 node_modules/
+.claude/

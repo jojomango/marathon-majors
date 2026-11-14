@@ -155,5 +155,139 @@ window.MAP_LANDMARKS = {
     "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Station_(Marunouchi_Building).jpg"
    }
   }
+ },
+ "nyc": {
+  "verrazzano": {
+   "lat": 40.6066,
+   "lon": -74.0447,
+   "icon": "bridge",
+   "img": "verrazzano.jpg",
+   "credit": {
+    "artist": "Kidfly182",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Verrazzano_Narrows_Bridge.jpg"
+   }
+  },
+  "bayridge": {
+   "lat": 40.6368,
+   "lon": -74.0227
+  },
+  "fourthave": {
+   "lat": 40.6768,
+   "lon": -73.9835,
+   "icon": "music",
+   "img": "fourthave.jpg",
+   "credit": {
+    "artist": "Steven Pisano",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:NYC_2014_Marathon_Along_Fourth_Avenue_in_Brooklyn.jpg"
+   }
+  },
+  "williamsburg": {
+   "lat": 40.7071,
+   "lon": -73.9644
+  },
+  "pulaski": {
+   "lat": 40.7385,
+   "lon": -73.9527,
+   "icon": "bridge",
+   "img": "pulaski.jpg",
+   "credit": {
+    "artist": "Jeffrey Bary",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Pulaski_Bridge_with_draw_span_open_(2017).jpg"
+   }
+  },
+  "queensboro": {
+   "lat": 40.757,
+   "lon": -73.9544,
+   "icon": "bridge",
+   "img": "queensboro.jpg",
+   "credit": {
+    "artist": "King of Hearts",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Queensboro_Bridge_New_York_October_2016_003.jpg"
+   }
+  },
+  "firstave": {
+   "lat": 40.7676,
+   "lon": -73.9562
+  },
+  "willis": {
+   "lat": 40.8027,
+   "lon": -73.9302,
+   "icon": "bridge",
+   "img": "willis.jpg",
+   "credit": {
+    "artist": "Acroterion",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Willis_Avenue_Bridge_NY1.jpg"
+   }
+  },
+  "madison": {
+   "lat": 40.8155,
+   "lon": -73.9343,
+   "icon": "bridge",
+   "img": "madison.jpg",
+   "credit": {
+    "artist": "Acroterion",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Madison_Avenue_Bridge_NY1.jpg"
+   }
+  },
+  "fifthave": {
+   "lat": 40.783,
+   "lon": -73.959,
+   "icon": "museum",
+   "img": "fifthave.jpg",
+   "credit": {
+    "artist": "Bmzuckerman",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Frank_Lloyd_Wright_-_New_York,_NY_-_Solomon_R._Guggenheim_Museum_(A).jpg"
+   }
+  },
+  "centralpark": {
+   "lat": 40.7745,
+   "lon": -73.9665,
+   "icon": "park",
+   "img": "centralpark.jpg",
+   "credit": {
+    "artist": "Superbass",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2024-11-19-Central_Park-0669.jpg"
+   }
+  },
+  "columbus": {
+   "lat": 40.7681,
+   "lon": -73.9819,
+   "icon": "monument",
+   "img": "columbus.jpg",
+   "credit": {
+    "artist": "TarHeel4793",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Columbus_Circle_in_New_York_City.jpg"
+   }
+  },
+  "tavern": {
+   "lat": 40.7722,
+   "lon": -73.9776,
+   "icon": "flag",
+   "img": "tavern.jpg",
+   "credit": {
+    "artist": "Jim.henderson",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Tavern_on_the_Green_cloudy_jeh.JPG"
+   }
+  }
  }
 };
