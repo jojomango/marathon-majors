@@ -1,0 +1,44 @@
+{
+ "tocho": {
+  "file": "File:Tokyo Metropolitan Government Building 2022-03-02.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Metropolitan_Government_Building_2022-03-02.jpg",
+  "artist": "Asanagi",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+ },
+ "nihonbashi": {
+  "file": "File:Nihonbashi Kirin Statue.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Nihonbashi_Kirin_Statue.jpg",
+  "artist": "Phlizz",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "kaminarimon": {
+  "file": "File:Kaminarimon lantern and Nakamise by Koichi Suzuki.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Kaminarimon_lantern_and_Nakamise_by_Koichi_Suzuki.jpg",
+  "artist": "Koichi Suzuki",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "ginza": {
+  "file": "File:Ginza Wako 20241021.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ginza_Wako_20241021.jpg",
+  "artist": "Supanut Arunoprayote",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+ },
+ "tokyotower": {
+  "file": "File:Tokyo Marathon 2010 Tokyo Tower and Zojoji.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Marathon_2010_Tokyo_Tower_and_Zojoji.jpg",
+  "artist": "Ajtnk",
+  "license": "Public domain",
+  "licenseUrl": ""
+ },
+ "tokyostation": {
+  "file": "File:Tokyo Station (Marunouchi Building).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Station_(Marunouchi_Building).jpg",
+  "artist": "Alexandr3126",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+ }
+}

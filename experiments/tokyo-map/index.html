@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>東京馬拉松・地圖原型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=JetBrains+Mono:wght@500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@900&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+/* 實驗：真實地圖底圖 + 景點圖示，滑過時換成圓形照片 */
+:root {
+  --bg: #F1F3F1; --surface: #FFFFFF; --ink: #13181C; --muted: #5A646B; --rule: #D3D8D5;
+  --course: #1C55D4; --course-soft: rgba(28, 85, 212, .14); --star: #B4800F;
+  --f-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --f-head: "Noto Serif TC", serif;
+  --f-body: "Noto Sans TC", "PingFang TC", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0E1214; --surface: #161B1E; --ink: #E6EAE7; --muted: #98A2A8; --rule: #2A3236; --course: #74A0FF; --course-soft: rgba(116, 160, 255, .18); --star: #E0B24C; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 20px max(16px, env(safe-area-inset-right, 0px)) 48px max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 14px; }
+.eyebrow { font-size: 12px; letter-spacing: .14em; color: var(--muted); font-weight: 700; }
+h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 34px); margin: 0; line-height: 1.3; }
+.lede { color: var(--muted); margin: 0; max-width: 40em; }
+
+/* 地圖 */
+.map-box { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid var(--rule); background: var(--surface); }
+#map { height: clamp(380px, 64vh, 680px); }
+.maplibregl-ctrl-attrib { font-size: 11px; }
+
+/* 景點圖示：平常是小圓圖示，滑過或點選時放大成圓形照片 */
+.lm { position: relative; width: 0; height: 0; }
+.lm-btn {
+  position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+  width: 38px; height: 38px; border-radius: 50%; padding: 0; cursor: pointer;
+  border: 2.5px solid var(--course); background: var(--surface) center / cover no-repeat;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  display: grid; place-items: center; color: var(--course);
+  transition: width .22s ease, height .22s ease, border-width .22s ease, box-shadow .22s ease;
+}
+.lm-btn svg { width: 20px; height: 20px; transition: opacity .15s ease; }
+.lm-btn::after {
+  /* 照片層：預設透明，放大時淡入 */
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: var(--photo) center / cover no-repeat; opacity: 0; transition: opacity .2s ease .05s;
+}
+.lm-card {
+  position: absolute; left: 0; top: 76px; transform: translateX(-50%);
+  width: max-content; max-width: 220px; padding: 8px 10px; border-radius: 6px;
+  background: var(--surface); color: var(--ink); box-shadow: 0 4px 16px rgba(0,0,0,.22);
+  font-size: 13px; line-height: 1.45; pointer-events: none; opacity: 0; transition: opacity .15s ease;
+}
+.lm-card b { display: block; font-size: 14px; }
+.lm-card .km { font-family: var(--f-mono); color: var(--course); font-size: 12px; }
+.lm-card span { display: block; color: var(--muted); }
+.lm.open { z-index: 5; }
+.lm.open .lm-btn { width: 132px; height: 132px; border-width: 4px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+.lm.open .lm-btn svg { opacity: 0; }
+.lm.open .lm-btn::after { opacity: 1; }
+.lm.open .lm-card { opacity: 1; }
+@media (hover: hover) {
+  .lm:hover { z-index: 5; }
+  .lm:hover .lm-btn { width: 132px; height: 132px; border-width: 4px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+  .lm:hover .lm-btn svg { opacity: 0; }
+  .lm:hover .lm-btn::after { opacity: 1; }
+  .lm:hover .lm-card { opacity: 1; }
+}
+/* 靠近地圖上緣時往下展開，靠近下緣時卡片放在上方 */
+.lm.down .lm-btn { transform: translate(-50%, -19px); }
+.lm.down.open .lm-btn { transform: translate(-50%, -19px); }
+.lm.down .lm-card { top: 124px; }
+.lm.up .lm-card { top: auto; bottom: 76px; }
+.lm.left .lm-card { left: auto; right: -70px; transform: none; }
+.lm.right .lm-card { left: -70px; transform: none; }
+.lm-btn:focus-visible { outline: 3px solid var(--star); outline-offset: 2px; }
+
+/* 沒有照片的次要景點：小圓點 */
+.dot { position: relative; width: 0; height: 0; }
+.dot-btn {
+  position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+  width: 14px; height: 14px; border-radius: 50%; padding: 0; cursor: pointer;
+  border: 2px solid var(--surface); background: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.3);
+}
+.dot .lm-card { top: 14px; }
+.dot.open .lm-card { opacity: 1; }
+@media (hover: hover) { .dot:hover { z-index: 4; } .dot:hover .lm-card { opacity: 1; } }
+
+/* 起終點、目前位置 */
+.flag { font: 700 11px/1 var(--f-body); color: #fff; background: var(--ink); padding: 4px 7px; border-radius: 3px; transform: translateY(-22px); white-space: nowrap; }
+.runner { width: 18px; height: 18px; border-radius: 50%; background: var(--course); border: 3px solid #fff; box-shadow: 0 0 0 6px var(--course-soft); }
+
+/* 公里滑桿 */
+.scrub { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-items: center; }
+.scrub .big { font-family: var(--f-display); font-weight: 900; font-size: 30px; line-height: 1; }
+.scrub .big small { font-family: var(--f-body); font-size: 12px; color: var(--muted); font-weight: 500; margin-left: 2px; }
+.scrub input { width: 100%; accent-color: var(--course); grid-column: 1 / -1; }
+.scrub .near { color: var(--muted); font-size: 14px; }
+.scrub .near b { color: var(--ink); }
+
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+.credits { font-size: 12px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 10px; display: grid; gap: 2px; }
+.credits a { color: inherit; }
+.credits ul { margin: 4px 0 0; padding-left: 1.1em; }
+@media (prefers-reduced-motion: reduce) { .lm-btn, .lm-btn::after, .lm-card { transition: none; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">EXPERIMENT · TOKYO MARATHON</div>
+  <h1>東京馬拉松路線地圖（原型）</h1>
+  <p class="lede">真實城市地圖上的比賽路線。滑過景點圖示會放大成照片；手機上點一下打開、再點一下或點地圖其他地方收起。</p>
+
+  <div class="map-box"><div id="map" role="region" aria-label="東京馬拉松路線地圖"></div></div>
+
+  <label class="scrub" for="km">
+    <span class="big" id="ro-km">21.1<small>km</small></span>
+    <span class="near" id="ro-near"></span>
+    <input id="km" type="range" min="0" max="42.195" step="0.1" value="21.1" aria-label="公里數">
+  </label>
+  <p class="note">拖曳滑桿，地圖上的藍點會沿路線移動。正式版會改成和現有的高度圖連動。</p>
+
+  <div class="credits" id="credits"></div>
+</main>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="tokyo-data.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.TOKYO;
+  var FULL = 42.195;
+  var dark = matchMedia("(prefers-color-scheme: dark)");
+  var STYLE = { light: "https://tiles.openfreemap.org/styles/positron", dark: "https://tiles.openfreemap.org/styles/dark" };
+  function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+  // 景點類型的線條圖示（24×24）
+  var ICONS = {
+    building: '<path d="M5 21V6l5-2v17M10 21V9h4v12M14 21V4l5 2v15M3 21h18"/>',
+    bridge: '<path d="M2 16h20M4 16c2-5 5-7 8-7s6 2 8 7M7 16v5M17 16v5M12 9v7"/>',
+    gate: '<path d="M8 3h8M9 3v2M15 3v2M7 5h10v12a5 5 0 0 1-10 0z M7 11h10M12 22v-1"/>',
+    clock: '<circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/>',
+    tower: '<path d="M12 2v3M10 5h4l2 16H8zM9 11h6M8.5 15h7M8 21h8"/>',
+    station: '<path d="M3 21V10l9-6 9 6v11M3 21h18M8 21v-6h8v6M12 4v4"/>'
+  };
+  function svg(name) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + "</svg>"; }
+
+  // 路線、公里數
+  var line = D.route.map(function (p) { return [p[0], p[1]]; });
+  function at(km) {
+    var r = D.route;
+    for (var i = 0; i < r.length - 1; i++) {
+      if (km <= r[i + 1][2]) {
+        var f = (km - r[i][2]) / ((r[i + 1][2] - r[i][2]) || 1);
+        return [r[i][0] + (r[i + 1][0] - r[i][0]) * f, r[i][1] + (r[i + 1][1] - r[i][1]) * f];
+      }
+    }
+    return line[line.length - 1];
+  }
+  var bounds = line.reduce(function (b, p) { return b.extend(p); }, new maplibregl.LngLatBounds(line[0], line[0]));
+  D.landmarks.forEach(function (lm) { bounds.extend([lm.lon, lm.lat]); });
+  var sw = bounds.getSouthWest(), ne = bounds.getNorthEast();
+  // 拖曳範圍：保留足夠空間，讓窄而高的手機畫面也能完整顯示路線
+  var padX = (ne.lng - sw.lng) * 1.2, padY = (ne.lat - sw.lat) * 1.6;
+
+  var map = new maplibregl.Map({
+    container: "map",
+    style: dark.matches ? STYLE.dark : STYLE.light,
+    bounds: bounds, fitBoundsOptions: { padding: 40 },
+    maxBounds: [[sw.lng - padX, sw.lat - padY], [ne.lng + padX, ne.lat + padY]],
+    dragRotate: false, pitchWithRotate: false, touchPitch: false,
+    cooperativeGestures: true,
+    attributionControl: { compact: true }
+  });
+  map.touchZoomRotate.disableRotation();
+  // 最小縮放＝剛好看到整條路線再拉遠一點，避免縮到整個關東
+  map.once("load", function () { map.setMinZoom(Math.max(0, map.getZoom() - 1)); });
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+
+  // 景點與路線之間的連接線（景點位置 → 該公里數在路線上的點）
+  var links = { type: "FeatureCollection", features: D.landmarks.filter(function (lm) { return lm.icon; }).map(function (lm) {
+    return { type: "Feature", geometry: { type: "LineString", coordinates: [[lm.lon, lm.lat], at(lm.km)] } };
+  }) };
+  var kms = { type: "FeatureCollection", features: [5, 10, 15, 20, 25, 30, 35, 40].map(function (k) {
+    return { type: "Feature", properties: { label: k + "K" }, geometry: { type: "Point", coordinates: at(k) } };
+  }) };
+
+  function quietBasemap() {
+    // 路號盾牌與道路編號會搶走路線的焦點，隱藏起來
+    map.getStyle().layers.forEach(function (l) {
+      var tf = l.layout && l.layout["text-field"];
+      var isRef = tf && JSON.stringify(tf).indexOf('"ref"') >= 0;
+      if (/shield/i.test(l.id) || isRef) map.setLayoutProperty(l.id, "visibility", "none");
+    });
+  }
+  function addLayers() {
+    quietBasemap();
+    var course = css("--course"), surface = css("--surface"), muted = css("--muted");
+    map.addSource("route", { type: "geojson", data: { type: "Feature", geometry: { type: "LineString", coordinates: line } } });
+    map.addSource("links", { type: "geojson", data: links });
+    map.addSource("kms", { type: "geojson", data: kms });
+    map.addLayer({ id: "links", type: "line", source: "links", paint: { "line-color": muted, "line-width": 1.2, "line-dasharray": [2, 2] } });
+    map.addLayer({ id: "route-casing", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" },
+      paint: { "line-color": surface, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 6, 15, 12] } });
+    map.addLayer({ id: "route", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" },
+      paint: { "line-color": course, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 3, 15, 6] } });
+    map.addLayer({ id: "km-dots", type: "circle", source: "kms", paint: { "circle-radius": 4, "circle-color": surface, "circle-stroke-color": course, "circle-stroke-width": 2 } });
+    map.addLayer({ id: "km-labels", type: "symbol", source: "kms",
+      layout: { "text-field": ["get", "label"], "text-font": ["Noto Sans Bold"], "text-size": 11, "text-offset": [0, -1.1], "text-allow-overlap": true },
+      paint: { "text-color": course, "text-halo-color": surface, "text-halo-width": 2 } });
+  }
+  map.on("style.load", addLayers);
+  dark.addEventListener("change", function () { map.setStyle(dark.matches ? STYLE.dark : STYLE.light); });
+
+  // 起終點
+  function flag(text, lngLat) {
+    var el = document.createElement("div"); el.className = "flag"; el.textContent = text;
+    new maplibregl.Marker({ element: el, anchor: "bottom" }).setLngLat(lngLat).addTo(map);
+  }
+
+  // 景點
+  var markers = [];
+  function place(el) {
+    var box = document.getElementById("map").getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    var y = r.top - box.top, x = r.left - box.left;
+    el.classList.toggle("down", y < 90);
+    el.classList.toggle("up", y > box.height - 170);
+    el.classList.toggle("left", x > box.width - 120);
+    el.classList.toggle("right", x < 120);
+  }
+  function closeAll(except) { markers.forEach(function (m) { if (m !== except) m.classList.remove("open"); }); }
+  D.landmarks.forEach(function (lm, i) {
+    var featured = !!lm.icon;
+    var el = document.createElement("div");
+    el.className = featured ? "lm" : "dot";
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = featured ? "lm-btn" : "dot-btn";
+    btn.setAttribute("aria-label", lm.name + "，第 " + lm.km.toFixed(1) + " 公里");
+    if (featured) { btn.style.setProperty("--photo", "url('img/" + lm.id + ".jpg')"); btn.innerHTML = svg(lm.icon); }
+    var card = document.createElement("div");
+    card.className = "lm-card";
+    card.innerHTML = '<span class="km">' + (lm.km >= FULL - 0.01 ? "42.2" : lm.km.toFixed(1)) + " K</span><b></b><span></span>";
+    card.querySelector("b").textContent = (i + 1) + ". " + lm.name;
+    card.querySelector("span:last-child").textContent = lm.note;
+    el.appendChild(btn); el.appendChild(card);
+    el.addEventListener("mouseenter", function () { place(el); });
+    btn.addEventListener("focus", function () { place(el); });
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      place(el);
+      var open = !el.classList.contains("open");
+      closeAll(el);
+      el.classList.toggle("open", open);
+      setKm(lm.km);
+    });
+    markers.push(el);
+    new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat([lm.lon, lm.lat]).addTo(map);
+  });
+  map.on("click", function () { closeAll(); });
+  // 預先載入照片，避免第一次滑過時閃一下
+  D.landmarks.forEach(function (lm) { if (lm.icon) { var im = new Image(); im.src = "img/" + lm.id + ".jpg"; } });
+
+  // 目前位置
+  var runnerEl = document.createElement("div"); runnerEl.className = "runner";
+  var runner = new maplibregl.Marker({ element: runnerEl }).setLngLat(at(21.1)).addTo(map);
+  var slider = document.getElementById("km"), roKm = document.getElementById("ro-km"), roNear = document.getElementById("ro-near");
+  function setKm(km) {
+    runner.setLngLat(at(km));
+    roKm.firstChild.nodeValue = km >= FULL - 0.01 ? "42.2" : km.toFixed(1);
+    var best = 0, bd = 1e9;
+    D.landmarks.forEach(function (lm, i) { var d = Math.abs(lm.km - km); if (d < bd) { bd = d; best = i; } });
+    roNear.innerHTML = (bd < 0.6 ? "此處：" : "最近：") + "<b></b>";
+    roNear.querySelector("b").textContent = (best + 1) + ". " + D.landmarks[best].name;
+    if (Math.abs(parseFloat(slider.value) - km) > 0.05) slider.value = km;
+  }
+  slider.addEventListener("input", function () { setKm(parseFloat(slider.value)); });
+  setKm(21.1);
+
+  // 照片出處
+  var c = document.getElementById("credits");
+  var items = D.landmarks.filter(function (lm) { return lm.icon; }).map(function (lm) {
+    var x = D.credits[lm.id];
+    return '<li>' + lm.name + "：<a href=\"" + x.page + '" target="_blank" rel="noopener">' + x.artist.replace(/</g, "&lt;") + "</a>，" +
+      (x.licenseUrl ? '<a href="' + x.licenseUrl + '" target="_blank" rel="noopener">' + x.license + "</a>" : x.license) + "</li>";
+  }).join("");
+  c.innerHTML = "<span>底圖：OpenFreeMap，地圖資料 © OpenStreetMap contributors。路線資料：OpenStreetMap（ODbL）。</span><span>照片來自 Wikimedia Commons：</span><ul>" + items + "</ul>";
+})();
+</script>
+</body>
+</html>
