@@ -91,6 +91,16 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
 .dot.open .lm-card { opacity: 1; }
 @media (hover: hover) { .dot:hover { z-index: 4; } .dot:hover .lm-card { opacity: 1; } }
 
+/* 聚合點：靠近的景點合併成一個帶數字的圓，點一下放大分開 */
+.cluster {
+  width: 42px; height: 42px; border-radius: 50%; cursor: pointer; padding: 0;
+  display: grid; place-items: center; color: #fff; background: var(--course);
+  border: 3px solid var(--surface); box-shadow: 0 0 0 5px var(--course-soft), 0 2px 8px rgba(0,0,0,.3);
+  font: 900 18px/1 var(--f-display); transition: transform .15s ease;
+}
+.cluster:hover { transform: scale(1.08); }
+.cluster:focus-visible { outline: 3px solid var(--star); outline-offset: 3px; }
+
 /* 起終點、目前位置 */
 .flag { font: 700 11px/1 var(--f-body); color: #fff; background: var(--ink); padding: 4px 7px; border-radius: 3px; transform: translateY(-22px); white-space: nowrap; }
 .runner { width: 18px; height: 18px; border-radius: 50%; background: var(--course); border: 3px solid #fff; box-shadow: 0 0 0 6px var(--course-soft); }
@@ -178,13 +188,18 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
     attributionControl: { compact: true }
   });
   map.touchZoomRotate.disableRotation();
+  window.__map = map; // 原型除錯用
   // 最小縮放＝剛好看到整條路線再拉遠一點，避免縮到整個關東
   map.once("load", function () { map.setMinZoom(Math.max(0, map.getZoom() - 1)); });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
   // 景點與路線之間的連接線（景點位置 → 該公里數在路線上的點）
   var links = { type: "FeatureCollection", features: D.landmarks.filter(function (lm) { return lm.icon; }).map(function (lm) {
-    return { type: "Feature", geometry: { type: "LineString", coordinates: [[lm.lon, lm.lat], at(lm.km)] } };
+    return { type: "Feature", properties: { i: D.landmarks.indexOf(lm) }, geometry: { type: "LineString", coordinates: [[lm.lon, lm.lat], at(lm.km)] } };
+  }) };
+  // 景點點位（給聚合用）
+  var points = { type: "FeatureCollection", features: D.landmarks.map(function (lm, i) {
+    return { type: "Feature", properties: { i: i }, geometry: { type: "Point", coordinates: [lm.lon, lm.lat] } };
   }) };
   var kms = { type: "FeatureCollection", features: [5, 10, 15, 20, 25, 30, 35, 40].map(function (k) {
     return { type: "Feature", properties: { label: k + "K" }, geometry: { type: "Point", coordinates: at(k) } };
@@ -204,6 +219,8 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
     map.addSource("route", { type: "geojson", data: { type: "Feature", geometry: { type: "LineString", coordinates: line } } });
     map.addSource("links", { type: "geojson", data: links });
     map.addSource("kms", { type: "geojson", data: kms });
+    map.addSource("lm", { type: "geojson", data: points, cluster: true, clusterRadius: 44, clusterMaxZoom: 15 });
+    map.addLayer({ id: "lm-index", type: "circle", source: "lm", paint: { "circle-radius": 1, "circle-opacity": 0, "circle-stroke-opacity": 0 } });
     map.addLayer({ id: "links", type: "line", source: "links", paint: { "line-color": muted, "line-width": 1.2, "line-dasharray": [2, 2] } });
     map.addLayer({ id: "route-casing", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" },
       paint: { "line-color": surface, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 6, 15, 12] } });
@@ -224,7 +241,7 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
   }
 
   // 景點
-  var markers = [];
+  var markers = [], lmMarkers = [];
   function place(el) {
     var box = document.getElementById("map").getBoundingClientRect();
     var r = el.getBoundingClientRect();
@@ -261,9 +278,47 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
       setKm(lm.km);
     });
     markers.push(el);
-    new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat([lm.lon, lm.lat]).addTo(map);
+    lmMarkers.push(new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat([lm.lon, lm.lat]));
   });
   map.on("click", function () { closeAll(); });
+
+  // 依目前的聚合結果顯示景點或數字圓
+  var shown = {}, clusterMarkers = {};
+  function clusterEl(id, count, lngLat) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "cluster"; b.textContent = count;
+    b.setAttribute("aria-label", count + " 個景點，點一下放大");
+    b.addEventListener("click", function (e) {
+      e.stopPropagation();
+      map.getSource("lm").getClusterExpansionZoom(id).then(function (z) {
+        map.easeTo({ center: lngLat, zoom: Math.min(z + 0.3, 17) });
+      });
+    });
+    return new maplibregl.Marker({ element: b, anchor: "center" }).setLngLat(lngLat);
+  }
+  function syncClusters() {
+    if (!map.getSource("lm") || !map.isSourceLoaded("lm")) return;
+    var feats = map.querySourceFeatures("lm");
+    var wantLm = {}, wantCl = {};
+    feats.forEach(function (f) {
+      var p = f.properties;
+      if (p.cluster) {
+        if (!wantCl[p.cluster_id]) wantCl[p.cluster_id] = { count: p.point_count, at: f.geometry.coordinates };
+      } else wantLm[p.i] = true;
+    });
+    lmMarkers.forEach(function (m, i) {
+      if (wantLm[i] && !shown[i]) { m.addTo(map); shown[i] = true; }
+      else if (!wantLm[i] && shown[i]) { m.remove(); markers[i].classList.remove("open"); shown[i] = false; }
+    });
+    Object.keys(clusterMarkers).forEach(function (id) { if (!wantCl[id]) { clusterMarkers[id].remove(); delete clusterMarkers[id]; } });
+    Object.keys(wantCl).forEach(function (id) {
+      if (!clusterMarkers[id]) clusterMarkers[id] = clusterEl(Number(id), wantCl[id].count, wantCl[id].at).addTo(map);
+    });
+    if (map.getLayer("links")) map.setFilter("links", ["in", ["get", "i"], ["literal", Object.keys(wantLm).map(Number)]]);
+  }
+  map.on("moveend", syncClusters);
+  map.on("idle", syncClusters);
+  map.on("sourcedata", function (e) { if (e.sourceId === "lm" && e.isSourceLoaded) syncClusters(); });
   // 預先載入照片，避免第一次滑過時閃一下
   D.landmarks.forEach(function (lm) { if (lm.icon) { var im = new Image(); im.src = "img/" + lm.id + ".jpg"; } });
 
