@@ -159,6 +159,12 @@ function recTile(label, x) {
   return `<div class="rec"><span class="rec-l">${esc(label)}</span><span class="rec-t">${esc(x.time)}</span><span class="rec-n">${esc(x.name)} · ${x.year}</span></div>`;
 }
 
+function photoCredits(lang, r) {
+  const items = r.map.map((m, i) => m.img ? `<li>${i + 1}. ${esc(m.name)}：<a href="${esc(m.credit.page)}" target="_blank" rel="noopener">${esc(m.credit.artist)}</a>，` +
+    (m.credit.licenseUrl ? `<a href="${esc(m.credit.licenseUrl)}" target="_blank" rel="noopener">${esc(m.credit.license)}</a>` : esc(m.credit.license)) + `</li>` : "").join("");
+  return `<details class="photo-credits"><summary>${esc(t(lang, "photoCredits"))}</summary><ul>${items}</ul></details>`;
+}
+
 function raceMain(ctx, r) {
   const { lang, races } = ctx;
   const st = Geo.stats(r);
@@ -197,12 +203,17 @@ function raceMain(ctx, r) {
 
     `<section class="block b-route" id="b-route"><h2>${head2(lang, "hCourse", "sCourse")}</h2>` +
     `<div class="route-pane"><div class="route-col"><figure class="map-fig" id="map-fig">${mapSvg(r, lang, P, st0)}` +
-    `<figcaption>${esc(t(lang, "mapCaption", { kind: r.source.kind === "sketch" ? t(lang, "mapSketch") : kindLabel }))}</figcaption></figure></div>` +
+    (r.map ? `<div class="live-map" id="live-map"></div>` : "") +
+    `<figcaption>${esc(r.map ? t(lang, "mapLiveCaption") : t(lang, "mapCaption", { kind: r.source.kind === "sketch" ? t(lang, "mapSketch") : kindLabel }))}</figcaption>` +
+    (r.map ? photoCredits(lang, r) : "") + `</figure></div>` +
     `<div class="route-col">` +
-    `<figure class="prof-fig" id="prof-fig">${profileSvg(r, lang, S, st0)}<figcaption>${esc(t(lang, "profCaption"))}</figcaption></figure>` +
+    // 讀數與滑桿放在地圖和高度圖之間；滑桿和高度圖的公里刻度對齊
+    `<div class="scrub">` +
     `<label class="readout" for="km-slider"><span class="big" id="ro-km">${Geo.fmtKm(st0.km)}<small>km</small></span><span class="big" id="ro-m">${Math.round(st0.ele)}<small>m</small></span>` +
     `<span class="near" id="ro-near">${esc(t(lang, st0.at ? "here" : "nearest"))}<b>${st0.near + 1}. ${esc(near.name)}</b></span></label>` +
     `<input class="slider" id="km-slider" type="range" min="0" max="${FULL}" step="0.1" value="21.1" aria-label="${esc(t(lang, "sliderAria"))}">` +
+    `</div>` +
+    `<figure class="prof-fig" id="prof-fig">${profileSvg(r, lang, S, st0)}<figcaption>${esc(t(lang, "profCaption"))}</figcaption></figure>` +
     `<div class="stat-row"><span>${esc(t(lang, "stStart"))} <b>${st.start} m</b></span><span>${esc(t(lang, "stHigh"))} <b>${st.hi} m</b></span><span>${esc(t(lang, "stLow"))} <b>${st.lo} m</b></span>` +
     `<span>${esc(t(lang, "stGain"))} <b>≈${st.gain} m</b></span><span>${esc(t(lang, "stLoss"))} <b>≈${st.loss} m</b></span></div>` +
     `<p class="note">${esc(r.profileNote)}</p>` +

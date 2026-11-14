@@ -1,0 +1,86 @@
+{
+ "tocho": {
+  "file": "File:Tokyo Metropolitan Government Building 2022-03-02.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Metropolitan_Government_Building_2022-03-02.jpg",
+  "artist": "Asanagi",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+ },
+ "nihonbashi": {
+  "file": "File:Nihonbashi Kirin Statue.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Nihonbashi_Kirin_Statue.jpg",
+  "artist": "Phlizz",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "kaminarimon": {
+  "file": "File:JP-tokio-sensoji-kaminarimon-gate.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:JP-tokio-sensoji-kaminarimon-gate.jpg",
+  "artist": "Bgabel",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "ginza": {
+  "file": "File:Ginza Wako 20241021.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ginza_Wako_20241021.jpg",
+  "artist": "Supanut Arunoprayote",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+ },
+ "tokyotower": {
+  "file": "File:Tokyo Tower 2024.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower_2024.jpg",
+  "artist": "Qian2007",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "tokyostation": {
+  "file": "File:Tokyo Station (Marunouchi Building).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Station_(Marunouchi_Building).jpg",
+  "artist": "Alexandr3126",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+ },
+ "kuramae": {
+  "file": "File:Kuramae Bridge 20050520.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Kuramae_Bridge_20050520.jpg",
+  "artist": "Smanabu",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/"
+ },
+ "hibiya": {
+  "file": "File:皇居の堀 Imperial Palace moat - panoramio.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:%E7%9A%87%E5%B1%85%E3%81%AE%E5%A0%80_Imperial_Palace_moat_-_panoramio.jpg",
+  "artist": "Bohao Zhao",
+  "license": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+ },
+ "iidabashi": {
+  "file": "File:Kagurazaka street 2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Kagurazaka_street_2.jpg",
+  "artist": "Kabacchi",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "ueno": {
+  "file": "File:Ameyoko June 2022.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ameyoko_June_2022.jpg",
+  "artist": "Syced",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+ },
+ "ryogoku": {
+  "file": "File:Ryogoku Great Sumo Hall.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ryogoku_Great_Sumo_Hall.jpg",
+  "artist": "Steve Cadman",
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+ },
+ "monzen": {
+  "file": "File:Tomioka Hachimangu in Monzen-Nakacho.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tomioka_Hachimangu_in_Monzen-Nakacho.jpg",
+  "artist": "Manish Prabhune",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+ }
+}

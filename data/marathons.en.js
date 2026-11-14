@@ -29,16 +29,17 @@ window.MAJORS_I18N.en = {
       profileNote: "Based on the Geospatial Information Authority of Japan’s 1 m lidar data: the start in Shinjuku sits at about 35 m and the first 5 km run downhill to around 10 m. After that the course stays almost entirely below 10 m in the low-lying shitamachi districts, with small rises only at bridges.",
       landmarks: [
         ["Tokyo Metropolitan Government Building", "The start, in front of the twin towers with Shinjuku’s skyscrapers behind."],
-        ["Iidabashi & Kagurazaka", "Along Sotobori-dori, where the opening downhill levels out."],
+        ["Iidabashi & Kagurazaka", "Along Sotobori-dori, where the opening downhill levels out, next to the cobbled lanes of Kagurazaka."],
         ["Ueno-hirokoji", "The turnaround at the north end of Chuo-dori, near Ueno Park and Ameyoko market."],
         ["Nihonbashi", "The starting point of the Edo-period highways, guarded by bronze kirin statues."],
         ["Kaminarimon, Asakusa", "The giant red lantern and Nakamise street, with Tokyo Skytree in view. The course turns here."],
+        ["Kuramae Bridge (Sumida River)", "A yellow arch bridge over the Sumida, the course’s only major river crossing. Runners cross it twice: around 19.9 km on the way out and 28.6 km on the way back."],
         ["Ryogoku", "Home of the sumo arena Kokugikan. Halfway falls on Kiyosumi-dori."],
         ["Monzen-nakacho & Tomioka Hachimangu", "A short out-and-back on Eitai-dori through the most old-Tokyo stretch."],
         ["Ginza 4-chome", "The Wako clock tower, with deep crowds lining the shopping street."],
         ["Tamachi turnaround", "The southernmost point, on Daiichi Keihin, before the course heads north on Hibiya-dori."],
         ["Zojoji & Tokyo Tower", "The red-and-white tower and the old temple in one view."],
-        ["Hibiya & Imperial Palace Outer Garden", "Along the moat into the final push."],
+        ["Hibiya & Imperial Palace Outer Garden", "Along the palace moat into the final push, with Nijubashi in view from the Outer Garden."],
         ["Tokyo Station", "The finish on Gyoko-dori, facing the red-brick Marunouchi station building."]
       ],
       events: [
