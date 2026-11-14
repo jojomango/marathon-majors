@@ -207,10 +207,13 @@ function raceMain(ctx, r) {
     `<figcaption>${esc(r.map ? t(lang, "mapLiveCaption") : t(lang, "mapCaption", { kind: r.source.kind === "sketch" ? t(lang, "mapSketch") : kindLabel }))}</figcaption>` +
     (r.map ? photoCredits(lang, r) : "") + `</figure></div>` +
     `<div class="route-col">` +
-    `<figure class="prof-fig" id="prof-fig">${profileSvg(r, lang, S, st0)}<figcaption>${esc(t(lang, "profCaption"))}</figcaption></figure>` +
+    // 讀數與滑桿放在地圖和高度圖之間；滑桿和高度圖的公里刻度對齊
+    `<div class="scrub">` +
     `<label class="readout" for="km-slider"><span class="big" id="ro-km">${Geo.fmtKm(st0.km)}<small>km</small></span><span class="big" id="ro-m">${Math.round(st0.ele)}<small>m</small></span>` +
     `<span class="near" id="ro-near">${esc(t(lang, st0.at ? "here" : "nearest"))}<b>${st0.near + 1}. ${esc(near.name)}</b></span></label>` +
     `<input class="slider" id="km-slider" type="range" min="0" max="${FULL}" step="0.1" value="21.1" aria-label="${esc(t(lang, "sliderAria"))}">` +
+    `</div>` +
+    `<figure class="prof-fig" id="prof-fig">${profileSvg(r, lang, S, st0)}<figcaption>${esc(t(lang, "profCaption"))}</figcaption></figure>` +
     `<div class="stat-row"><span>${esc(t(lang, "stStart"))} <b>${st.start} m</b></span><span>${esc(t(lang, "stHigh"))} <b>${st.hi} m</b></span><span>${esc(t(lang, "stLow"))} <b>${st.lo} m</b></span>` +
     `<span>${esc(t(lang, "stGain"))} <b>≈${st.gain} m</b></span><span>${esc(t(lang, "stLoss"))} <b>≈${st.loss} m</b></span></div>` +
     `<p class="note">${esc(r.profileNote)}</p>` +

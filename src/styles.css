@@ -194,6 +194,14 @@ figcaption { font-size: 12px; color: var(--muted); padding: 6px 10px 8px; }
 .readout .near { color: var(--muted); min-width: 0; }
 .readout .near b { color: var(--ink); font-weight: 500; }
 .slider { width: 100%; accent-color: var(--course); margin: 0; }
+/* 讀數與滑桿：位於地圖和高度圖之間。
+   滑桿兩端對齊高度圖的 0 與 42.2 km（高度圖左側 36/440、右側 14/440 是刻度邊距，
+   再扣掉滑桿圓點半徑約 8px，讓圓點中心正好落在高度圖游標上方） */
+.scrub { display: grid; gap: 6px; padding-inline: 5px; }
+.scrub .slider {
+  display: block; margin-left: calc(8.1818% - 8px); margin-right: calc(3.1818% - 8px);
+  width: calc(88.6364% + 16px);
+}
 .note { font-size: 13px; color: var(--muted); }
 .src { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; font-size: 12px; color: var(--muted); line-height: 1.5; }
 .src-tag { font-weight: 700; letter-spacing: .04em; padding: 1px 6px; border-radius: 3px; border: 1px solid currentColor; }
