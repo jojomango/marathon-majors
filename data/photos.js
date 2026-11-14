@@ -661,5 +661,131 @@ window.MAP_LANDMARKS = {
     "page": "https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_-_Dec_2008.jpg"
    }
   }
+ },
+ "berlin": {
+  "siegessaeule": {
+   "lat": 52.5145,
+   "lon": 13.3501,
+   "icon": "monument",
+   "img": "siegessaeule.jpg",
+   "credit": {
+    "artist": "Sami Mlouhi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Berliner_Siegess%C3%A4ule_-_Berlin_Victory_Column_photo8.jpg"
+   }
+  },
+  "reichstag": {
+   "lat": 52.5186,
+   "lon": 13.3762,
+   "icon": "palace",
+   "img": "reichstag.jpg",
+   "credit": {
+    "artist": "Jörg Braukmann",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Reichstagsgeb%C3%A4ude_von_Westen.jpg"
+   }
+  },
+  "alexanderplatz": {
+   "lat": 52.5208,
+   "lon": 13.4094,
+   "icon": "tower",
+   "img": "alexanderplatz.jpg",
+   "credit": {
+    "artist": "Tobi85",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Crosses_of_Berliner_Fernsehturm_and_Berliner_Dom.jpg"
+   }
+  },
+  "kreuzberg": {
+   "lat": 52.4992,
+   "lon": 13.4179,
+   "icon": "music",
+   "img": "kreuzberg.jpg",
+   "credit": {
+    "artist": "Unmarcheprovencal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Berlin_Marathon_2022_km_16.jpg"
+   }
+  },
+  "schoeneberg": {
+   "lat": 52.4851,
+   "lon": 13.3443,
+   "icon": "building",
+   "img": "schoeneberg.jpg",
+   "credit": {
+    "artist": "A.Savin",
+    "license": "FAL",
+    "licenseUrl": "http://artlibre.org/licence/lal/en",
+    "page": "https://commons.wikimedia.org/wiki/File:Berlin_Rathaus_Sch%C3%B6neberg_asv2021-06.jpg"
+   }
+  },
+  "wildereber": {
+   "lat": 52.4676,
+   "lon": 13.3063,
+   "icon": "monument",
+   "img": "wildereber.jpg",
+   "credit": {
+    "artist": "Colin Smith",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Platz_am_Wilden_Eber_-_geo.hlipp.de_-_31011.jpg"
+   }
+  },
+  "kudamm": {
+   "lat": 52.5049,
+   "lon": 13.335,
+   "icon": "church",
+   "img": "kudamm.jpg",
+   "credit": {
+    "artist": "Dguendel",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Berlin-Charlottenburg,_the_Kaiser_Wilhelm_Memorial_Church.JPG"
+   }
+  },
+  "potsdamer": {
+   "lat": 52.5096,
+   "lon": 13.376,
+   "icon": "building",
+   "img": "potsdamer.jpg",
+   "credit": {
+    "artist": "Tuxyso",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Potsdamer-Platz-Hochhaeuser-2015.jpg"
+   }
+  },
+  "gendarmenmarkt": {
+   "lat": 52.5137,
+   "lon": 13.3927,
+   "icon": "church",
+   "img": "gendarmenmarkt.jpg",
+   "credit": {
+    "artist": "Jorge Lascar",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Gendarmenmarkt_Berlin_2009.JPG"
+   }
+  },
+  "brandenburg": {
+   "lat": 52.5163,
+   "lon": 13.3777,
+   "icon": "gate",
+   "img": "brandenburg.jpg",
+   "credit": {
+    "artist": "Amy EWen",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Berlin_Marathon_2011.JPG"
+   }
+  },
+  "finish": {
+   "lat": 52.5158,
+   "lon": 13.3708
+  }
  }
 };
