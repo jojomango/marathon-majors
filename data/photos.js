@@ -315,5 +315,123 @@ window.MAP_LANDMARKS = {
     "page": "https://commons.wikimedia.org/wiki/File:Tavern_on_the_Green_cloudy_jeh.JPG"
    }
   }
+ },
+ "boston": {
+  "hopkinton": {
+   "lat": 42.2298,
+   "lon": -71.5182,
+   "icon": "flag",
+   "img": "hopkinton.jpg",
+   "credit": {
+    "artist": "John Phelan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Boston_Marathon_Starting_Line,_Hopkinton_MA.jpg"
+   }
+  },
+  "framingham": {
+   "lat": 42.2775,
+   "lon": -71.4167,
+   "icon": "station",
+   "img": "framingham.jpg",
+   "credit": {
+    "artist": "Marc N. Belanger",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Framingham_Railroad_Station.jpg"
+   }
+  },
+  "wellesley": {
+   "lat": 42.2962,
+   "lon": -71.3047,
+   "icon": "megaphone",
+   "img": "wellesley.jpg",
+   "credit": {
+    "artist": "Ericshawwhite",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Wellesley_College.jpg"
+   }
+  },
+  "lowerfalls": {
+   "lat": 42.3268,
+   "lon": -71.255,
+   "icon": "river",
+   "img": "lowerfalls.jpg",
+   "credit": {
+    "artist": "John Phelan",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Charles_River,_Newton_Lower_Falls_MA.jpg"
+   }
+  },
+  "firehouse": {
+   "lat": 42.341,
+   "lon": -71.2382
+  },
+  "heartbreak": {
+   "lat": 42.3371,
+   "lon": -71.173,
+   "icon": "slope",
+   "img": "heartbreak.jpg",
+   "credit": {
+    "artist": "Rob Larsen",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Yuki_Kawauchi_Boston_Marathon_Winner_on_Heartbreak_Hill_(41467754532).jpg"
+   }
+  },
+  "bostoncollege": {
+   "lat": 42.3357,
+   "lon": -71.17,
+   "icon": "building",
+   "img": "bostoncollege.jpg",
+   "credit": {
+    "artist": "Amandajunyue",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Gasson_Hall_in_Boston_College.jpg"
+   }
+  },
+  "coolidge": {
+   "lat": 42.342,
+   "lon": -71.1215,
+   "icon": "building",
+   "img": "coolidge.jpg",
+   "credit": {
+    "artist": "Ddogas",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Intersection_of_Harvard_and_Beacon_Streets,_Coolidge_Corner,_Brookline,_MA.JPG"
+   }
+  },
+  "citgo": {
+   "lat": 42.3489,
+   "lon": -71.0966,
+   "icon": "sign",
+   "img": "citgo.jpg",
+   "credit": {
+    "artist": "Beyond My Ken",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2017_Citgo_sign_Kenmore_Square_Boston.jpg"
+   }
+  },
+  "hereford": {
+   "lat": 42.3483,
+   "lon": -71.087
+  },
+  "copley": {
+   "lat": 42.3499,
+   "lon": -71.0781,
+   "icon": "flag",
+   "img": "copley.jpg",
+   "credit": {
+    "artist": "MáVëRíC",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Boston_Marathon_Finish_line_(41017489080).jpg"
+   }
+  }
  }
 };

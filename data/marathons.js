@@ -98,17 +98,17 @@ window.MAJORS = [
     ],
     profileNote: "起點霍普金頓約 137 公尺、終點約 3 公尺，整體淨下降超過 130 公尺；前段長下坡很傷股四頭肌，25–34 公里的牛頓丘陵連續爬升，最後一個就是心碎坡。",
     landmarks: [
-      { km: 0, name: "霍普金頓起點", note: "小鎮綠地旁起跑，一開始就是陡下坡。" },
-      { km: 10, name: "弗雷明漢", note: "沿 135 號公路經過老火車站。" },
-      { km: 20, name: "衛斯理學院「尖叫隧道」", note: "女校學生在路邊尖叫加油，聲音隔幾百公尺就聽得到。" },
-      { km: 25, name: "牛頓下瀑布", note: "跨越查爾斯河，丘陵段從這裡開始。" },
-      { km: 28, name: "牛頓消防站右轉", note: "轉上聯邦大道，迎接連續上坡。" },
-      { km: 33, name: "心碎坡 Heartbreak Hill", note: "長約 800 公尺的最後一個坡，名稱來自 1936 年的比賽。" },
-      { km: 34, name: "波士頓學院", note: "坡頂後大學生的加油區。" },
-      { km: 38.5, name: "庫利奇角", note: "布魯克萊恩的熱鬧路口。" },
-      { km: 40.5, name: "肯莫爾廣場 Citgo 招牌", note: "芬威球場旁，看到招牌代表只剩約一英里。" },
-      { km: 41.8, name: "右轉 Hereford、左轉 Boylston", note: "跑者口耳相傳的最後兩個轉彎。" },
-      { km: 42.195, name: "柯普利廣場", note: "波士頓公共圖書館前的終點。" }
+      { id: "hopkinton", km: 0, name: "霍普金頓起點", note: "小鎮綠地旁起跑，一開始就是陡下坡。" },
+      { id: "framingham", km: 10, name: "弗雷明漢", note: "沿 135 號公路經過老火車站。" },
+      { id: "wellesley", km: 20, name: "衛斯理學院「尖叫隧道」", note: "女校學生在路邊尖叫加油，聲音隔幾百公尺就聽得到。" },
+      { id: "lowerfalls", km: 25, name: "牛頓下瀑布", note: "跨越查爾斯河，丘陵段從這裡開始。" },
+      { id: "firehouse", km: 28, name: "牛頓消防站右轉", note: "轉上聯邦大道，迎接連續上坡。" },
+      { id: "heartbreak", km: 33, name: "心碎坡 Heartbreak Hill", note: "長約 800 公尺的最後一個坡，名稱來自 1936 年的比賽。" },
+      { id: "bostoncollege", km: 34, name: "波士頓學院", note: "坡頂後大學生的加油區。" },
+      { id: "coolidge", km: 38.5, name: "庫利奇角", note: "布魯克萊恩的熱鬧路口。" },
+      { id: "citgo", km: 40.5, name: "肯莫爾廣場 Citgo 招牌", note: "芬威球場旁，看到招牌代表只剩約一英里。" },
+      { id: "hereford", km: 41.8, name: "右轉 Hereford、左轉 Boylston", note: "跑者口耳相傳的最後兩個轉彎。" },
+      { id: "copley", km: 42.195, name: "柯普利廣場", note: "波士頓公共圖書館前的終點。" }
     ],
     records: {
       men: { time: "2:01:52", name: "John Korir（肯亞）", year: 2026 },
