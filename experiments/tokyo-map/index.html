@@ -80,14 +80,17 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
 .lm.right .lm-card { left: -70px; transform: none; }
 .lm-btn:focus-visible { outline: 3px solid var(--star); outline-offset: 2px; }
 
-/* 沒有照片的次要景點：小圓點 */
+/* 沒有照片的次要景點：帶編號的圓點（和公里標記區隔） */
 .dot { position: relative; width: 0; height: 0; }
 .dot-btn {
   position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
-  width: 14px; height: 14px; border-radius: 50%; padding: 0; cursor: pointer;
-  border: 2px solid var(--surface); background: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.3);
+  width: 24px; height: 24px; border-radius: 50%; padding: 0; cursor: pointer;
+  border: 2px solid var(--surface); background: var(--ink); color: var(--bg);
+  box-shadow: 0 1px 5px rgba(0,0,0,.35);
+  font: 700 11px/1 var(--f-mono); display: grid; place-items: center;
 }
-.dot .lm-card { top: 14px; }
+.dot-btn:focus-visible { outline: 3px solid var(--star); outline-offset: 2px; }
+.dot .lm-card { top: 18px; }
 .dot.open .lm-card { opacity: 1; }
 @media (hover: hover) { .dot:hover { z-index: 4; } .dot:hover .lm-card { opacity: 1; } }
 
@@ -261,6 +264,7 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
     btn.className = featured ? "lm-btn" : "dot-btn";
     btn.setAttribute("aria-label", lm.name + "，第 " + lm.km.toFixed(1) + " 公里");
     if (featured) { btn.style.setProperty("--photo", "url('img/" + lm.id + ".jpg')"); btn.innerHTML = svg(lm.icon); }
+    else btn.textContent = i + 1;
     var card = document.createElement("div");
     card.className = "lm-card";
     card.innerHTML = '<span class="km">' + (lm.km >= FULL - 0.01 ? "42.2" : lm.km.toFixed(1)) + " K</span><b></b><span></span>";
