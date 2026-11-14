@@ -46,6 +46,31 @@
       var q = window.Geo.routeAt(r, Math.max(0, Math.min(FULL, km)));
       return [q[1], q[0]];
     }
+    // 往返共用同一條路的路段：拆成獨立線段，畫線時各自往行進方向的右側偏移，兩趟才不會疊在一起
+    function shared() {
+      var R = r.route, kx = 111320 * Math.cos(R[0][0] * Math.PI / 180), ky = 110540;
+      function near(p, a, b) {
+        var ax = (a[1] - p[1]) * kx, ay = (a[0] - p[0]) * ky, bx = (b[1] - p[1]) * kx, by = (b[0] - p[0]) * ky;
+        var dx = bx - ax, dy = by - ay, t = Math.max(0, Math.min(1, -(ax * dx + ay * dy) / (dx * dx + dy * dy || 1)));
+        return Math.hypot(ax + t * dx, ay + t * dy) < 25;
+      }
+      var on = R.map(function (p) {
+        for (var j = 0; j < R.length - 1; j++) {
+          if (Math.abs(R[j][2] - p[2]) > 0.5 && Math.abs(R[j + 1][2] - p[2]) > 0.5 && near(p, R[j], R[j + 1])) return true;
+        }
+        return false;
+      });
+      var feats = [], cur = null;
+      for (var i = 0; i < line.length - 1; i++) {
+        var o = on[i] && on[i + 1] ? 1 : 0;
+        if (!cur || cur.properties.o !== o) {
+          cur = { type: "Feature", properties: { o: o }, geometry: { type: "LineString", coordinates: [line[i]] } };
+          feats.push(cur);
+        }
+        cur.geometry.coordinates.push(line[i + 1]);
+      }
+      return { type: "FeatureCollection", features: feats };
+    }
     var bounds = line.reduce(function (b, p) { return b.extend(p); }, new ml.LngLatBounds(line[0], line[0]));
     r.landmarks.forEach(function (lm) { if (lm.lon != null) bounds.extend([lm.lon, lm.lat]); });
     var sw = bounds.getSouthWest(), ne = bounds.getNorthEast();
@@ -87,15 +112,16 @@
         if (/shield/i.test(l.id) || (tf && JSON.stringify(tf).indexOf('"ref"') >= 0)) map.setLayoutProperty(l.id, "visibility", "none");
       });
       var box = opts.container, course = css(box, "--course"), surface = css(box, "--surface"), muted = css(box, "--muted");
-      map.addSource("route", { type: "geojson", data: { type: "Feature", geometry: { type: "LineString", coordinates: line } } });
+      map.addSource("route", { type: "geojson", data: shared() });
+      var offset = ["interpolate", ["linear"], ["zoom"], 11, ["*", 2, ["get", "o"]], 15, ["*", 4.5, ["get", "o"]]];
       map.addSource("links", { type: "geojson", data: links });
       map.addSource("kms", { type: "geojson", data: kms });
       map.addSource("lm", { type: "geojson", data: points, cluster: true, clusterRadius: 44, clusterMaxZoom: 15 });
       map.addLayer({ id: "links", type: "line", source: "links", paint: { "line-color": muted, "line-width": 1.2, "line-dasharray": [2, 2] } });
       map.addLayer({ id: "route-casing", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" },
-        paint: { "line-color": surface, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 6, 15, 12] } });
+        paint: { "line-color": surface, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 6, 15, 12], "line-offset": offset } });
       map.addLayer({ id: "route", type: "line", source: "route", layout: { "line-join": "round", "line-cap": "round" },
-        paint: { "line-color": course, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 3, 15, 6] } });
+        paint: { "line-color": course, "line-width": ["interpolate", ["linear"], ["zoom"], 11, 3, 15, 6], "line-offset": offset } });
       map.addLayer({ id: "km-dots", type: "circle", source: "kms", paint: { "circle-radius": 4, "circle-color": surface, "circle-stroke-color": course, "circle-stroke-width": 2 } });
       map.addLayer({ id: "km-labels", type: "symbol", source: "kms",
         layout: { "text-field": ["get", "label"], "text-font": ["Noto Sans Bold"], "text-size": 11, "text-offset": [0, -1.1], "text-allow-overlap": true },
