@@ -93,7 +93,8 @@
     museum: '<path d="M3 21h18M5 17h14v4H5zM6 17c0-3 1-4 1-6h10c0 2 1 3 1 6M5 11h14M6.5 11c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/>',
     park: '<path d="M12 21v-6M12 15c-4 0-6-2-6-5 0-2.5 1.5-4 3-4.5C9.5 3.5 10.6 3 12 3s2.5.5 3 2.5c1.5.5 3 2 3 4.5 0 3-2 5-6 5zM9 21h6"/>',
     monument: '<path d="M10 21V7l2-4 2 4v14M8 21h8M10 10h4M7 21v-2h10v2"/>',
-    flag: '<path d="M5 21V3M5 4h13l-3 4 3 4H5"/>'
+    flag: '<path d="M5 21V3M5 4h13l-3 4 3 4H5"/>',
+    megaphone: '<path d="M3 10v4h3l9 5V5L6 10zM6 14l1.5 5h2.5l-1-4.5M18 9.5a3.5 3.5 0 0 1 0 5"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || ICONS.building) + "</svg>";

@@ -170,8 +170,16 @@ window.MAP_LANDMARKS = {
    }
   },
   "bayridge": {
-   "lat": 40.6368,
-   "lon": -74.0227
+   "lat": 40.6349,
+   "lon": -74.0235,
+   "icon": "station",
+   "img": "bayridge.jpg",
+   "credit": {
+    "artist": "GK tramrunner RU",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BMT_Fourth_Avenue_Line_-_Bay_Ridge_Avenue_Station_Entrance_(street_view).jpg"
+   }
   },
   "fourthave": {
    "lat": 40.6768,
@@ -187,7 +195,15 @@ window.MAP_LANDMARKS = {
   },
   "williamsburg": {
    "lat": 40.7071,
-   "lon": -73.9644
+   "lon": -73.9644,
+   "icon": "building",
+   "img": "williamsburg.jpg",
+   "credit": {
+    "artist": "LWYang",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bedford_Av_and_N_7_St_Williamsburg.jpg"
+   }
   },
   "pulaski": {
    "lat": 40.7385,
@@ -215,7 +231,15 @@ window.MAP_LANDMARKS = {
   },
   "firstave": {
    "lat": 40.7676,
-   "lon": -73.9562
+   "lon": -73.9562,
+   "icon": "megaphone",
+   "img": "firstave.jpg",
+   "credit": {
+    "artist": "Upjav",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:View_of_2024_New_York_City_Marathon_from_81st_St._and_1st_Ave._in_Manhattan.jpg"
+   }
   },
   "willis": {
    "lat": 40.8027,
