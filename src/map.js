@@ -26,7 +26,10 @@
     flag: '<path d="M5 21V3M5 4h13l-3 4 3 4H5"/>',
     megaphone: '<path d="M3 10v4h3l9 5V5L6 10zM6 14l1.5 5h2.5l-1-4.5M18 9.5a3.5 3.5 0 0 1 0 5"/>',
     sign: '<path d="M4 4h16v10H4zM8 14v7M16 14v7M8 11l4-5 4 5z"/>',
-    ship: '<path d="M3 16h18l-2 4H5zM7 16V5M12 16V3M17 16V5M5 8h4M9.5 6h5M15 8h4M5 12h4M9.5 11h5M15 12h4"/>'
+    ship: '<path d="M3 16h18l-2 4H5zM7 16V5M12 16V3M17 16V5M5 8h4M9.5 6h5M15 8h4M5 12h4M9.5 11h5M15 12h4"/>',
+    church: '<path d="M12 2v4M10 4h4M8 21V11l4-5 4 5v10M3 21v-7l5-3M21 21v-7l-5-3M2 21h20M11 21v-4h2v4"/>',
+    stadium: '<ellipse cx="12" cy="9" rx="9" ry="4"/><path d="M3 9v6c0 2.2 4 4 9 4s9-1.8 9-4V9M7 12.5v4.5M12 13v6M17 12.5v4.5"/>',
+    view: '<circle cx="7" cy="15" r="4"/><circle cx="17" cy="15" r="4"/><path d="M11 15h2M5 11.5 7 5h3l1 6M19 11.5 17 5h-3l-1 6"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || ICONS.building) + "</svg>";
@@ -46,12 +49,13 @@
     var bounds = line.reduce(function (b, p) { return b.extend(p); }, new ml.LngLatBounds(line[0], line[0]));
     r.landmarks.forEach(function (lm) { if (lm.lon != null) bounds.extend([lm.lon, lm.lat]); });
     var sw = bounds.getSouthWest(), ne = bounds.getNorthEast();
-    var padX = (ne.lng - sw.lng) * 1.2, padY = (ne.lat - sw.lat) * 1.6;
+    // 可拖曳範圍依路線的長邊留白，窄長的路線（如雪梨）才不會因為範圍太窄而被迫放大
+    var span = Math.max(ne.lng - sw.lng, ne.lat - sw.lat), padX = span * 1.5, padY = span * 1.5;
 
     var map = new ml.Map({
       container: opts.container,
       style: STYLE,
-      bounds: bounds, fitBoundsOptions: { padding: 36 },
+      bounds: bounds, fitBoundsOptions: { padding: 48 },
       maxBounds: [[sw.lng - padX, sw.lat - padY], [ne.lng + padX, ne.lat + padY]],
       dragRotate: false, pitchWithRotate: false, touchPitch: false,
       cooperativeGestures: true,
@@ -191,7 +195,7 @@
       refit: function () {
         map.resize();
         map.setMinZoom(0);
-        map.fitBounds(bounds, { padding: 36, animate: false });
+        map.fitBounds(bounds, { padding: 48, animate: false });
         map.setMinZoom(Math.max(0, map.getZoom() - 1));
       },
       onReady: function (fn) { if (map.loaded()) fn(); else map.once("load", fn); },

@@ -547,5 +547,119 @@ window.MAP_LANDMARKS = {
     "page": "https://commons.wikimedia.org/wiki/File:The_mall_london.jpg"
    }
   }
+ },
+ "sydney": {
+  "northsydney": {
+   "lat": -33.8333,
+   "lon": 151.208,
+   "icon": "building",
+   "img": "northsydney.jpg",
+   "credit": {
+    "artist": "MDRX",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:North_Sydney_Skyline_2020.jpg"
+   }
+  },
+  "harbourbridge": {
+   "lat": -33.8523,
+   "lon": 151.2108,
+   "icon": "bridge",
+   "img": "harbourbridge.jpg",
+   "credit": {
+    "artist": "Bernard Gagnon",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Sydney_Harbour_Bridge_01.jpg"
+   }
+  },
+  "barangaroo": {
+   "lat": -33.858,
+   "lon": 151.2025,
+   "icon": "park",
+   "img": "barangaroo.jpg",
+   "credit": {
+    "artist": "Rob Deutscher",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Sydney_Skyline_from_Barangaroo_Reserve.jpg"
+   }
+  },
+  "pyrmont": {
+   "lat": -33.8706,
+   "lon": 151.199,
+   "icon": "bridge",
+   "img": "pyrmont.jpg",
+   "credit": {
+    "artist": "Dietmar Rabich",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Sydney_(AU),_Darling_Harbour,_Pyrmont_Bridge_--_2019_--_2088.jpg"
+   }
+  },
+  "hydepark": {
+   "lat": -33.8714,
+   "lon": 151.2131,
+   "icon": "church",
+   "img": "hydepark.jpg",
+   "credit": {
+    "artist": "Dicklyon",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Archibald_Memorial_Fountain_and_St_Mary%27s_Cathedral,_Hyde_Park_Sydney.jpg"
+   }
+  },
+  "moorepark": {
+   "lat": -33.8915,
+   "lon": 151.2247,
+   "icon": "stadium",
+   "img": "moorepark.jpg",
+   "credit": {
+    "artist": "J Bar",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Moore_Park_Sydney_Cricket_Ground_1.JPG"
+   }
+  },
+  "kensington": {
+   "lat": -33.9298,
+   "lon": 151.2356
+  },
+  "centennial": {
+   "lat": -33.8985,
+   "lon": 151.234,
+   "icon": "park",
+   "img": "centennial.jpg",
+   "credit": {
+    "artist": "Batsv",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Centennial_park_in_Sydney_(20).jpg"
+   }
+  },
+  "mrsmacquarie": {
+   "lat": -33.8597,
+   "lon": 151.2226,
+   "icon": "view",
+   "img": "mrsmacquarie.jpg",
+   "credit": {
+    "artist": "Prajwal433",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Amazing_sunset_view_from_Macquarie%27s_Chair.jpg"
+   }
+  },
+  "operahouse": {
+   "lat": -33.8568,
+   "lon": 151.2153,
+   "icon": "flag",
+   "img": "operahouse.jpg",
+   "credit": {
+    "artist": "Diliff",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_-_Dec_2008.jpg"
+   }
+  }
  }
 };
