@@ -155,5 +155,165 @@ window.MAP_LANDMARKS = {
     "page": "https://commons.wikimedia.org/wiki/File:Tokyo_Station_(Marunouchi_Building).jpg"
    }
   }
+ },
+ "nyc": {
+  "verrazzano": {
+   "lat": 40.6066,
+   "lon": -74.0447,
+   "icon": "bridge",
+   "img": "verrazzano.jpg",
+   "credit": {
+    "artist": "Kidfly182",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Verrazzano_Narrows_Bridge.jpg"
+   }
+  },
+  "bayridge": {
+   "lat": 40.6349,
+   "lon": -74.0235,
+   "icon": "station",
+   "img": "bayridge.jpg",
+   "credit": {
+    "artist": "GK tramrunner RU",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BMT_Fourth_Avenue_Line_-_Bay_Ridge_Avenue_Station_Entrance_(street_view).jpg"
+   }
+  },
+  "fourthave": {
+   "lat": 40.6768,
+   "lon": -73.9835,
+   "icon": "music",
+   "img": "fourthave.jpg",
+   "credit": {
+    "artist": "Steven Pisano",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:NYC_2014_Marathon_Along_Fourth_Avenue_in_Brooklyn.jpg"
+   }
+  },
+  "williamsburg": {
+   "lat": 40.7071,
+   "lon": -73.9644,
+   "icon": "building",
+   "img": "williamsburg.jpg",
+   "credit": {
+    "artist": "LWYang",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bedford_Av_and_N_7_St_Williamsburg.jpg"
+   }
+  },
+  "pulaski": {
+   "lat": 40.7385,
+   "lon": -73.9527,
+   "icon": "bridge",
+   "img": "pulaski.jpg",
+   "credit": {
+    "artist": "Jeffrey Bary",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Pulaski_Bridge_with_draw_span_open_(2017).jpg"
+   }
+  },
+  "queensboro": {
+   "lat": 40.757,
+   "lon": -73.9544,
+   "icon": "bridge",
+   "img": "queensboro.jpg",
+   "credit": {
+    "artist": "King of Hearts",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Queensboro_Bridge_New_York_October_2016_003.jpg"
+   }
+  },
+  "firstave": {
+   "lat": 40.7676,
+   "lon": -73.9562,
+   "icon": "megaphone",
+   "img": "firstave.jpg",
+   "credit": {
+    "artist": "Upjav",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:View_of_2024_New_York_City_Marathon_from_81st_St._and_1st_Ave._in_Manhattan.jpg"
+   }
+  },
+  "willis": {
+   "lat": 40.8027,
+   "lon": -73.9302,
+   "icon": "bridge",
+   "img": "willis.jpg",
+   "credit": {
+    "artist": "Acroterion",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Willis_Avenue_Bridge_NY1.jpg"
+   }
+  },
+  "madison": {
+   "lat": 40.8155,
+   "lon": -73.9343,
+   "icon": "bridge",
+   "img": "madison.jpg",
+   "credit": {
+    "artist": "Acroterion",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Madison_Avenue_Bridge_NY1.jpg"
+   }
+  },
+  "fifthave": {
+   "lat": 40.7925,
+   "lon": -73.952,
+   "icon": "museum",
+   "img": "fifthave.jpg",
+   "pos": "100% 100%",
+   "size": "auto 160%",
+   "credit": {
+    "artist": "Beyond My Ken",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Museum_of_the_City_of_New_York_1220_Fifth_Avenue_from_north.jpg"
+   }
+  },
+  "centralpark": {
+   "lat": 40.7745,
+   "lon": -73.9665,
+   "icon": "park",
+   "img": "centralpark.jpg",
+   "credit": {
+    "artist": "Superbass",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2024-11-19-Central_Park-0669.jpg"
+   }
+  },
+  "columbus": {
+   "lat": 40.7681,
+   "lon": -73.9819,
+   "icon": "monument",
+   "img": "columbus.jpg",
+   "credit": {
+    "artist": "TarHeel4793",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Columbus_Circle_in_New_York_City.jpg"
+   }
+  },
+  "tavern": {
+   "lat": 40.7722,
+   "lon": -73.9776,
+   "icon": "flag",
+   "img": "tavern.jpg",
+   "credit": {
+    "artist": "Jim.henderson",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Tavern_on_the_Green_cloudy_jeh.JPG"
+   }
+  }
  }
 };
