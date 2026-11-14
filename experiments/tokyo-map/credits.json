@@ -54,5 +54,33 @@
   "artist": "Chris 73",
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+ },
+ "iidabashi": {
+  "file": "File:Kagurazaka street 2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Kagurazaka_street_2.jpg",
+  "artist": "Kabacchi",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+ },
+ "ueno": {
+  "file": "File:Ameyoko June 2022.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ameyoko_June_2022.jpg",
+  "artist": "Syced",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+ },
+ "ryogoku": {
+  "file": "File:Ryogoku Great Sumo Hall.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Ryogoku_Great_Sumo_Hall.jpg",
+  "artist": "Steve Cadman",
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+ },
+ "monzen": {
+  "file": "File:Tomioka Hachimangu in Monzen-Nakacho.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Tomioka_Hachimangu_in_Monzen-Nakacho.jpg",
+  "artist": "Manish Prabhune",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
  }
 }
