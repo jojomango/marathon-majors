@@ -156,16 +156,16 @@ window.MAJORS = [
     ],
     profileNote: "起點布萊克希思約 45 公尺，前 3 公里明顯下坡，之後沿泰晤士河幾乎全平，海拔大多在 5–15 公尺之間。",
     landmarks: [
-      { km: 0, name: "格林威治公園・布萊克希思", note: "分三個起點區出發，在約 5 公里處匯合。" },
-      { km: 10.5, name: "卡蒂薩克號", note: "19 世紀運茶快船，周圍是第一個大型加油區。" },
-      { km: 19.3, name: "倫敦塔橋", note: "最有名的一段，跨橋時觀眾聲浪最大。" },
-      { km: 22, name: "半程・The Highway", note: "可看到另一側已跑到 35 公里的菁英選手。" },
-      { km: 30, name: "金絲雀碼頭", note: "金融區摩天樓間繞行，GPS 常在此失準。" },
-      { km: 36.5, name: "倫敦塔", note: "中世紀城堡旁回到市中心。" },
-      { km: 38, name: "泰晤士河堤", note: "沿河看見倫敦眼。" },
-      { km: 40.5, name: "大笨鐘・西敏宮", note: "國會大廈前轉入鳥籠道。" },
-      { km: 41.7, name: "白金漢宮", note: "繞過維多利亞紀念碑。" },
-      { km: 42.195, name: "林蔭路 The Mall", note: "紅色路面的終點直道。" }
+      { id: "greenwich", km: 0, name: "格林威治公園・布萊克希思", note: "分三個起點區出發，在約 5 公里處匯合。" },
+      { id: "cuttysark", km: 10.5, name: "卡蒂薩克號", note: "19 世紀運茶快船，周圍是第一個大型加油區。" },
+      { id: "towerbridge", km: 19.3, name: "倫敦塔橋", note: "最有名的一段，跨橋時觀眾聲浪最大。" },
+      { id: "highway", km: 22, name: "半程・The Highway", note: "可看到另一側已跑到 35 公里的菁英選手。" },
+      { id: "canarywharf", km: 30, name: "金絲雀碼頭", note: "金融區摩天樓間繞行，GPS 常在此失準。" },
+      { id: "toweroflondon", km: 36.5, name: "倫敦塔", note: "中世紀城堡旁回到市中心。" },
+      { id: "embankment", km: 38, name: "泰晤士河堤", note: "沿河看見倫敦眼。" },
+      { id: "bigben", km: 40.5, name: "大笨鐘・西敏宮", note: "國會大廈前轉入鳥籠道。" },
+      { id: "buckingham", km: 41.7, name: "白金漢宮", note: "繞過維多利亞紀念碑。" },
+      { id: "themall", km: 42.195, name: "林蔭路 The Mall", note: "紅色路面的終點直道。" }
     ],
     records: {
       men: { time: "1:59:30", name: "Sabastian Sawe（肯亞）", year: 2026 },
