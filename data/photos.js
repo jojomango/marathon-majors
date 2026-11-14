@@ -266,15 +266,17 @@ window.MAP_LANDMARKS = {
    }
   },
   "fifthave": {
-   "lat": 40.783,
-   "lon": -73.959,
+   "lat": 40.7925,
+   "lon": -73.952,
    "icon": "museum",
    "img": "fifthave.jpg",
+   "pos": "100% 100%",
+   "size": "auto 160%",
    "credit": {
-    "artist": "Bmzuckerman",
-    "license": "CC BY 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Frank_Lloyd_Wright_-_New_York,_NY_-_Solomon_R._Guggenheim_Museum_(A).jpg"
+    "artist": "Beyond My Ken",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Museum_of_the_City_of_New_York_1220_Fifth_Avenue_from_north.jpg"
    }
   },
   "centralpark": {
