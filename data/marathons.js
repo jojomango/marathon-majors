@@ -324,17 +324,17 @@ window.MAJORS = [
     ],
     profileNote: "全程海拔都在 35–55 公尺之間，最高處在南端野豬廣場一帶（約 28 公里），幾乎感覺不到坡度，這是世界紀錄頻繁出現的主因之一。",
     landmarks: [
-      { km: 0, name: "6 月 17 日大街・勝利紀念柱", note: "蒂爾加滕公園中的寬闊大道起跑。" },
-      { km: 6, name: "國會大廈・總理府", note: "施普雷河畔的政府區。" },
-      { km: 9, name: "亞歷山大廣場・電視塔", note: "前東柏林的中心。" },
-      { km: 15, name: "十字山 Kreuzberg", note: "街頭樂隊與多元移民街區。" },
-      { km: 24, name: "舍訥貝格市政廳", note: "1963 年甘迺迪「我是柏林人」演說的地點。" },
-      { km: 27, name: "野豬廣場 Wilder Eber", note: "南端最熱鬧的加油點。" },
-      { km: 35, name: "選帝侯大街・威廉皇帝紀念教堂", note: "保留戰爭毀損鐘樓的教堂。" },
-      { km: 38.5, name: "波茨坦廣場", note: "曾被圍牆一分為二的廣場，地面標有圍牆線。" },
-      { km: 40, name: "御林廣場", note: "兩座對稱教堂與音樂廳。" },
-      { km: 41.9, name: "布蘭登堡門", note: "穿過城門後就是終點。" },
-      { km: 42.195, name: "終點", note: "6 月 17 日大街上完賽。" }
+      { id: "siegessaeule", km: 0, name: "6 月 17 日大街・勝利紀念柱", note: "蒂爾加滕公園中的寬闊大道起跑。" },
+      { id: "reichstag", km: 6, name: "國會大廈・總理府", note: "施普雷河畔的政府區。" },
+      { id: "alexanderplatz", km: 9, name: "亞歷山大廣場・電視塔", note: "前東柏林的中心。" },
+      { id: "kreuzberg", km: 15, name: "十字山 Kreuzberg", note: "街頭樂隊與多元移民街區。" },
+      { id: "schoeneberg", km: 24, name: "舍訥貝格市政廳", note: "1963 年甘迺迪「我是柏林人」演說的地點。" },
+      { id: "wildereber", km: 27, name: "野豬廣場 Wilder Eber", note: "南端最熱鬧的加油點。" },
+      { id: "kudamm", km: 35, name: "選帝侯大街・威廉皇帝紀念教堂", note: "保留戰爭毀損鐘樓的教堂。" },
+      { id: "potsdamer", km: 38.5, name: "波茨坦廣場", note: "曾被圍牆一分為二的廣場，地面標有圍牆線。" },
+      { id: "gendarmenmarkt", km: 40, name: "御林廣場", note: "兩座對稱教堂與音樂廳。" },
+      { id: "brandenburg", km: 41.9, name: "布蘭登堡門", note: "穿過城門後就是終點。" },
+      { id: "finish", km: 42.195, name: "終點", note: "6 月 17 日大街上完賽。" }
     ],
     records: {
       men: { time: "2:01:09", name: "Eliud Kipchoge（肯亞）", year: 2022 },
