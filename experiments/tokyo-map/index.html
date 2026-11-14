@@ -48,7 +48,7 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
 .lm-btn::after {
   /* 照片層：預設透明，放大時淡入 */
   content: ""; position: absolute; inset: 0; border-radius: 50%;
-  background: var(--photo) center / cover no-repeat; opacity: 0; transition: opacity .2s ease .05s;
+  background: var(--photo) var(--pos, center) / var(--size, cover) no-repeat; opacity: 0; transition: opacity .2s ease .05s;
 }
 .lm-card {
   position: absolute; left: 0; top: 76px; transform: translateX(-50%);
@@ -159,7 +159,9 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
     gate: '<path d="M8 3h8M9 3v2M15 3v2M7 5h10v12a5 5 0 0 1-10 0z M7 11h10M12 22v-1"/>',
     clock: '<circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/>',
     tower: '<path d="M12 2v3M10 5h4l2 16H8zM9 11h6M8.5 15h7M8 21h8"/>',
-    station: '<path d="M3 21V10l9-6 9 6v11M3 21h18M8 21v-6h8v6M12 4v4"/>'
+    station: '<path d="M3 21V10l9-6 9 6v11M3 21h18M8 21v-6h8v6M12 4v4"/>',
+    palace: '<path d="M2 10h20M4.5 10 7 6h10l2.5 4M12 3v3M6 10v9M18 10v9M3 19h18M10 19v-5h4v5"/>',
+    river: '<path d="M2 12c4-7 16-7 20 0M2 12h20M6 12v3M12 8.5V15M18 12v3M2 19c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/>'
   };
   function svg(name) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + "</svg>"; }
 
@@ -250,7 +252,7 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
     var r = el.getBoundingClientRect();
     var y = r.top - box.top, x = r.left - box.left;
     el.classList.toggle("down", y < 90);
-    el.classList.toggle("up", y > box.height - 170);
+    el.classList.toggle("up", y > box.height - 260);
     el.classList.toggle("left", x > box.width - 120);
     el.classList.toggle("right", x < 120);
   }
@@ -263,7 +265,12 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
     btn.type = "button";
     btn.className = featured ? "lm-btn" : "dot-btn";
     btn.setAttribute("aria-label", lm.name + "，第 " + lm.km.toFixed(1) + " 公里");
-    if (featured) { btn.style.setProperty("--photo", "url('img/" + lm.id + ".jpg')"); btn.innerHTML = svg(lm.icon); }
+    if (featured) {
+      btn.style.setProperty("--photo", "url('img/" + lm.id + ".jpg')");
+      if (lm.pos) btn.style.setProperty("--pos", lm.pos);
+      if (lm.size) btn.style.setProperty("--size", lm.size);
+      btn.innerHTML = svg(lm.icon);
+    }
     else btn.textContent = i + 1;
     var card = document.createElement("div");
     card.className = "lm-card";
@@ -271,7 +278,7 @@ h1 { font-family: var(--f-head); font-weight: 900; font-size: clamp(24px, 6vw, 3
     card.querySelector("b").textContent = (i + 1) + ". " + lm.name;
     card.querySelector("span:last-child").textContent = lm.note;
     el.appendChild(btn); el.appendChild(card);
-    el.addEventListener("mouseenter", function () { place(el); });
+    el.addEventListener("mouseenter", function () { place(el); closeAll(el); });
     btn.addEventListener("focus", function () { place(el); });
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
