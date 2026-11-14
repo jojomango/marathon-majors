@@ -1,8 +1,9 @@
 // 真實地圖（MapLibre + OpenFreeMap）：路線、公里標、景點圖示（點開換成圓形照片）、聚合、目前位置。
+// 深色模式的底圖不夠清楚，所以不論網站深淺色，地圖一律用淺色底圖與淺色配色。
 // 只在有景點照片設定的賽事頁載入。建置時併在 geo.js 之後、app.js 之前。
 (function () {
   "use strict";
-  var STYLE = { light: "https://tiles.openfreemap.org/styles/positron", dark: "https://tiles.openfreemap.org/styles/dark" };
+  var STYLE = "https://tiles.openfreemap.org/styles/positron";
 
   // 景點類型的線條圖示（24×24）
   var ICONS = {
@@ -22,7 +23,8 @@
   function svg(name) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || ICONS.building) + "</svg>";
   }
-  function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  // 從地圖容器讀顏色：容器固定使用淺色配色（見 styles.css 的 .live-map）
+  function css(el, v) { return getComputedStyle(el).getPropertyValue(v).trim(); }
 
   // opts: { container, race (route [lat,lon,km], landmarks [{km,name,note,id,lat,lon,icon,img,pos,size}]), imgBase, text, onPick(km) }
   function create(opts) {
@@ -33,7 +35,6 @@
       var q = window.Geo.routeAt(r, Math.max(0, Math.min(FULL, km)));
       return [q[1], q[0]];
     }
-    var dark = matchMedia("(prefers-color-scheme: dark)");
     var bounds = line.reduce(function (b, p) { return b.extend(p); }, new ml.LngLatBounds(line[0], line[0]));
     r.landmarks.forEach(function (lm) { if (lm.lon != null) bounds.extend([lm.lon, lm.lat]); });
     var sw = bounds.getSouthWest(), ne = bounds.getNorthEast();
@@ -41,7 +42,7 @@
 
     var map = new ml.Map({
       container: opts.container,
-      style: dark.matches ? STYLE.dark : STYLE.light,
+      style: STYLE,
       bounds: bounds, fitBoundsOptions: { padding: 36 },
       maxBounds: [[sw.lng - padX, sw.lat - padY], [ne.lng + padX, ne.lat + padY]],
       dragRotate: false, pitchWithRotate: false, touchPitch: false,
@@ -73,7 +74,7 @@
         var tf = l.layout && l.layout["text-field"];
         if (/shield/i.test(l.id) || (tf && JSON.stringify(tf).indexOf('"ref"') >= 0)) map.setLayoutProperty(l.id, "visibility", "none");
       });
-      var course = css("--course"), surface = css("--surface"), muted = css("--muted");
+      var box = opts.container, course = css(box, "--course"), surface = css(box, "--surface"), muted = css(box, "--muted");
       map.addSource("route", { type: "geojson", data: { type: "Feature", geometry: { type: "LineString", coordinates: line } } });
       map.addSource("links", { type: "geojson", data: links });
       map.addSource("kms", { type: "geojson", data: kms });
@@ -90,7 +91,6 @@
       map.addLayer({ id: "lm-index", type: "circle", source: "lm", paint: { "circle-radius": 1, "circle-opacity": 0, "circle-stroke-opacity": 0 } });
     }
     map.on("style.load", addLayers);
-    dark.addEventListener("change", function () { map.setStyle(dark.matches ? STYLE.dark : STYLE.light); });
 
     // 景點
     var els = [], markers = [];

@@ -361,7 +361,13 @@ html[lang="en"], html[lang="es"] {
 
 /* ---------- 真實地圖（MapLibre）：載入完成後取代 SVG 路線圖 ---------- */
 .map-fig { position: relative; }
-.live-map { position: absolute; inset: 0; visibility: hidden; }
+.live-map {
+  position: absolute; inset: 0; visibility: hidden;
+  /* 地圖一律用淺色：深色模式下也維持淺色底圖、標記與說明卡片 */
+  --bg: #F1F3F1; --surface: #FFFFFF; --ink: #13181C; --muted: #5A646B; --rule: #D3D8D5;
+  --course: #1C55D4; --course-soft: rgba(28, 85, 212, .14); --star: #B4800F;
+  color-scheme: light;
+}
 .map-fig.has-live > svg { display: none; }
 .map-fig.has-live .live-map { position: relative; visibility: visible; height: clamp(340px, 56vh, 540px); }
 .live-map .maplibregl-ctrl-attrib { font-size: 11px; }
