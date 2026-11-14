@@ -433,5 +433,119 @@ window.MAP_LANDMARKS = {
     "page": "https://commons.wikimedia.org/wiki/File:Boston_Marathon_Finish_line_(41017489080).jpg"
    }
   }
+ },
+ "london": {
+  "greenwich": {
+   "lat": 51.4745,
+   "lon": 0.005,
+   "icon": "park",
+   "img": "greenwich.jpg",
+   "credit": {
+    "artist": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:View_of_the_Royal_Observatory_Greenwich_from_One_Tree_Hill_in_Greenwich_Park,_London,_20260719_0940_4508.jpg"
+   }
+  },
+  "cuttysark": {
+   "lat": 51.4828,
+   "lon": -0.0096,
+   "icon": "ship",
+   "img": "cuttysark.jpg",
+   "credit": {
+    "artist": "Robert Lamb",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:View_of_the_Cutty_Sark_from_the_Cutty_Sark_plaza_-_geograph.org.uk_-_3634739.jpg"
+   }
+  },
+  "towerbridge": {
+   "lat": 51.5055,
+   "lon": -0.0754,
+   "icon": "bridge",
+   "img": "towerbridge.jpg",
+   "credit": {
+    "artist": "DanHuddleston",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2021_London_Marathon.jpg"
+   }
+  },
+  "highway": {
+   "lat": 51.5097,
+   "lon": -0.0585
+  },
+  "canarywharf": {
+   "lat": 51.5049,
+   "lon": -0.0195,
+   "icon": "building",
+   "img": "canarywharf.jpg",
+   "credit": {
+    "artist": "Acabashi",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2026_London_Marathon_and_spectators_Canary_Wharf_Isle_of_Dogs_London_England.jpg"
+   }
+  },
+  "toweroflondon": {
+   "lat": 51.5081,
+   "lon": -0.0759,
+   "icon": "palace",
+   "img": "toweroflondon.jpg",
+   "credit": {
+    "artist": "Bob Collowan",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Tower_of_London_viewed_from_the_River_Thames.jpg"
+   }
+  },
+  "embankment": {
+   "lat": 51.5075,
+   "lon": -0.118,
+   "icon": "river",
+   "img": "embankment.jpg",
+   "credit": {
+    "artist": "Chris j wood",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:London_Marathon_2005_at_Embankment.jpg"
+   }
+  },
+  "bigben": {
+   "lat": 51.5007,
+   "lon": -0.1246,
+   "icon": "clock",
+   "img": "bigben.jpg",
+   "credit": {
+    "artist": "Colin",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Big_Ben_at_sunset_-_2014-10-27_17-30.jpg"
+   }
+  },
+  "buckingham": {
+   "lat": 51.5014,
+   "lon": -0.1419,
+   "icon": "palace",
+   "img": "buckingham.jpg",
+   "credit": {
+    "artist": "APK",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Buckingham_Palace_and_Victoria_Memorial_in_2026.jpg"
+   }
+  },
+  "themall": {
+   "lat": 51.503,
+   "lon": -0.1365,
+   "icon": "flag",
+   "img": "themall.jpg",
+   "credit": {
+    "artist": "Yuval Madar",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:The_mall_london.jpg"
+   }
+  }
  }
 };

@@ -95,7 +95,8 @@
     monument: '<path d="M10 21V7l2-4 2 4v14M8 21h8M10 10h4M7 21v-2h10v2"/>',
     flag: '<path d="M5 21V3M5 4h13l-3 4 3 4H5"/>',
     megaphone: '<path d="M3 10v4h3l9 5V5L6 10zM6 14l1.5 5h2.5l-1-4.5M18 9.5a3.5 3.5 0 0 1 0 5"/>',
-    sign: '<path d="M4 4h16v10H4zM8 14v7M16 14v7M8 11l4-5 4 5z"/>'
+    sign: '<path d="M4 4h16v10H4zM8 14v7M16 14v7M8 11l4-5 4 5z"/>',
+    ship: '<path d="M3 16h18l-2 4H5zM7 16V5M12 16V3M17 16V5M5 8h4M9.5 6h5M15 8h4M5 12h4M9.5 11h5M15 12h4"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || ICONS.building) + "</svg>";
