@@ -30,9 +30,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=JetBrains+Mono:wght@500&family=Noto+Sans:wght@400;500;700&family=Noto+Serif:wght@700;900&display=swap">
 <link rel="stylesheet" href="../../assets/styles.css?v=b144ffb9">
-<script>window.SITE={"lang":"es","here":"Aquí: ","nearest":"Más cerca: ","privacy":"Privacidad","privacyUrl":"../../es/privacy/","consentText":"Este sitio quiere usar Google Analytics para contar las visitas, lo que instala cookies de análisis.","consentYes":"Aceptar","consentNo":"Rechazar","consentAria":"Cookies de análisis","map":{"gestureWin":"Usa Ctrl + rueda para hacer zoom en el mapa","gestureMac":"Usa ⌘ + rueda para hacer zoom en el mapa","gestureMobile":"Usa dos dedos para mover el mapa","cluster":"{n} puntos de interés, toca para acercar"}};</script>
+<script>window.SITE={"lang":"es","here":"Aquí: ","nearest":"Más cerca: ","privacy":"Privacidad","privacyUrl":"../../es/privacy/","consentText":"Este sitio quiere usar Google Analytics para contar las visitas, lo que instala cookies de análisis.","consentYes":"Aceptar","consentNo":"Rechazar","consentAria":"Cookies de análisis","noticeText":"Este sitio usa Google Analytics para contar las visitas, lo que instala cookies de análisis. Si sigues navegando, aceptas su uso.","noticeOk":"Entendido","noticeNo":"No rastrearme","map":{"gestureWin":"Usa Ctrl + rueda para hacer zoom en el mapa","gestureMac":"Usa ⌘ + rueda para hacer zoom en el mapa","gestureMobile":"Usa dos dedos para mover el mapa","cluster":"{n} puntos de interés, toca para acercar"}};</script>
 <script defer src="../../assets/config.js?v=5fa49925"></script>
-<script defer src="../../assets/analytics.js?v=5c69fe89"></script>
+<script defer src="../../assets/analytics.js?v=a44517a2"></script>
 <script defer src="../../assets/app.js?v=eac61d06"></script>
 </head>
 <body>
@@ -46,20 +46,25 @@
     <h2>Qué datos recoge este sitio</h2>
     <p>Este es un sitio web estático, sin cuentas, comentarios ni formularios. Nunca pide tu nombre, tu correo electrónico ni otros datos personales.</p>
     <h2>Google Analytics</h2>
-    <p>Este sitio usa Google Analytics 4. En tu primera visita se te pide el consentimiento, y Google Analytics solo se carga, con sus cookies de análisis, después de que elijas «Aceptar». Sirve para contar:</p>
+    <p>Este sitio usa Google Analytics 4, que instala cookies de análisis, para contar:</p>
     <ul>
       <li>qué páginas de carreras ves, durante cuánto tiempo y en qué idioma de la interfaz</li>
       <li>tu región aproximada y el tipo de dispositivo y navegador</li>
       <li>desde qué sitio web llegaste</li>
     </ul>
     <p>Los datos solo se usan para saber qué contenidos interesan más y mejorar el sitio. Las direcciones IP se anonimizan. Google trata y conserva los datos según su <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad</a>.</p>
-    <p>Si eliges «Rechazar», no se carga ningún código de seguimiento.</p>
+    <p>El funcionamiento depende de dónde estés. El sitio lo deduce de la zona horaria de tu navegador y no consulta tu dirección IP para ello:</p>
+    <ul>
+      <li><strong>Europa (incluidos la UE, el EEE, el Reino Unido y Suiza)</strong>: en tu primera visita se te pide el consentimiento, y Google Analytics solo se carga después de que elijas «Aceptar». Si eliges «Rechazar», no se carga ningún código de seguimiento.</li>
+      <li><strong>Resto del mundo</strong>: Google Analytics se carga por defecto y se muestra un aviso en la parte inferior de la página. Si eliges «No rastrearme», el sitio deja de enviar datos, borra las cookies de análisis y no vuelve a cargar Google Analytics.</li>
+    </ul>
+    <p>Estés donde estés, Google Analytics nunca se carga si tu navegador envía la señal Global Privacy Control (GPC).</p>
     <h2>Idioma</h2>
     <p>El idioma que eliges en el selector se guarda en tu propio navegador (localStorage) y solo sirve para mostrar el mismo idioma la próxima vez.</p>
     <h2>Cambiar tu elección</h2>
-    <p>Tu elección sobre las cookies de análisis también se guarda solo en tu navegador. Con el botón de abajo puedes borrarla y se te volverá a preguntar en la página de inicio. También puedes borrar los datos del sitio en tu navegador.</p>
+    <p>Tu elección sobre las cookies de análisis también se guarda solo en tu navegador. Con el botón de abajo puedes borrarla y se te volverá a preguntar o avisar la próxima vez que abras el sitio. También puedes borrar los datos del sitio en tu navegador.</p>
     <button type="button" class="reset" id="privacy-reset">Borrar mi elección sobre cookies de análisis</button>
-    <p class="muted reset-msg" hidden>Borrada. Se te volverá a preguntar en la página de inicio.</p>
+    <p class="muted reset-msg" hidden>Borrada. Se te volverá a preguntar o avisar la próxima vez que abras el sitio.</p>
     <h2>Recursos de terceros</h2>
     <p>Las fuentes tipográficas las proporciona Google Fonts, así que tu navegador se conecta a los servidores de Google para cargarlas. El sitio está alojado en GitHub Pages, y GitHub puede guardar registros de acceso según sus propias políticas.</p>
     <h2>Contacto</h2>

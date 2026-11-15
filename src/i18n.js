@@ -52,7 +52,9 @@ const UI = {
       privacy: "隱私權說明", cookieSettings: "分析 Cookie 設定",
       titleSep: "・",
       consentText: "本站想使用 Google Analytics 統計瀏覽量，會設定分析用 Cookie。",
-      consentYes: "同意", consentNo: "不同意", consentAria: "分析 Cookie"
+      consentYes: "同意", consentNo: "不同意", consentAria: "分析 Cookie",
+      noticeText: "本站使用 Google Analytics 統計瀏覽量，會設定分析用 Cookie。繼續瀏覽即表示你同意。",
+      noticeOk: "了解", noticeNo: "不要追蹤"
     },
     en: {
       seoHomeTitle: "Majors Course Atlas: World Marathon Majors courses, elevation and records",
@@ -105,7 +107,9 @@ const UI = {
       privacy: "Privacy", cookieSettings: "Analytics cookie settings",
       titleSep: " · ",
       consentText: "This site would like to use Google Analytics to count visits, which sets analytics cookies.",
-      consentYes: "Accept", consentNo: "Decline", consentAria: "Analytics cookies"
+      consentYes: "Accept", consentNo: "Decline", consentAria: "Analytics cookies",
+      noticeText: "This site uses Google Analytics to count visits, which sets analytics cookies. By continuing to browse, you agree to this.",
+      noticeOk: "Got it", noticeNo: "Don’t track me"
     },
     es: {
       seoHomeTitle: "Atlas de los Majors: recorridos, altimetría y récords de los World Marathon Majors",
@@ -158,7 +162,9 @@ const UI = {
       privacy: "Privacidad", cookieSettings: "Ajustes de cookies de análisis",
       titleSep: " · ",
       consentText: "Este sitio quiere usar Google Analytics para contar las visitas, lo que instala cookies de análisis.",
-      consentYes: "Aceptar", consentNo: "Rechazar", consentAria: "Cookies de análisis"
+      consentYes: "Aceptar", consentNo: "Rechazar", consentAria: "Cookies de análisis",
+      noticeText: "Este sitio usa Google Analytics para contar las visitas, lo que instala cookies de análisis. Si sigues navegando, aceptas su uso.",
+      noticeOk: "Entendido", noticeNo: "No rastrearme"
     }
 };
 

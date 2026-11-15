@@ -54,20 +54,25 @@ button { font: inherit; padding: 6px 14px; border-radius: 4px; border: 1px solid
     <h2>本站收集哪些資料</h2>
     <p>本站是靜態網站，沒有會員、留言或表單，不會要求你提供姓名、電子郵件等個人資料。</p>
     <h2>Google Analytics</h2>
-    <p>本站使用 Google Analytics 4。第一次造訪時會詢問你是否同意，只有在你按下「同意」後，才會載入 Google Analytics 並設定分析用 Cookie，用來統計：</p>
+    <p>本站使用 Google Analytics 4，並設定分析用 Cookie，用來統計：</p>
     <ul>
       <li>瀏覽了哪些賽事頁面、停留多久，以及使用的介面語言</li>
       <li>大致的地區、使用的裝置與瀏覽器類型</li>
       <li>從哪個網站連結過來</li>
     </ul>
     <p>這些資料只用於了解哪些內容受歡迎，以改善網站。IP 位址會經過匿名化處理。資料由 Google 依其<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">隱私權政策</a>處理與保存。</p>
-    <p>如果你按下「不同意」，本站不會載入任何追蹤程式。</p>
+    <p>處理方式依你所在的地區而不同，本站以瀏覽器的時區判斷，不會為此查詢你的 IP 位址：</p>
+    <ul>
+      <li><strong>歐洲（含歐盟、歐洲經濟區、英國與瑞士）</strong>：第一次造訪時會詢問你是否同意，只有在你按下「同意」後才會載入 Google Analytics。按「不同意」則不會載入任何追蹤程式。</li>
+      <li><strong>其他地區</strong>：預設載入 Google Analytics，並在畫面下方告知。按「不要追蹤」後，本站會停止傳送資料、刪除分析用 Cookie，之後也不再載入。</li>
+    </ul>
+    <p>不論在哪個地區，如果你的瀏覽器開啟了 Global Privacy Control（GPC）訊號，本站都不會載入 Google Analytics。</p>
     <h2>語言設定</h2>
     <p>你在語言切換器選擇的語言會存在你自己的瀏覽器裡（localStorage），只用來下次以相同語言顯示。</p>
     <h2>更改你的選擇</h2>
-    <p>你的分析 Cookie 選擇也只存在你的瀏覽器裡。按下面的按鈕可以清除，下次回到首頁時會再詢問一次；也可以直接清除瀏覽器的網站資料。</p>
+    <p>你的分析 Cookie 選擇也只存在你的瀏覽器裡。按下面的按鈕可以清除，下次打開本站時會再詢問或告知一次；也可以直接清除瀏覽器的網站資料。</p>
     <button type="button" class="reset">清除我的分析 Cookie 選擇</button>
-    <p class="muted reset-msg" hidden>已清除。回到首頁時會再詢問一次。</p>
+    <p class="muted reset-msg" hidden>已清除。下次打開本站時會再詢問或告知一次。</p>
     <h2>第三方資源</h2>
     <p>網頁字型由 Google Fonts 提供。載入字型時，你的瀏覽器會連線到 Google 的伺服器。網站本身由 GitHub Pages 代管，GitHub 可能依其政策記錄存取紀錄。</p>
     <h2>聯絡</h2>
@@ -80,20 +85,25 @@ button { font: inherit; padding: 6px 14px; border-radius: 4px; border: 1px solid
     <h2>What this site collects</h2>
     <p>This is a static website with no accounts, comments or forms. It never asks for your name, email address or other personal details.</p>
     <h2>Google Analytics</h2>
-    <p>This site uses Google Analytics 4. On your first visit you are asked for consent, and Google Analytics is only loaded, with its analytics cookies, after you choose “Accept”. It is used to count:</p>
+    <p>This site uses Google Analytics 4, which sets analytics cookies, to count:</p>
     <ul>
       <li>which race pages you view, for how long, and in which interface language</li>
       <li>your approximate region and the type of device and browser you use</li>
       <li>which website linked you here</li>
     </ul>
     <p>The data is only used to understand which content is popular and to improve the site. IP addresses are anonymised. Google processes and stores the data under its <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
-    <p>If you choose “Decline”, no tracking code is loaded.</p>
+    <p>How this works depends on where you are. The site tells this from your browser’s time zone and does not look up your IP address to do so:</p>
+    <ul>
+      <li><strong>Europe (including the EU, the EEA, the UK and Switzerland)</strong>: on your first visit you are asked for consent, and Google Analytics is only loaded after you choose “Accept”. If you choose “Decline”, no tracking code is loaded.</li>
+      <li><strong>Elsewhere</strong>: Google Analytics is loaded by default and a notice is shown at the bottom of the page. If you choose “Don’t track me”, the site stops sending data, deletes the analytics cookies and does not load Google Analytics again.</li>
+    </ul>
+    <p>Wherever you are, Google Analytics is never loaded if your browser sends a Global Privacy Control (GPC) signal.</p>
     <h2>Language setting</h2>
     <p>The language you pick in the language switcher is stored in your own browser (localStorage) and is only used to show the same language next time.</p>
     <h2>Changing your choice</h2>
-    <p>Your analytics cookie choice is also stored only in your browser. Use the button below to clear it, and you will be asked again on the home page. You can also clear the site data in your browser.</p>
+    <p>Your analytics cookie choice is also stored only in your browser. Use the button below to clear it, and you will be asked or notified again the next time you open the site. You can also clear the site data in your browser.</p>
     <button type="button" class="reset">Clear my analytics cookie choice</button>
-    <p class="muted reset-msg" hidden>Cleared. You will be asked again on the home page.</p>
+    <p class="muted reset-msg" hidden>Cleared. You will be asked or notified again the next time you open the site.</p>
     <h2>Third-party resources</h2>
     <p>Web fonts are provided by Google Fonts, so your browser connects to Google’s servers to load them. The site is hosted on GitHub Pages, and GitHub may keep access logs under its own policies.</p>
     <h2>Contact</h2>
@@ -106,20 +116,25 @@ button { font: inherit; padding: 6px 14px; border-radius: 4px; border: 1px solid
     <h2>Qué datos recoge este sitio</h2>
     <p>Este es un sitio web estático, sin cuentas, comentarios ni formularios. Nunca pide tu nombre, tu correo electrónico ni otros datos personales.</p>
     <h2>Google Analytics</h2>
-    <p>Este sitio usa Google Analytics 4. En tu primera visita se te pide el consentimiento, y Google Analytics solo se carga, con sus cookies de análisis, después de que elijas «Aceptar». Sirve para contar:</p>
+    <p>Este sitio usa Google Analytics 4, que instala cookies de análisis, para contar:</p>
     <ul>
       <li>qué páginas de carreras ves, durante cuánto tiempo y en qué idioma de la interfaz</li>
       <li>tu región aproximada y el tipo de dispositivo y navegador</li>
       <li>desde qué sitio web llegaste</li>
     </ul>
     <p>Los datos solo se usan para saber qué contenidos interesan más y mejorar el sitio. Las direcciones IP se anonimizan. Google trata y conserva los datos según su <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad</a>.</p>
-    <p>Si eliges «Rechazar», no se carga ningún código de seguimiento.</p>
+    <p>El funcionamiento depende de dónde estés. El sitio lo deduce de la zona horaria de tu navegador y no consulta tu dirección IP para ello:</p>
+    <ul>
+      <li><strong>Europa (incluidos la UE, el EEE, el Reino Unido y Suiza)</strong>: en tu primera visita se te pide el consentimiento, y Google Analytics solo se carga después de que elijas «Aceptar». Si eliges «Rechazar», no se carga ningún código de seguimiento.</li>
+      <li><strong>Resto del mundo</strong>: Google Analytics se carga por defecto y se muestra un aviso en la parte inferior de la página. Si eliges «No rastrearme», el sitio deja de enviar datos, borra las cookies de análisis y no vuelve a cargar Google Analytics.</li>
+    </ul>
+    <p>Estés donde estés, Google Analytics nunca se carga si tu navegador envía la señal Global Privacy Control (GPC).</p>
     <h2>Idioma</h2>
     <p>El idioma que eliges en el selector se guarda en tu propio navegador (localStorage) y solo sirve para mostrar el mismo idioma la próxima vez.</p>
     <h2>Cambiar tu elección</h2>
-    <p>Tu elección sobre las cookies de análisis también se guarda solo en tu navegador. Con el botón de abajo puedes borrarla y se te volverá a preguntar en la página de inicio. También puedes borrar los datos del sitio en tu navegador.</p>
+    <p>Tu elección sobre las cookies de análisis también se guarda solo en tu navegador. Con el botón de abajo puedes borrarla y se te volverá a preguntar o avisar la próxima vez que abras el sitio. También puedes borrar los datos del sitio en tu navegador.</p>
     <button type="button" class="reset">Borrar mi elección sobre cookies de análisis</button>
-    <p class="muted reset-msg" hidden>Borrada. Se te volverá a preguntar en la página de inicio.</p>
+    <p class="muted reset-msg" hidden>Borrada. Se te volverá a preguntar o avisar la próxima vez que abras el sitio.</p>
     <h2>Recursos de terceros</h2>
     <p>Las fuentes tipográficas las proporciona Google Fonts, así que tu navegador se conecta a los servidores de Google para cargarlas. El sitio está alojado en GitHub Pages, y GitHub puede guardar registros de acceso según sus propias políticas.</p>
     <h2>Contacto</h2>

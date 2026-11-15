@@ -144,6 +144,7 @@ function siteInline(lang, up) {
   return "window.SITE=" + json({
     lang, here: U.here, nearest: U.nearest, privacy: U.privacy, privacyUrl: up + lang + "/privacy/",
     consentText: U.consentText, consentYes: U.consentYes, consentNo: U.consentNo, consentAria: U.consentAria,
+    noticeText: U.noticeText, noticeOk: U.noticeOk, noticeNo: U.noticeNo,
     map: { gestureWin: U.gestureWin, gestureMac: U.gestureMac, gestureMobile: U.gestureMobile, cluster: U.clusterAria }
   }) + ";";
 }

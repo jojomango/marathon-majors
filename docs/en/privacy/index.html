@@ -30,9 +30,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=JetBrains+Mono:wght@500&family=Noto+Sans:wght@400;500;700&family=Noto+Serif:wght@700;900&display=swap">
 <link rel="stylesheet" href="../../assets/styles.css?v=b144ffb9">
-<script>window.SITE={"lang":"en","here":"Here: ","nearest":"Nearest: ","privacy":"Privacy","privacyUrl":"../../en/privacy/","consentText":"This site would like to use Google Analytics to count visits, which sets analytics cookies.","consentYes":"Accept","consentNo":"Decline","consentAria":"Analytics cookies","map":{"gestureWin":"Use Ctrl + scroll to zoom the map","gestureMac":"Use ⌘ + scroll to zoom the map","gestureMobile":"Use two fingers to move the map","cluster":"{n} landmarks, tap to zoom in"}};</script>
+<script>window.SITE={"lang":"en","here":"Here: ","nearest":"Nearest: ","privacy":"Privacy","privacyUrl":"../../en/privacy/","consentText":"This site would like to use Google Analytics to count visits, which sets analytics cookies.","consentYes":"Accept","consentNo":"Decline","consentAria":"Analytics cookies","noticeText":"This site uses Google Analytics to count visits, which sets analytics cookies. By continuing to browse, you agree to this.","noticeOk":"Got it","noticeNo":"Don’t track me","map":{"gestureWin":"Use Ctrl + scroll to zoom the map","gestureMac":"Use ⌘ + scroll to zoom the map","gestureMobile":"Use two fingers to move the map","cluster":"{n} landmarks, tap to zoom in"}};</script>
 <script defer src="../../assets/config.js?v=5fa49925"></script>
-<script defer src="../../assets/analytics.js?v=5c69fe89"></script>
+<script defer src="../../assets/analytics.js?v=a44517a2"></script>
 <script defer src="../../assets/app.js?v=eac61d06"></script>
 </head>
 <body>
@@ -46,20 +46,25 @@
     <h2>What this site collects</h2>
     <p>This is a static website with no accounts, comments or forms. It never asks for your name, email address or other personal details.</p>
     <h2>Google Analytics</h2>
-    <p>This site uses Google Analytics 4. On your first visit you are asked for consent, and Google Analytics is only loaded, with its analytics cookies, after you choose “Accept”. It is used to count:</p>
+    <p>This site uses Google Analytics 4, which sets analytics cookies, to count:</p>
     <ul>
       <li>which race pages you view, for how long, and in which interface language</li>
       <li>your approximate region and the type of device and browser you use</li>
       <li>which website linked you here</li>
     </ul>
     <p>The data is only used to understand which content is popular and to improve the site. IP addresses are anonymised. Google processes and stores the data under its <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
-    <p>If you choose “Decline”, no tracking code is loaded.</p>
+    <p>How this works depends on where you are. The site tells this from your browser’s time zone and does not look up your IP address to do so:</p>
+    <ul>
+      <li><strong>Europe (including the EU, the EEA, the UK and Switzerland)</strong>: on your first visit you are asked for consent, and Google Analytics is only loaded after you choose “Accept”. If you choose “Decline”, no tracking code is loaded.</li>
+      <li><strong>Elsewhere</strong>: Google Analytics is loaded by default and a notice is shown at the bottom of the page. If you choose “Don’t track me”, the site stops sending data, deletes the analytics cookies and does not load Google Analytics again.</li>
+    </ul>
+    <p>Wherever you are, Google Analytics is never loaded if your browser sends a Global Privacy Control (GPC) signal.</p>
     <h2>Language setting</h2>
     <p>The language you pick in the language switcher is stored in your own browser (localStorage) and is only used to show the same language next time.</p>
     <h2>Changing your choice</h2>
-    <p>Your analytics cookie choice is also stored only in your browser. Use the button below to clear it, and you will be asked again on the home page. You can also clear the site data in your browser.</p>
+    <p>Your analytics cookie choice is also stored only in your browser. Use the button below to clear it, and you will be asked or notified again the next time you open the site. You can also clear the site data in your browser.</p>
     <button type="button" class="reset" id="privacy-reset">Clear my analytics cookie choice</button>
-    <p class="muted reset-msg" hidden>Cleared. You will be asked again on the home page.</p>
+    <p class="muted reset-msg" hidden>Cleared. You will be asked or notified again the next time you open the site.</p>
     <h2>Third-party resources</h2>
     <p>Web fonts are provided by Google Fonts, so your browser connects to Google’s servers to load them. The site is hosted on GitHub Pages, and GitHub may keep access logs under its own policies.</p>
     <h2>Contact</h2>
